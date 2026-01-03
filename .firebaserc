@@ -1,0 +1,15 @@
+{
+  "projects": {
+    "staging": "quickfindapp-eaae2"
+  },
+  "targets": {
+    "quickfindapp-eaae2": {
+      "hosting": {
+        "prolper-client": [
+          "prolper-client"
+        ]
+      }
+    }
+  },
+  "etags": {}
+}

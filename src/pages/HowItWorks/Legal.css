@@ -1,0 +1,49 @@
+/* Legal Page Wrapper - Space for Navbar */
+.legal-page-wrapper {
+    background-color: #ffffff;
+    padding-top: 100px; /* Space for Nav Bar */
+}
+
+/* Typography Consistency */
+.text-slate { color: #475569; }
+.teal-text { color: #0d9488; }
+
+.teal-underline {
+    width: 60px;
+    height: 4px;
+    background-color: #0d9488;
+    border-radius: 2px;
+}
+
+/* Legal Section Card - Modern & Minimal */
+.legal-section-card {
+    background: #ffffff;
+    padding: 35px;
+    border-radius: 20px;
+    border: 1px solid #f1f5f9;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.legal-section-card:hover {
+    border-color: #0d9488;
+    box-shadow: 0 4px 20px rgba(13, 148, 136, 0.04);
+}
+
+/* Numbered Tag for Modern Look */
+.section-id-tag {
+    position: absolute;
+    top: -14px;
+    left: 25px;
+    background-color: #0d9488;
+    color: white;
+    width: 28px;
+    height: 28px;
+    font-size: 14px;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(13, 148, 136, 0.2);
+}

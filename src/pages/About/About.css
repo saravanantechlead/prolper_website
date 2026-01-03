@@ -1,0 +1,14 @@
+.table-responsive {
+    margin-top: 30px;
+  }
+  
+  .table th,
+  .table td {
+    padding: 15px;
+  }
+  
+  footer .social-icons i {
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
+  

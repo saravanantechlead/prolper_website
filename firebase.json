@@ -1,0 +1,20 @@
+{
+  "hosting": [
+    {
+      "target": "prolper-client",
+      "public": "dist",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
+      "cleanUrls": true,
+      "rewrites": [
+        {
+          "source": "!**/*.@(css|gif|ico|jpg|js|png|svg|webp|woff|woff2)",
+          "destination": "/index.html"
+        }
+      ]
+    }
+  ]
+}

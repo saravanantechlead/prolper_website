@@ -1,0 +1,305 @@
+/* ==========================================================================
+   1. COLOR PALETTE & VARIABLES
+   ========================================================================== */
+:root {
+  --ios-black: #000000;
+  --ios-gray-nav: rgba(28, 28, 30, 0.72);
+  --ios-border: rgba(255, 255, 255, 0.12);
+  --ios-glow: rgba(255, 255, 255, 0.4);
+  --teal-primary: #0d9488;
+  --teal-hover: #0f766e;
+  --teal-light: #f0fdfa;
+  --text-main: #1e293b;
+  --text-muted: #64748b;
+  --nav-bg: rgba(15, 15, 15, 0.75);
+  --nav-bg-scrolled: rgba(0, 0, 0, 0.95);
+  --transition-smooth: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Global Reset to prevent side-scrolling */
+html, body {
+  overflow-x: hidden;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ==========================================================================
+   2. NAVBAR STYLES (iOS PRESCISION)
+   ========================================================================== */
+.ios-nav {
+  background: var(--nav-bg) !important;
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  border-bottom: 1px solid var(--ios-border);
+  padding: 1.2rem 0;
+  transition: var(--transition-smooth);
+  z-index: 1050;
+}
+
+.nav-scrolled {
+  padding: 0.75rem 0 !important;
+  background: var(--nav-bg-scrolled) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5);
+}
+
+.ios-logo {
+  height: 44px;
+  width: auto;
+  filter: brightness(0) invert(1);
+  transition: var(--transition-smooth);
+}
+
+.ios-logo:hover {
+  transform: scale(1.05);
+  filter: brightness(0) invert(1) drop-shadow(0 0 8px rgba(255, 255, 255, 0.5));
+}
+
+.ios-link {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Lato", sans-serif;
+  font-weight: 500;
+  font-size: 15px !important;
+  color: rgba(255, 255, 255, 0.8) !important;
+  padding: 0.6rem 1.2rem !important;
+  transition: var(--transition-smooth);
+}
+
+.ios-link:hover {
+  color: #ffffff !important;
+  transform: translateY(-1px);
+}
+
+/* Social Wrapper */
+.ios-social-wrapper {
+  display: flex;
+  gap: 0.8rem;
+  align-items: center;
+  padding: 6px 16px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 50px;
+  border: 1px solid var(--ios-border);
+  transition: var(--transition-smooth);
+}
+
+.ios-social-icon img {
+  width: 18px;
+  height: 18px;
+  filter: brightness(0) invert(1);
+  transition: var(--transition-smooth);
+}
+
+.ios-social-icon:hover {
+  transform: scale(1.2);
+}
+
+/* Navbar Toggle (Hamburger) */
+.navbar-toggler {
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  border-radius: 10px;
+  padding: 10px !important;
+}
+
+.ios-toggler-icon {
+  width: 22px;
+  height: 2px;
+  background: white;
+  display: block;
+  position: relative;
+  transition: var(--transition-smooth);
+}
+
+.ios-toggler-icon::before,
+.ios-toggler-icon::after {
+  content: '';
+  width: 22px;
+  height: 2px;
+  background: white;
+  position: absolute;
+  left: 0;
+  transition: var(--transition-smooth);
+}
+
+.ios-toggler-icon::before { top: -7px; }
+.ios-toggler-icon::after { top: 7px; }
+
+/* ==========================================================================
+   3. HERO SECTION (SPLIT LAYOUT)
+   ========================================================================== */
+.hero-split-section {
+  padding: 180px 0 100px;
+  background-color: #ffffff;
+  overflow: hidden;
+}
+
+.hero-badge {
+  display: inline-block;
+  background-color: var(--teal-light);
+  color: var(--teal-primary);
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 20px;
+  margin-bottom: 24px;
+}
+
+.hero-headline {
+  font-size: 3.5rem;
+  font-weight: 800;
+  line-height: 1.1;
+  color: var(--text-main);
+  margin-bottom: 24px;
+  letter-spacing: -1px;
+}
+
+.teal-text {
+  color: var(--teal-primary);
+}
+
+.hero-subtext {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: var(--text-muted);
+  margin-bottom: 40px;
+  max-width: 520px;
+}
+
+.hero-ui-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 24px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+  transform: perspective(1000px) rotateY(-5deg) rotateX(5deg);
+}
+
+/* Buttons */
+.btn-primary-teal, .btn-outline-teal {
+  padding: 14px 32px;
+  border-radius: 12px;
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-block;
+  transition: var(--transition-smooth);
+}
+
+.btn-primary-teal {
+  background-color: var(--teal-primary);
+  color: white;
+  border: none;
+}
+
+.btn-primary-teal:hover {
+  background-color: var(--teal-hover);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(13, 148, 136, 0.2);
+  color: white;
+}
+
+.btn-outline-teal {
+  border: 2px solid var(--teal-primary);
+  color: var(--teal-primary);
+}
+
+.btn-outline-teal:hover {
+  background-color: var(--teal-light);
+  transform: translateY(-3px);
+}
+
+/* ==========================================================================
+   4. ANIMATIONS & UI EXTRAS (SweetAlert2 Customization)
+   ========================================================================== */
+.rounded-2xl {
+  border-radius: 24px !important;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-up {
+  opacity: 0;
+  animation: fadeUp 0.8s ease-out forwards;
+}
+
+@keyframes float {
+  0%, 100% { transform: perspective(1000px) rotateY(-5deg) rotateX(5deg) translateY(0); }
+  50% { transform: perspective(1000px) rotateY(-5deg) rotateX(5deg) translateY(-20px); }
+}
+
+.animate-float {
+  animation: float 5s ease-in-out infinite;
+}
+
+/* ==========================================================================
+   5. MOBILE RESPONSIVE (OVERFLOW FIX)
+   ========================================================================== */
+@media (max-width: 991px) {
+  .hero-split-section {
+    padding: 120px 0 60px;
+    text-align: center;
+  }
+
+  .hero-content-left {
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .hero-headline {
+    font-size: 2.4rem;
+  }
+
+  .hero-ui-image {
+    max-width: 85%;
+    transform: none !important; /* Remove tilt on mobile */
+    margin: 0 auto;
+  }
+
+  /* Navbar Mobile Menu Overflow Fix */
+  .navbar-collapse {
+    background: rgba(10, 10, 10, 0.98);
+    margin-top: 15px;
+    border-radius: 20px;
+    width: calc(100vw - 40px); /* Keeps it from touching screen edges */
+    padding: 20px;
+    border: 1px solid var(--ios-border);
+    backdrop-filter: blur(30px);
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%); /* Perfectly centers the dropdown */
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+  }
+
+  .navbar-nav {
+    gap: 10px;
+  }
+
+  .ios-link {
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    width: 100%;
+    text-align: center;
+  }
+
+  .ios-social-wrapper {
+    margin: 20px auto;
+  }
+
+  .ios-cta-glass {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+@media (max-width: 576px) {
+  .hero-buttons {
+    flex-direction: column;
+    width: 100%;
+    gap: 12px;
+  }
+  .btn-primary-teal, .btn-outline-teal {
+    width: 100%;
+  }
+}
