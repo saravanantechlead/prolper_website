@@ -1,0 +1,220 @@
+/* ──────────────────────────────────────────────────────────
+   FOOTER SECTION
+   ────────────────────────────────────────────────────────── */
+.nh-footer {
+  background: var(--nh-dark);
+}
+
+/* Ticker */
+.nh-ticker-wrap {
+  border-top: 1px solid var(--nh-border);
+  border-bottom: 1px solid var(--nh-border);
+  padding: 14px 0;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  overflow: hidden;
+}
+
+.nh-ticker-label {
+  flex-shrink: 0;
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  color: var(--nh-teal);
+  padding: 0 20px;
+  white-space: nowrap;
+}
+
+.nh-ticker-track {
+  flex: 1;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 8%, #000 92%, transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0%, #000 8%, #000 92%, transparent 100%);
+}
+
+.nh-ticker-inner {
+  display: flex;
+  gap: 32px;
+  animation: nhTicker 36s linear infinite;
+  white-space: nowrap;
+  width: max-content;
+}
+
+.nh-ticker-wrap:hover .nh-ticker-inner {
+  animation-play-state: paused;
+}
+
+.nh-ticker-inner span {
+  font-size: 0.82rem;
+  color: rgba(255,255,255,0.65);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.nh-ticker-inner .bi {
+  color: var(--nh-teal);
+  font-size: 0.78rem;
+}
+
+.nh-dot {
+  color: rgba(255,255,255,0.2) !important;
+}
+
+@keyframes nhTicker {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-25%); }
+}
+
+/* Main footer */
+.nh-footer-main {
+  padding: 64px 0 40px;
+}
+
+.nh-footer-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 60px;
+  align-items: start;
+}
+
+.nh-footer-logo {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--nh-white);
+  margin-bottom: 12px;
+  letter-spacing: -0.5px;
+}
+
+.nh-footer-tagline {
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.45);
+  line-height: 1.65;
+  margin-bottom: 16px;
+  max-width: 340px;
+}
+
+.nh-footer-loc {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: rgba(255,255,255,0.45);
+  font-size: 0.82rem;
+}
+
+.nh-footer-loc i {
+  color: var(--nh-teal);
+}
+
+.nh-nl-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--nh-white);
+  margin-bottom: 8px;
+}
+
+.nh-nl-sub {
+  font-size: 0.82rem;
+  color: rgba(255,255,255,0.45);
+  line-height: 1.6;
+  margin-bottom: 18px;
+}
+
+.nh-nl-form {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+
+.nh-nl-input {
+  flex: 1;
+  background: rgba(255,255,255,0.07);
+  border: 1px solid var(--nh-border);
+  border-radius: 12px;
+  padding: 12px 16px;
+  color: var(--nh-white);
+  font-size: 0.85rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.nh-nl-input::placeholder { color: rgba(255,255,255,0.3); }
+.nh-nl-input:focus { border-color: var(--nh-teal); }
+
+.nh-nl-btn {
+  background: var(--nh-teal);
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  width: 46px;
+  height: 46px;
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background 0.2s;
+}
+
+.nh-nl-btn:hover { background: #0da872; }
+
+.nh-footer-socials {
+  display: flex;
+  gap: 10px;
+}
+
+.nh-social-icon {
+  width: 38px;
+  height: 38px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255,255,255,0.7);
+  font-size: 0.9rem;
+  text-decoration: none;
+  border: 1px solid var(--nh-border);
+  transition: background 0.2s, color 0.2s;
+}
+
+.nh-social-icon:hover {
+  background: var(--nh-teal);
+  color: #fff;
+  border-color: var(--nh-teal);
+}
+
+/* Copyright bar */
+.nh-copyright {
+  border-top: 1px solid var(--nh-border);
+  padding: 20px 0;
+}
+
+.nh-copyright-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.35);
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.nh-heart { font-size: 0.9rem; }
+
+.nh-footer-links {
+  display: flex;
+  gap: 20px;
+}
+
+.nh-footer-links a {
+  color: rgba(255,255,255,0.35);
+  text-decoration: none;
+  transition: color 0.2s;
+  font-size: 0.8rem;
+}
+
+.nh-footer-links a:hover { color: var(--nh-white); }

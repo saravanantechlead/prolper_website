@@ -204,6 +204,58 @@ const Legal = () => {
               features, user interfaces, and related content and software.
             </p>
 
+            {/* Section: Customer Terms */}
+            <div className="legal-section-card mb-4" style={{borderLeft: '4px solid #0e766d'}}>
+              <h2 className="fs-4 fw-bold teal-text mb-3">Terms for Customers</h2>
+              <p className="fs-6 text-slate mb-3">These terms apply to individuals using the <strong>Prolper Customer App</strong> to find and book local service providers.</p>
+              <div className="mb-3">
+                <h3 className="fs-6 fw-bold text-dark mb-1">Booking Services</h3>
+                <p className="fs-6 text-slate">Customers may submit service requests by selecting a category, location, date, and time. Prolper will match the request with available local providers. Acceptance of a request is at the discretion of the provider.</p>
+              </div>
+              <div className="mb-3">
+                <h3 className="fs-6 fw-bold text-dark mb-1">Communication</h3>
+                <p className="fs-6 text-slate">Customers may chat or call local providers through the Prolper app once a service request is accepted. All communication must remain professional and respectful. Personal contact information should not be exchanged outside the platform.</p>
+              </div>
+              <div className="mb-3">
+                <h3 className="fs-6 fw-bold text-dark mb-1">Estimates and Payments</h3>
+                <p className="fs-6 text-slate">Customers will receive an estimate from the local provider before the service begins. By accepting an estimate, the customer agrees to the quoted price. Payment is processed securely through the Prolper app upon service completion.</p>
+              </div>
+              <div className="mb-3">
+                <h3 className="fs-6 fw-bold text-dark mb-1">Cancellations</h3>
+                <p className="fs-6 text-slate">Customers may cancel a service request before it is accepted at no charge. Cancellations after acceptance may be subject to a cancellation fee as agreed with the provider.</p>
+              </div>
+              <div>
+                <h3 className="fs-6 fw-bold text-dark mb-1">Ratings and Reviews</h3>
+                <p className="fs-6 text-slate">Customers are encouraged to leave honest ratings and feedback after each service. Ratings must be based on genuine experiences and must not be used to harass or defame providers.</p>
+              </div>
+            </div>
+
+            {/* Section: Provider Terms */}
+            <div className="legal-section-card mb-4" style={{borderLeft: '4px solid #45C824'}}>
+              <h2 className="fs-4 fw-bold mb-3" style={{color: '#2d7a2d'}}>Terms for Local Providers</h2>
+              <p className="fs-6 text-slate mb-3">These terms apply to individuals and businesses using the <strong>Prolper Business App</strong> to offer services to customers.</p>
+              <div className="mb-3">
+                <h3 className="fs-6 fw-bold text-dark mb-1">Eligibility</h3>
+                <p className="fs-6 text-slate">Local providers must be legally authorized to offer the services listed on their profile. Prolper reserves the right to verify credentials and may remove providers who misrepresent their qualifications.</p>
+              </div>
+              <div className="mb-3">
+                <h3 className="fs-6 fw-bold text-dark mb-1">Accepting Service Requests</h3>
+                <p className="fs-6 text-slate">Providers will receive relevant service requests based on their category, location, and availability. Providers may accept or decline requests at their discretion. Consistent non-responsiveness may affect your standing on the platform.</p>
+              </div>
+              <div className="mb-3">
+                <h3 className="fs-6 fw-bold text-dark mb-1">Estimates and Payments</h3>
+                <p className="fs-6 text-slate">Providers must submit a clear and honest estimate to the customer before commencing work. Once an estimate is accepted, the agreed price is binding unless there is a mutually agreed change in scope. Payments are disbursed through the Prolper app after service completion.</p>
+              </div>
+              <div className="mb-3">
+                <h3 className="fs-6 fw-bold text-dark mb-1">Service Standards</h3>
+                <p className="fs-6 text-slate">Providers are expected to deliver services professionally, safely, and as agreed. Prolper may investigate complaints and, after a thorough review, delist providers who consistently receive negative feedback or violate these terms.</p>
+              </div>
+              <div>
+                <h3 className="fs-6 fw-bold text-dark mb-1">Prohibited Conduct</h3>
+                <p className="fs-6 text-slate">Providers must not solicit customers to transact outside the Prolper platform, share customer personal information, or engage in any fraudulent or harmful activity. Violations will result in immediate account suspension.</p>
+              </div>
+            </div>
+
             {/* Section 1: Membership */}
             <div className="legal-section-card mb-4">
               <div className="section-id-tag">1</div>

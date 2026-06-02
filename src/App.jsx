@@ -492,27 +492,35 @@ function Navbar() {
           <ul className="navbar-nav ms-auto align-items-center">
             <li className="nav-item">
               <a href="#about-us" className="nav-link ios-link" onClick={(e) => handleNavigateAndScroll(e, "about-us")}>
-                About Us
+                Why us
               </a>
             </li>
             <li className="nav-item">
-              <a href="#how-section" className="nav-link ios-link" onClick={(e) => handleNavigateAndScroll(e, "how-section")}>
-                How It Works
+              <a href="#contact-section" className="nav-link ios-link" onClick={(e) => handleNavigateAndScroll(e, "contact-section")}>
+                Contact us
               </a>
+            </li>
+
+            <li className="nav-item d-none d-lg-flex align-items-center">
+              <div className="ios-nav-divider"></div>
             </li>
 
             <li className="nav-item px-lg-2">
-              <div className="ios-social-wrapper">
+              <div className="ios-social-group">
                 <SocialIcon url="https://facebook.com/Prolper" icon={facebook} alt="Facebook" />
-                <SocialIcon url="https://linkedin.com/company/prolper" icon={linkedin} alt="LinkedIn" />
                 <SocialIcon url="https://instagram.com/prolperapp" icon={instagram} alt="Instagram" />
                 <SocialIcon url="https://x.com/ProlperApp" icon={twitter} alt="X" isX />
+                <SocialIcon url="https://linkedin.com/company/prolper" icon={linkedin} alt="LinkedIn" />
               </div>
             </li>
 
+            <li className="nav-item d-none d-lg-flex align-items-center">
+              <div className="ios-nav-divider"></div>
+            </li>
+
             <li className="nav-item">
-              <a href="#contact" className="btn ios-cta-glass" onClick={(e) => handleNavigateAndScroll(e, "contact-section")}>
-                Contact
+              <a href="#download-section" className="btn ios-cta-glass" onClick={(e) => handleNavigateAndScroll(e, "download-section")}>
+                Download
               </a>
             </li>
           </ul>

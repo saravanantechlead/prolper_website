@@ -102,21 +102,50 @@ const Privacy = () => {
 
             {/* 2. How We Use Information */}
             <PolicySection id="use" step="2" title="How We Use Information">
+              <p className="fs-6 text-slate mb-3">We use the information we collect to operate and improve the Prolper platform for both customers and local providers:</p>
+              <div className="row g-3 mb-3">
+                <div className="col-md-6">
+                  <div className="sub-data-card customer-gradient">
+                    <h4 className="fs-6 fw-bold mb-2">For Customers</h4>
+                    <ul className="fs-6 text-slate ps-3">
+                      <li>Authenticate your account (Phone/Google)</li>
+                      <li>Match you with available local providers</li>
+                      <li>Process and track your service requests</li>
+                      <li>Enable in-app chat and calling</li>
+                      <li>Facilitate secure payments</li>
+                      <li>Send service updates and notifications</li>
+                    </ul>
+                  </div>
+                </div>
+                <div className="col-md-6">
+                  <div className="sub-data-card business-gradient">
+                    <h4 className="fs-6 fw-bold mb-2">For Local Providers</h4>
+                    <ul className="fs-6 text-slate ps-3">
+                      <li>Authenticate your business account</li>
+                      <li>Send relevant service requests to you</li>
+                      <li>Manage your schedule and availability</li>
+                      <li>Display your business profile to customers</li>
+                      <li>Process payments and earnings</li>
+                      <li>Collect and display customer ratings</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
               <ul className="fs-6 text-slate lh-lg">
-                <li>Authenticate users (Phone, Email, or Google)</li>
-                <li>Connect customers and businesses</li>
-                <li>Track service status (Pending, Accepted, Completed)</li>
                 <li>Maintain records and improve user experience</li>
+                <li>Prevent fraud and ensure platform safety</li>
+                <li>Comply with legal obligations</li>
               </ul>
             </PolicySection>
 
             {/* 3. Data Sharing */}
             <PolicySection id="sharing" step="3" title="Data Sharing and Disclosure">
-              <p className="fs-6 text-slate">We do not sell or rent your personal data. We may share data:</p>
+              <p className="fs-6 text-slate">We do not sell or rent your personal data. We may share limited data in the following circumstances:</p>
               <ul className="fs-6 text-slate">
-                <li>With service providers (Firebase)</li>
-                <li>To comply with legal obligations</li>
-                <li>To protect safety of users or the platform</li>
+                <li><strong>Between customers and local providers:</strong> Only the information necessary to complete a service request is shared (e.g., service location for providers). Personal contact details are not shared.</li>
+                <li><strong>With technology partners (Firebase):</strong> For authentication, data storage, and app infrastructure.</li>
+                <li><strong>To comply with legal obligations:</strong> When required by law or to protect the rights and safety of users.</li>
+                <li><strong>To protect the platform:</strong> To investigate fraud, abuse, or violations of our Terms of Use.</li>
               </ul>
             </PolicySection>
 
@@ -124,18 +153,27 @@ const Privacy = () => {
             <PolicySection id="security" step="4" title="Data Storage and Security">
               <div className="security-gradient-box">
                 <ul className="fs-6 text-slate mb-0">
-                  <li>Stored using **Google Firebase** (Auth and Firestore)</li>
-                  <li>Encryption and access controls are utilized</li>
+                  <li>All data is stored using <strong>Google Firebase</strong> (Authentication and Firestore)</li>
+                  <li>Encryption and access controls are applied to all stored data</li>
                   <li>Passwords are never stored in plain text</li>
+                  <li>Payment transactions are processed through secure, PCI-compliant channels</li>
+                  <li>We regularly review our data practices to maintain security standards</li>
                 </ul>
               </div>
             </PolicySection>
 
             {/* 5. Your Rights */}
             <PolicySection id="rights" step="5" title="Your Rights">
-              <p className="fs-6 text-slate">You can request access or deletion of your account and data.</p>
+              <p className="fs-6 text-slate mb-3">Regardless of whether you are a customer or a local provider, you have the following rights regarding your personal data:</p>
+              <ul className="fs-6 text-slate mb-3">
+                <li><strong>Access:</strong> Request a copy of the personal data we hold about you.</li>
+                <li><strong>Correction:</strong> Request correction of inaccurate or incomplete data.</li>
+                <li><strong>Deletion:</strong> Request deletion of your account and associated data.</li>
+                <li><strong>Portability:</strong> Request your data in a portable format.</li>
+                <li><strong>Withdrawal of Consent:</strong> Withdraw consent for data processing at any time by deleting your account.</li>
+              </ul>
               <div className="action-box-teal">
-                <p className="mb-0">Contact us at: contact@prolper.com</p>
+                <p className="mb-0">To exercise your rights, contact us at: <strong>contact@prolper.com</strong></p>
               </div>
             </PolicySection>
 
@@ -159,7 +197,7 @@ const Privacy = () => {
               <div className="contact-grid-card">
                 <p className="mb-1 text-slate"><strong>Email:</strong> contact@prolper.com</p>
                 <p className="mb-1 text-slate"><strong>Company:</strong> Prolper</p>
-                <p className="mb-0 text-slate"><strong>Address:</strong> Canada</p>
+                <p className="mb-0 text-slate"><strong>Address:</strong> Mississauga, Ontario, Canada</p>
               </div>
             </PolicySection>
 

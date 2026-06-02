@@ -13,10 +13,10 @@ const About = () => {
         {/* Description */}
         <p className="text-start mt-5 lh-lg ">
           With just a couple of clicks, our advanced AI-based algorithm quickly
-          identifies the best available service providers tailored to your
-          preferred location, date, and time. Whether you’re in need of an
-          electrician, plumber, baker, private tutor, realtor or mover,
-          Prolper has you covered with more than 150 service categories.
+          identifies the best available local providers tailored to your
+          preferred location, date, and time. Whether you’re in need of a
+          Handyman, Painting, Cleaning, Car Detailing, Pet Care, CPA Services, Tutoring, or Fitness Coaching,
+          Prolper has you covered across 8 service categories.
         </p>
         <p className="text-start lh-lg ">
           Join Prolper today for free and experience a new level of

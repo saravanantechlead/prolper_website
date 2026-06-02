@@ -1,0 +1,183 @@
+/* ──────────────────────────────────────────────────────────
+   CONTACT SECTION
+   ────────────────────────────────────────────────────────── */
+.nh-contact {
+  background: linear-gradient(145deg, #eef2f7 0%, #e8edf5 50%, #edf1f7 100%);
+  padding: 100px 0;
+}
+
+.nh-contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 64px;
+  align-items: center;
+}
+
+.nh-contact-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(15,186,129,0.1);
+  color: var(--nh-teal);
+  border: 1px solid rgba(15,186,129,0.25);
+  border-radius: 100px;
+  padding: 5px 14px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+.nh-contact-heading {
+  font-size: clamp(2.2rem, 4vw, 3rem);
+  font-weight: 900;
+  color: var(--nh-text);
+  line-height: 1.06;
+  margin-bottom: 18px;
+  letter-spacing: -2px;
+}
+
+.nh-contact-intro {
+  color: var(--nh-muted);
+  font-size: 0.95rem;
+  line-height: 1.75;
+  margin-bottom: 36px;
+}
+
+.nh-contact-info { margin-bottom: 32px; }
+
+.nh-contact-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  color: var(--nh-text);
+  font-size: 0.92rem;
+  margin-bottom: 16px;
+  font-weight: 500;
+}
+
+.nh-contact-row-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(15,186,129,0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.nh-contact-row-icon i {
+  color: var(--nh-teal);
+  font-size: 0.9rem;
+}
+
+.nh-responds {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.83rem;
+  color: var(--nh-muted);
+  font-weight: 500;
+  padding: 8px 14px;
+  background: rgba(15,186,129,0.07);
+  border-radius: 100px;
+  border: 1px solid rgba(15,186,129,0.15);
+}
+
+.nh-online-dot {
+  width: 8px;
+  height: 8px;
+  background: var(--nh-teal);
+  border-radius: 50%;
+  animation: nhDotPulse 2s ease-in-out infinite;
+}
+
+/* Form card */
+.nh-contact-right {
+  background: #fff;
+  border-radius: 24px;
+  padding: 44px 40px 48px;
+  position: relative;
+  box-shadow:
+    0 2px 4px rgba(0,0,0,0.04),
+    0 8px 20px rgba(0,0,0,0.06),
+    0 24px 56px rgba(0,0,0,0.09);
+}
+
+.nh-form { display: flex; flex-direction: column; gap: 0; }
+
+.nh-field {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-bottom: 1.5px solid #e8edf3;
+  padding: 15px 2px;
+  transition: border-color 0.2s;
+}
+
+.nh-field:focus-within {
+  border-color: var(--nh-teal);
+}
+
+.nh-field i {
+  color: #b0bec5;
+  font-size: 1rem;
+  width: 18px;
+  flex-shrink: 0;
+}
+
+.nh-field input,
+.nh-field textarea {
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 0.93rem;
+  color: var(--nh-text);
+  width: 100%;
+  resize: none;
+  font-family: inherit;
+}
+
+.nh-field input::placeholder,
+.nh-field textarea::placeholder {
+  color: #b0bec5;
+}
+
+.nh-phone-field { gap: 8px; }
+
+.nh-cc {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #64748b;
+  white-space: nowrap;
+  cursor: default;
+}
+
+.nh-textarea-field { align-items: flex-start; }
+.nh-textarea-field i { margin-top: 3px; }
+
+.nh-send-btn {
+  margin-top: 32px;
+  background: #111827;
+  color: #fff;
+  border: none;
+  border-radius: 14px;
+  padding: 17px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+  letter-spacing: 0.01em;
+}
+
+.nh-send-btn:hover {
+  background: #1e293b;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+}

@@ -1,0 +1,133 @@
+/* ──────────────────────────────────────────────────────────
+   PLATFORM SECTION
+   ────────────────────────────────────────────────────────── */
+.nh-platform {
+  background: var(--nh-dark);
+  padding: 100px 0;
+}
+
+.nh-platform-title {
+  font-size: clamp(2rem, 3.8vw, 3rem);
+  font-weight: 900;
+  color: var(--nh-white);
+  text-align: center;
+  margin-bottom: 14px;
+  letter-spacing: -1.5px;
+  line-height: 1.1;
+}
+
+.nh-platform-sub {
+  text-align: center;
+  color: rgba(255,255,255,0.45);
+  font-size: 1rem;
+  margin-bottom: 56px;
+}
+
+.nh-platform-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.nh-pcard {
+  background: var(--nh-card-bg);
+  border-radius: 20px;
+  padding: 44px 36px;
+  border: 1px solid rgba(255,255,255,0.07);
+  transition: transform 0.35s cubic-bezier(0.4,0,0.2,1),
+              border-color 0.35s ease,
+              box-shadow 0.35s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.nh-pcard::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(15,186,129,0.4), transparent);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.nh-pcard:hover {
+  transform: translateY(-8px);
+  border-color: rgba(15,186,129,0.2);
+  box-shadow: 0 24px 60px rgba(0,0,0,0.3), 0 0 0 1px rgba(15,186,129,0.08);
+}
+
+.nh-pcard:hover::before {
+  opacity: 1;
+}
+
+.nh-pcard-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--nh-teal);
+  color: #ffffff;
+  border-radius: 10px;
+  padding: 10px 16px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  margin-bottom: 20px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.nh-pcard-title {
+  font-size: 1.7rem;
+  font-weight: 800;
+  color: var(--nh-white);
+  margin-bottom: 10px;
+  letter-spacing: -0.5px;
+}
+
+.nh-pcard-desc {
+  font-size: 0.92rem;
+  color: rgba(255,255,255,0.5);
+  line-height: 1.65;
+  margin-bottom: 24px;
+}
+
+.nh-qr-box {
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.nh-qr-box::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -80%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(120deg, transparent, rgba(255,255,255,0.7), transparent);
+  transform: skewX(-18deg);
+  transition: left 0s;
+  pointer-events: none;
+}
+
+.nh-pcard:hover .nh-qr-box::after {
+  animation: nhShimmerSweep 0.65s ease forwards;
+}
+
+.nh-qr-img {
+  width: 100%;
+  max-width: 240px;
+  height: auto;
+  display: block;
+  transition: transform 0.35s ease;
+}
+
+.nh-pcard:hover .nh-qr-img {
+  transform: scale(1.03);
+}

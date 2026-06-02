@@ -26,77 +26,118 @@ html, body {
 }
 
 /* ==========================================================================
-   2. NAVBAR STYLES (iOS PRESCISION)
+   2. NAVBAR STYLES — floating pill
    ========================================================================== */
 .ios-nav {
-  background: var(--nav-bg) !important;
-  backdrop-filter: blur(20px) saturate(160%);
-  -webkit-backdrop-filter: blur(20px) saturate(160%);
-  border-bottom: 1px solid var(--ios-border);
-  padding: 1.2rem 0;
-  transition: var(--transition-smooth);
+  background: linear-gradient(180deg, #1c1c28 0%, #111119 100%) !important;
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border-radius: 18px !important;
+  border: 1px solid rgba(255, 255, 255, 0.09) !important;
+  padding: 14px 32px !important;
+  top: 16px !important;
+  left: 50% !important;
+  right: auto !important;
+  transform: translateX(-50%);
+  width: calc(100% - 48px) !important;
+  max-width: 1240px !important;
   z-index: 1050;
+  box-shadow:
+    0 2px 8px rgba(0,0,0,0.2),
+    0 8px 32px rgba(0,0,0,0.3),
+    inset 0 1px 0 rgba(255,255,255,0.09);
+  transition: var(--transition-smooth);
 }
 
 .nav-scrolled {
-  padding: 0.75rem 0 !important;
-  background: var(--nav-bg-scrolled) !important;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.18);
-  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5);
+  background: linear-gradient(180deg, #141420 0%, #0c0c14 100%) !important;
+  box-shadow:
+    0 4px 16px rgba(0,0,0,0.35),
+    0 16px 48px rgba(0,0,0,0.4),
+    inset 0 1px 0 rgba(255,255,255,0.06) !important;
+  padding: 12px 32px !important;
 }
 
 .ios-logo {
-  height: 44px;
+  height: 30px;
   width: auto;
   filter: brightness(0) invert(1);
   transition: var(--transition-smooth);
 }
 
 .ios-logo:hover {
-  transform: scale(1.05);
-  filter: brightness(0) invert(1) drop-shadow(0 0 8px rgba(255, 255, 255, 0.5));
+  transform: scale(1.06);
+  filter: brightness(0) invert(1) drop-shadow(0 0 10px rgba(255,255,255,0.45));
 }
 
 .ios-link {
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Lato", sans-serif;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif;
   font-weight: 500;
   font-size: 15px !important;
-  color: rgba(255, 255, 255, 0.8) !important;
-  padding: 0.6rem 1.2rem !important;
-  transition: var(--transition-smooth);
+  color: rgba(255, 255, 255, 0.7) !important;
+  padding: 8px 16px !important;
+  border-radius: 10px;
+  transition: color 0.2s ease, background 0.2s ease !important;
+  letter-spacing: -0.1px;
 }
 
 .ios-link:hover {
   color: #ffffff !important;
-  transform: translateY(-1px);
+  background: rgba(255,255,255,0.07) !important;
 }
 
-/* Social Wrapper */
-.ios-social-wrapper {
+/* Divider between links and social icons */
+.ios-nav-divider {
+  width: 1px;
+  height: 22px;
+  background: rgba(255,255,255,0.12);
+  margin: 0 8px;
+}
+
+/* Social Group */
+.ios-social-group {
   display: flex;
-  gap: 0.8rem;
+  gap: 6px;
   align-items: center;
-  padding: 6px 16px;
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 50px;
-  border: 1px solid var(--ios-border);
-  transition: var(--transition-smooth);
 }
 
-.ios-social-icon img {
-  width: 18px;
-  height: 18px;
-  filter: brightness(0) invert(1);
-  transition: var(--transition-smooth);
+.ios-social-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 50%;
+  transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1),
+              background 0.2s ease,
+              box-shadow 0.2s ease,
+              border-color 0.2s ease;
+  text-decoration: none;
 }
 
 .ios-social-icon:hover {
-  transform: scale(1.2);
+  background: rgba(255,255,255,0.16);
+  border-color: rgba(255,255,255,0.25);
+  transform: translateY(-3px) scale(1.12);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.3);
 }
 
-/* Navbar Toggle (Hamburger) */
+.ios-social-icon:active { transform: scale(0.92); }
+
+.ios-social-icon img {
+  width: 15px;
+  height: 15px;
+  filter: brightness(0) invert(1);
+  transition: transform 0.2s ease;
+}
+
+.ios-social-icon:hover img { transform: scale(1.1); }
+
+/* Navbar Toggle */
 .navbar-toggler {
-  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  border: 1px solid rgba(255,255,255,0.18) !important;
   border-radius: 10px;
   padding: 10px !important;
 }
@@ -122,7 +163,7 @@ html, body {
 }
 
 .ios-toggler-icon::before { top: -7px; }
-.ios-toggler-icon::after { top: 7px; }
+.ios-toggler-icon::after  { top: 7px;  }
 
 /* ==========================================================================
    3. HERO SECTION (SPLIT LAYOUT)
@@ -206,6 +247,51 @@ html, body {
   transform: translateY(-3px);
 }
 
+/* Download CTA button */
+.ios-cta-glass {
+  background: #0fba81 !important;
+  color: #ffffff !important;
+  border: none !important;
+  border-radius: 12px !important;
+  padding: 10px 26px !important;
+  font-size: 14.5px !important;
+  font-weight: 700 !important;
+  text-decoration: none !important;
+  letter-spacing: -0.2px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(15,186,129,0.35);
+  transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1),
+              box-shadow 0.25s ease,
+              background 0.2s ease !important;
+}
+
+.ios-cta-glass::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -75%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(120deg, transparent, rgba(255,255,255,0.3), transparent);
+  transform: skewX(-20deg);
+  transition: left 0.5s ease;
+}
+
+.ios-cta-glass:hover {
+  background: #0da876 !important;
+  color: #ffffff !important;
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 8px 28px rgba(15,186,129,0.45) !important;
+}
+
+.ios-cta-glass:hover::before { left: 130%; }
+
+.ios-cta-glass:active {
+  transform: scale(0.96) !important;
+  box-shadow: 0 2px 8px rgba(15,186,129,0.2) !important;
+}
+
 /* ==========================================================================
    4. ANIMATIONS & UI EXTRAS (SweetAlert2 Customization)
    ========================================================================== */
@@ -258,19 +344,18 @@ html, body {
     margin: 0 auto;
   }
 
-  /* Navbar Mobile Menu Overflow Fix */
+  /* Navbar Mobile Menu — inside the floating card */
   .navbar-collapse {
-    background: rgba(10, 10, 10, 0.98);
-    margin-top: 15px;
-    border-radius: 20px;
-    width: calc(100vw - 40px); /* Keeps it from touching screen edges */
-    padding: 20px;
-    border: 1px solid var(--ios-border);
-    backdrop-filter: blur(30px);
-    position: relative;
-    left: 50%;
-    transform: translateX(-50%); /* Perfectly centers the dropdown */
-    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    background: transparent;
+    margin-top: 8px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    padding-top: 12px;
+  }
+
+  .ios-nav {
+    width: calc(100% - 24px) !important;
+    top: 14px !important;
+    padding: 8px 16px !important;
   }
 
   .navbar-nav {
@@ -283,8 +368,9 @@ html, body {
     text-align: center;
   }
 
-  .ios-social-wrapper {
+  .ios-social-group {
     margin: 20px auto;
+    justify-content: center;
   }
 
   .ios-cta-glass {
