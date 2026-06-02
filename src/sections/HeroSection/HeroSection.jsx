@@ -33,118 +33,114 @@ const HeroSection = () => {
           <div className="nh-hiw-card" id="how-section">
             <h3 className="nh-hiw-title">How It Works</h3>
             <p className="nh-hiw-sub">Your service sorted in four simple steps.</p>
-            <div className="nh-hiw2-grid">
+            <div className="nh-hiw-grid">
 
               {/* Step 1 */}
-              <div className="nh-hiw2-step">
-                <div className="nh-step-badge">1</div>
-                <div className="nh-hiw2-visual">
-                  <span className="nh-step-bg-num">1</span>
-                  <div className="nh-mini-phone">
-                    <div className="nh-mini-phone-island"></div>
-                    <div className="nh-mini-phone-screen">
-                      <div className="nh-mini-appbar">
-                        <span className="nh-mini-appname">Prolper</span>
-                        <i className="bi bi-three-dots nh-mini-menu"></i>
-                      </div>
-                      <div className="nh-mini-search-bar">
-                        <i className="bi bi-search"></i>
-                        <span>Try 'Handyman'</span>
-                      </div>
-                      <div className="nh-mini-section-lbl">Suggestions</div>
-                      <div className="nh-mini-svc-grid">
-                        <div className="nh-mini-svc-tile nh-tile-active">
-                          <i className="bi bi-tools"></i>
-                          <span>Handyman</span>
+              <div className="nh-hiw-step">
+                <div className="nh-hiw-scard nh-hiw-scard-teal">
+                  <span className="nh-hiw-bgnum">1</span>
+                  <div className="nh-hiw-pill nh-hiw-pill-teal">01</div>
+                  <div className="nh-hiw-vis">
+                    <div className="nh-mini-phone">
+                      <div className="nh-mini-phone-island"></div>
+                      <div className="nh-mini-phone-screen">
+                        <div className="nh-mini-appbar">
+                          <span className="nh-mini-appname">Prolper</span>
+                          <i className="bi bi-three-dots nh-mini-menu"></i>
                         </div>
-                        <div className="nh-mini-svc-tile">
-                          <i className="bi bi-brush-fill"></i>
-                          <span>Painting</span>
+                        <div className="nh-mini-search-bar">
+                          <i className="bi bi-search"></i>
+                          <span>Try &lsquo;Handyman&rsquo;</span>
                         </div>
-                        <div className="nh-mini-svc-tile">
-                          <i className="bi bi-house-heart-fill"></i>
-                          <span>Cleaning</span>
-                        </div>
-                        <div className="nh-mini-svc-tile">
-                          <i className="bi bi-car-front-fill"></i>
-                          <span>Car Detail</span>
+                        <div className="nh-mini-section-lbl">Suggestions</div>
+                        <div className="nh-mini-svc-grid">
+                          <div className="nh-mini-svc-tile nh-tile-active"><i className="bi bi-tools"></i><span>Handyman</span></div>
+                          <div className="nh-mini-svc-tile"><i className="bi bi-brush-fill"></i><span>Painting</span></div>
+                          <div className="nh-mini-svc-tile"><i className="bi bi-house-heart-fill"></i><span>Cleaning</span></div>
+                          <div className="nh-mini-svc-tile"><i className="bi bi-car-front-fill"></i><span>Car Detail</span></div>
                         </div>
                       </div>
+                      <div className="nh-mini-phone-bar"></div>
                     </div>
-                    <div className="nh-mini-phone-bar"></div>
                   </div>
                 </div>
-                <h4 className="nh-hiw2-title">Select a Service</h4>
-                <p className="nh-hiw2-desc">Browse 8 categories and pick what you need.</p>
+                <h4 className="nh-hiw-slabel">Select a Service</h4>
+                <p className="nh-hiw-sdesc">Browse 8 categories and pick what you need.</p>
               </div>
 
               {/* Step 2 */}
-              <div className="nh-hiw2-step">
-                <div className="nh-step-badge">2</div>
-                <div className="nh-hiw2-visual">
-                  <span className="nh-step-bg-num">2</span>
-                  <div className="nh-ai-radar">
-                    <span className="nh-radar-r1"></span>
-                    <span className="nh-radar-r2"></span>
-                    <span className="nh-radar-r3"></span>
-                    <span className="nh-radar-sweep"></span>
-                    <span className="nh-radar-ch-h"></span>
-                    <span className="nh-radar-ch-v"></span>
-                    <div className="nh-radar-core"><i className="bi bi-cpu-fill"></i></div>
-                    <span className="nh-radar-dot rd1"></span>
-                    <span className="nh-radar-dot rd2"></span>
-                    <span className="nh-radar-dot rd3"></span>
+              <div className="nh-hiw-step">
+                <div className="nh-hiw-scard nh-hiw-scard-indigo">
+                  <span className="nh-hiw-bgnum">2</span>
+                  <div className="nh-hiw-pill nh-hiw-pill-indigo">02</div>
+                  <div className="nh-hiw-vis">
+                    <div className="nh-ai-radar">
+                      <span className="nh-radar-r1"></span>
+                      <span className="nh-radar-r2"></span>
+                      <span className="nh-radar-r3"></span>
+                      <span className="nh-radar-sweep"></span>
+                      <span className="nh-radar-ch-h"></span>
+                      <span className="nh-radar-ch-v"></span>
+                      <div className="nh-radar-core"><i className="bi bi-cpu-fill"></i></div>
+                      <span className="nh-radar-dot rd1"></span>
+                      <span className="nh-radar-dot rd2"></span>
+                      <span className="nh-radar-dot rd3"></span>
+                    </div>
                   </div>
                 </div>
-                <h4 className="nh-hiw2-title">AI Smart Match</h4>
-                <p className="nh-hiw2-desc">AI finds the best-rated local pro near you.</p>
+                <h4 className="nh-hiw-slabel">AI Smart Match</h4>
+                <p className="nh-hiw-sdesc">AI finds the best-rated local pro near you.</p>
               </div>
 
               {/* Step 3 */}
-              <div className="nh-hiw2-step">
-                <div className="nh-step-badge">3</div>
-                <div className="nh-hiw2-visual">
-                  <span className="nh-step-bg-num">3</span>
-                  <div className="nh-connect-visual">
-                    <div className="nh-connect-btns">
-                      <div className="nh-cv-btn nh-cv-call">
-                        <div className="nh-cv-ring"></div>
-                        <div className="nh-cv-ring nh-cv-ring2"></div>
-                        <div className="nh-cv-icon"><i className="bi bi-telephone-fill"></i></div>
-                        <span>Call</span>
+              <div className="nh-hiw-step">
+                <div className="nh-hiw-scard nh-hiw-scard-teal">
+                  <span className="nh-hiw-bgnum">3</span>
+                  <div className="nh-hiw-pill nh-hiw-pill-teal">03</div>
+                  <div className="nh-hiw-vis">
+                    <div className="nh-connect-visual">
+                      <div className="nh-connect-btns">
+                        <div className="nh-cv-btn nh-cv-call">
+                          <div className="nh-cv-ring"></div>
+                          <div className="nh-cv-ring nh-cv-ring2"></div>
+                          <div className="nh-cv-icon"><i className="bi bi-telephone-fill"></i></div>
+                          <span>Call</span>
+                        </div>
+                        <div className="nh-cv-or">or</div>
+                        <div className="nh-cv-btn nh-cv-chat">
+                          <div className="nh-cv-icon"><i className="bi bi-chat-dots-fill"></i></div>
+                          <span>Chat</span>
+                        </div>
                       </div>
-                      <div className="nh-cv-or">or</div>
-                      <div className="nh-cv-btn nh-cv-chat">
-                        <div className="nh-cv-icon"><i className="bi bi-chat-dots-fill"></i></div>
-                        <span>Chat</span>
+                      <div className="nh-cv-estimate">
+                        <i className="bi bi-file-earmark-text-fill"></i> Estimate Sent
                       </div>
-                    </div>
-                    <div className="nh-cv-estimate">
-                      <i className="bi bi-file-earmark-text-fill"></i> Estimate Sent
                     </div>
                   </div>
                 </div>
-                <h4 className="nh-hiw2-title">Provider Connects</h4>
-                <p className="nh-hiw2-desc">Pro reaches out via <strong>call</strong> or <strong>chat</strong> and sends a live estimate.</p>
+                <h4 className="nh-hiw-slabel">Provider Connects</h4>
+                <p className="nh-hiw-sdesc">Chat or call, accept the estimate, pay &amp; get it done.</p>
               </div>
 
               {/* Step 4 */}
-              <div className="nh-hiw2-step">
-                <div className="nh-step-badge">4</div>
-                <div className="nh-hiw2-visual">
-                  <span className="nh-step-bg-num">4</span>
-                  <div className="nh-inv-card">
-                    <div className="nh-inv-toprow">
-                      <span className="nh-inv-id">Invoice #1042</span>
-                      <span className="nh-inv-ok"><i className="bi bi-check-circle-fill"></i> Approved</span>
+              <div className="nh-hiw-step">
+                <div className="nh-hiw-scard nh-hiw-scard-indigo">
+                  <span className="nh-hiw-bgnum">4</span>
+                  <div className="nh-hiw-pill nh-hiw-pill-indigo">04</div>
+                  <div className="nh-hiw-vis">
+                    <div className="nh-inv-card">
+                      <div className="nh-inv-toprow">
+                        <span className="nh-inv-id">Invoice #1042</span>
+                        <span className="nh-inv-ok"><i className="bi bi-check-circle-fill"></i> Approved</span>
+                      </div>
+                      <div className="nh-inv-service">Handyman · 2 hrs</div>
+                      <div className="nh-inv-amount">$120</div>
+                      <button className="nh-inv-pay"><i className="bi bi-lock-fill"></i> Pay Securely</button>
                     </div>
-                    <div className="nh-inv-service">Handyman · 2 hrs</div>
-                    <div className="nh-inv-amount">$120</div>
-                    <button className="nh-inv-pay"><i className="bi bi-lock-fill"></i> Pay Securely</button>
                   </div>
                 </div>
-                <h4 className="nh-hiw2-title">Approve &amp; Pay</h4>
-                <p className="nh-hiw2-desc">Accept, get the job done, pay securely in-app.</p>
+                <h4 className="nh-hiw-slabel">Approve &amp; Pay</h4>
+                <p className="nh-hiw-sdesc">Accept, get the job done, pay securely.</p>
               </div>
 
             </div>

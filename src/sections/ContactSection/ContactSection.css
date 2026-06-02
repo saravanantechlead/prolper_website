@@ -2,8 +2,9 @@
    CONTACT SECTION
    ────────────────────────────────────────────────────────── */
 .nh-contact {
-  background: linear-gradient(145deg, #eef2f7 0%, #e8edf5 50%, #edf1f7 100%);
+  background: var(--mesh-light);
   padding: 100px 0;
+  position: relative;
 }
 
 .nh-contact-grid {
@@ -18,8 +19,10 @@
   align-items: center;
   gap: 6px;
   background: rgba(15,186,129,0.1);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   color: var(--nh-teal);
-  border: 1px solid rgba(15,186,129,0.25);
+  border: 1px solid rgba(15,186,129,0.28);
   border-radius: 100px;
   padding: 5px 14px;
   font-size: 0.72rem;
@@ -61,11 +64,15 @@
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background: rgba(15,186,129,0.12);
+  background: rgba(15,186,129,0.1);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(15,186,129,0.2);
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.8);
 }
 
 .nh-contact-row-icon i {
@@ -81,9 +88,12 @@
   color: var(--nh-muted);
   font-weight: 500;
   padding: 8px 14px;
-  background: rgba(15,186,129,0.07);
+  background: rgba(15,186,129,0.08);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   border-radius: 100px;
-  border: 1px solid rgba(15,186,129,0.15);
+  border: 1px solid rgba(15,186,129,0.18);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.7);
 }
 
 .nh-online-dot {
@@ -94,16 +104,20 @@
   animation: nhDotPulse 2s ease-in-out infinite;
 }
 
-/* Form card */
+/* Form card — light glass */
 .nh-contact-right {
-  background: #fff;
-  border-radius: 24px;
+  background: var(--glass-light);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border-radius: 28px;
   padding: 44px 40px 48px;
   position: relative;
+  border: 1px solid var(--glass-light-border);
   box-shadow:
     0 2px 4px rgba(0,0,0,0.04),
-    0 8px 20px rgba(0,0,0,0.06),
-    0 24px 56px rgba(0,0,0,0.09);
+    0 8px 24px rgba(0,0,0,0.06),
+    0 32px 72px rgba(0,0,0,0.08),
+    inset 0 1px 0 rgba(255,255,255,1);
 }
 
 .nh-form { display: flex; flex-direction: column; gap: 0; }
@@ -112,7 +126,7 @@
   display: flex;
   align-items: center;
   gap: 12px;
-  border-bottom: 1.5px solid #e8edf3;
+  border-bottom: 1.5px solid rgba(0,0,0,0.08);
   padding: 15px 2px;
   transition: border-color 0.2s;
 }
@@ -160,9 +174,11 @@
 
 .nh-send-btn {
   margin-top: 32px;
-  background: #111827;
+  background: rgba(10,10,20,0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   color: #fff;
-  border: none;
+  border: 1px solid rgba(255,255,255,0.1);
   border-radius: 14px;
   padding: 17px;
   font-size: 0.95rem;
@@ -174,10 +190,50 @@
   gap: 9px;
   transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
   letter-spacing: 0.01em;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.18), inset 0 1px 0 rgba(255,255,255,0.08);
 }
 
 .nh-send-btn:hover {
-  background: #1e293b;
+  background: rgba(15,186,129,0.92);
+  border-color: rgba(15,186,129,0.4);
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+  box-shadow: 0 8px 28px rgba(15,186,129,0.3), inset 0 1px 0 rgba(255,255,255,0.15);
+}
+
+/* ════════════════════════════════════════════════════════════
+   RESPONSIVE
+   ════════════════════════════════════════════════════════════ */
+@media (max-width: 900px) {
+  .nh-contact {
+    padding: 80px 0;
+  }
+
+  .nh-contact-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .nh-contact-heading {
+    font-size: clamp(1.8rem, 5vw, 2.4rem);
+    letter-spacing: -1px;
+  }
+}
+
+@media (max-width: 576px) {
+  .nh-contact {
+    padding: 60px 0;
+  }
+
+  .nh-contact-right {
+    padding: 32px 22px 36px;
+    border-radius: 22px;
+  }
+
+  .nh-contact-heading {
+    font-size: 1.8rem;
+  }
+
+  .nh-contact-intro {
+    font-size: 0.88rem;
+  }
 }

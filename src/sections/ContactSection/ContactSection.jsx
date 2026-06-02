@@ -21,7 +21,7 @@ const ContactSection = () => {
       await addDoc(collection(db, "contacts"), {
         name,
         email,
-        phone,
+        mobile: phone,
         message,
         timestamp: new Date(),
       });

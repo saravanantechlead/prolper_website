@@ -387,6 +387,8 @@ import {
 import Home from "./pages/Home/Home";
 import About from "./pages/About/About";
 import Legal from "./pages/HowItWorks/Legal";
+import LegalPage from "./pages/Legal/LegalPage";
+import AppDownload from "./pages/AppDownload/AppDownload";
 import Social from "./pages/Social/Social";
 import Privacy from "./pages/Privacy/Privacy";
 import logo from "/prolper-cropped.svg";
@@ -407,6 +409,8 @@ function App() {
         <Route path="/social" element={<Social />} />
         <Route path="/privacy-policy" element={<Privacy />} />
         <Route path="/privacy" element={<Navigate to="/privacy-policy" replace />} />
+        <Route path="/legal/:type" element={<LegalPage />} />
+        <Route path="/app"         element={<AppDownload />} />
       </Routes>
     </Router>
   );
@@ -467,6 +471,12 @@ function Navbar() {
     }
   }, [location.pathname, navigate]);
 
+  // Hide site navbar on standalone pages
+  if (
+    ["/privacy-policy", "/privacy", "/app"].includes(location.pathname) ||
+    location.pathname.startsWith("/legal/")
+  ) return null;
+
   return (
     <nav className={`navbar navbar-expand-lg fixed-top ios-nav ${isScrolled ? "nav-scrolled" : ""}`}>
       <div className="container">
@@ -507,10 +517,10 @@ function Navbar() {
 
             <li className="nav-item px-lg-2">
               <div className="ios-social-group">
-                <SocialIcon url="https://facebook.com/Prolper" icon={facebook} alt="Facebook" />
-                <SocialIcon url="https://instagram.com/prolperapp" icon={instagram} alt="Instagram" />
+                <SocialIcon url="https://www.facebook.com/Prolperapp" icon={facebook} alt="Facebook" />
+                <SocialIcon url="https://www.instagram.com/prolperapp" icon={instagram} alt="Instagram" />
                 <SocialIcon url="https://x.com/ProlperApp" icon={twitter} alt="X" isX />
-                <SocialIcon url="https://linkedin.com/company/prolper" icon={linkedin} alt="LinkedIn" />
+                <SocialIcon url="https://www.linkedin.com/company/prolper" icon={linkedin} alt="LinkedIn" />
               </div>
             </li>
 

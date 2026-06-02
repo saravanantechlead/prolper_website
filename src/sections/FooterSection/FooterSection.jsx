@@ -11,9 +11,11 @@ const FooterSection = () => {
   const handleNewsletterSubmit = async (e) => {
     e.preventDefault();
     try {
-      await addDoc(collection(db, "newsletters"), {
+      await addDoc(collection(db, "newsletter_subscribers"), {
         email: nemail,
-        timestamp: new Date(),
+        isActive: true,
+        source: "footer_form",
+        subscribedAt: new Date(),
       });
       Swal.fire({
         icon: "success",
@@ -90,10 +92,10 @@ const FooterSection = () => {
                 </button>
               </form>
               <div className="nh-footer-socials">
-                <a href="https://facebook.com/Prolper" target="_blank" rel="noreferrer" className="nh-social-icon"><i className="bi bi-facebook"></i></a>
-                <a href="https://instagram.com/prolperapp" target="_blank" rel="noreferrer" className="nh-social-icon"><i className="bi bi-instagram"></i></a>
+                <a href="https://www.facebook.com/Prolperapp" target="_blank" rel="noreferrer" className="nh-social-icon"><i className="bi bi-facebook"></i></a>
+                <a href="https://www.instagram.com/prolperapp" target="_blank" rel="noreferrer" className="nh-social-icon"><i className="bi bi-instagram"></i></a>
                 <a href="https://x.com/ProlperApp" target="_blank" rel="noreferrer" className="nh-social-icon"><i className="bi bi-twitter-x"></i></a>
-                <a href="https://linkedin.com/company/prolper" target="_blank" rel="noreferrer" className="nh-social-icon"><i className="bi bi-linkedin"></i></a>
+                <a href="https://www.linkedin.com/company/prolper" target="_blank" rel="noreferrer" className="nh-social-icon"><i className="bi bi-linkedin"></i></a>
               </div>
             </div>
 
@@ -107,7 +109,8 @@ const FooterSection = () => {
           <div className="nh-copyright-row">
             <span>© 2026 Prolper Inc. All rights reserved. Made with <span className="nh-heart">💚</span></span>
             <div className="nh-footer-links">
-              <Link to="/legal">Legal</Link>
+              <Link to="/legal/business">Business Legal</Link>
+              <Link to="/legal/customer">Customer Legal</Link>
               <Link to="/privacy-policy">Privacy Policy</Link>
             </div>
           </div>

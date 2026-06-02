@@ -2,7 +2,7 @@
    HERO SECTION
    ────────────────────────────────────────────────────────── */
 .nh-hero {
-  background: #fafafa;
+  background: var(--mesh-light);
   min-height: 100vh;
   padding: 100px 24px 60px;
   display: flex;
@@ -61,15 +61,18 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: #f0fdf9;
+  background: var(--glass-light);
+  backdrop-filter: var(--glass-blur-sm);
+  -webkit-backdrop-filter: var(--glass-blur-sm);
   color: #0a8a5f;
-  border: 1px solid rgba(15,186,129,0.22);
+  border: 1px solid var(--glass-light-border);
   border-radius: 24px;
   padding: 6px 14px 6px 10px;
   font-size: 0.78rem;
   font-weight: 600;
   margin-bottom: 18px;
   width: fit-content;
+  box-shadow: 0 2px 12px rgba(15,186,129,0.1), inset 0 1px 0 rgba(255,255,255,0.9);
 }
 
 .nh-eyebrow-dot {
@@ -110,20 +113,27 @@
   font-weight: 400;
 }
 
-/* ── How It Works card (inside hero) ── */
+/* ════════════════════════════════════════════════════════════
+   HOW IT WORKS CARD (inside hero)
+   ════════════════════════════════════════════════════════════ */
 .nh-hiw-card {
-  background: #090910;
-  border-radius: 22px;
-  padding: 26px 22px 24px;
+  background: var(--glass-dark);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border-radius: 24px;
+  padding: 26px 20px 24px;
   margin-bottom: 28px;
-  border: 1px solid rgba(255,255,255,0.06);
-  box-shadow: 0 24px 60px rgba(0,0,0,0.4);
+  border: 1px solid var(--glass-dark-border);
+  box-shadow:
+    0 24px 60px rgba(0,0,0,0.28),
+    0 8px 24px rgba(0,0,0,0.18),
+    inset 0 1px 0 rgba(255,255,255,0.08);
 }
 
 .nh-hiw-title {
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   font-weight: 800;
-  margin-bottom: 4px;
+  margin-bottom: 3px;
   text-align: center;
   letter-spacing: -0.3px;
   background: linear-gradient(90deg, #0fba81 0%, #818cf8 100%);
@@ -133,183 +143,181 @@
 }
 
 .nh-hiw-sub {
-  font-size: 0.78rem;
-  color: rgba(255,255,255,0.38);
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.35);
   text-align: center;
-  margin-bottom: 18px;
+  margin-bottom: 16px;
 }
 
-/* 1×4 horizontal grid inside the hero card */
-.nh-hiw2-grid {
+/* 1×4 grid */
+.nh-hiw-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 12px;
   position: relative;
 }
 
-.nh-hiw2-step {
+.nh-hiw-step {
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
   position: relative;
-  z-index: 1;
 }
 
-/* Connector arrow between steps */
-.nh-hiw2-step:not(:last-child)::after {
+/* connector arrow */
+.nh-hiw-step:not(:last-child)::after {
   content: '→';
   position: absolute;
-  right: -13px;
-  top: 50px;
-  font-size: 1rem;
-  color: rgba(15,186,129,0.55);
-  z-index: 2;
+  right: -9px;
+  top: 88px;
+  font-size: 0.85rem;
+  color: rgba(15,186,129,0.45);
+  z-index: 4;
   pointer-events: none;
   line-height: 1;
 }
+.nh-hiw-step:nth-child(2)::after { color: rgba(129,140,248,0.5); }
+.nh-hiw-step:nth-child(3)::after { color: rgba(15,186,129,0.45); }
 
-/* Step number badge */
-.nh-step-badge {
-  width: 17px;
-  height: 17px;
-  background: var(--nh-teal);
-  color: #fff;
-  border-radius: 50%;
+/* ── Step card shell ── */
+.nh-hiw-scard {
+  width: 100%;
+  height: 188px;
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,0.07);
+  position: relative;
+  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.55rem;
-  font-weight: 800;
-  margin-bottom: 5px;
-  flex-shrink: 0;
-  box-shadow: 0 0 0 2px rgba(15,186,129,0.18), 0 2px 8px rgba(15,186,129,0.3);
-  letter-spacing: 0;
+  margin-bottom: 9px;
+  transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1),
+              border-color 0.3s ease,
+              box-shadow 0.3s ease;
+  box-shadow: 0 4px 18px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.06);
 }
 
-/* Ghost background number on each step visual card */
-.nh-step-bg-num {
+.nh-hiw-scard::before {
+  content: '';
   position: absolute;
-  top: -8px;
-  right: 8px;
-  font-size: 5rem;
+  top: 0; left: 12%; right: 12%;
+  height: 1px;
+}
+.nh-hiw-scard-teal {
+  border-color: rgba(15,186,129,0.15);
+}
+.nh-hiw-scard-teal::before {
+  background: linear-gradient(90deg, transparent, rgba(15,186,129,0.55), transparent);
+}
+.nh-hiw-scard-indigo {
+  border-color: rgba(129,140,248,0.15);
+}
+.nh-hiw-scard-indigo::before {
+  background: linear-gradient(90deg, transparent, rgba(129,140,248,0.55), transparent);
+}
+
+.nh-hiw-step:hover .nh-hiw-scard-teal {
+  transform: translateY(-6px);
+  border-color: rgba(15,186,129,0.32);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.5), 0 0 28px rgba(15,186,129,0.07);
+}
+.nh-hiw-step:hover .nh-hiw-scard-indigo {
+  transform: translateY(-6px);
+  border-color: rgba(129,140,248,0.32);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.5), 0 0 28px rgba(129,140,248,0.07);
+}
+
+/* Ghost background number */
+.nh-hiw-bgnum {
+  position: absolute;
+  top: -10px;
+  right: 6px;
+  font-size: 4.2rem;
   font-weight: 900;
   line-height: 1;
   pointer-events: none;
   user-select: none;
+  letter-spacing: -5px;
+  z-index: 0;
+}
+.nh-hiw-scard-teal .nh-hiw-bgnum {
   background: linear-gradient(180deg,
     rgba(15,186,129,0.28) 0%,
-    rgba(15,186,129,0.08) 55%,
+    rgba(15,186,129,0.06) 55%,
     transparent 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  z-index: 0;
-  letter-spacing: -4px;
+}
+.nh-hiw-scard-indigo .nh-hiw-bgnum {
+  background: linear-gradient(180deg,
+    rgba(129,140,248,0.28) 0%,
+    rgba(129,140,248,0.06) 55%,
+    transparent 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
-.nh-hiw2-visual {
-  width: 100%;
-  background: linear-gradient(160deg, #111122 0%, #0c0c18 60%, #0a0a14 100%);
-  border: 1px solid rgba(255,255,255,0.09);
-  border-radius: 20px;
-  padding: 14px 8px;
-  height: 164px;
-  min-height: unset;
+/* Step number pill */
+.nh-hiw-pill {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-size: 0.58rem;
+  font-weight: 800;
+  border-radius: 100px;
+  padding: 3px 7px;
+  z-index: 3;
+  letter-spacing: 0.04em;
+}
+.nh-hiw-pill-teal {
+  background: rgba(15,186,129,0.14);
+  color: #0fba81;
+  border: 1px solid rgba(15,186,129,0.28);
+}
+.nh-hiw-pill-indigo {
+  background: rgba(129,140,248,0.14);
+  color: #818cf8;
+  border: 1px solid rgba(129,140,248,0.28);
+}
+
+/* Visual area (z-index above bgnum) */
+.nh-hiw-vis {
+  position: relative;
+  z-index: 2;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 10px;
-  position: relative;
-  overflow: hidden;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.05);
-  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
 }
+.nh-hiw-vis .nh-mini-phone     { transform: scale(0.78); transform-origin: center; }
+.nh-hiw-vis .nh-ai-radar       { transform: scale(1.08); transform-origin: center; }
+.nh-hiw-vis .nh-connect-visual { transform: scale(0.92); transform-origin: center; }
+.nh-hiw-vis .nh-inv-card       { transform: scale(0.96); transform-origin: center; }
 
-/* Scale down each step's visual to fit the narrower 4-column layout */
-.nh-hiw2-visual .nh-mini-phone     { transform: scale(0.68); transform-origin: center; }
-.nh-hiw2-visual .nh-ai-radar       { transform: scale(0.98); transform-origin: center; }
-.nh-hiw2-visual .nh-connect-visual { transform: scale(0.82); transform-origin: center; }
-.nh-hiw2-visual .nh-inv-card       { transform: scale(0.86); transform-origin: center; }
-
-.nh-hiw2-visual::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 15%; right: 15%;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(15,186,129,0.5), transparent);
-}
-
-.nh-hiw2-step:hover .nh-hiw2-visual {
-  border-color: rgba(15,186,129,0.3);
-  box-shadow: 0 24px 56px rgba(0,0,0,0.45), 0 0 0 1px rgba(15,186,129,0.1), 0 0 20px rgba(15,186,129,0.06);
-  transform: translateY(-5px);
-}
-
-/* ── Dual-color accent: teal (steps 1, 3) · indigo (steps 2, 4) ── */
-
-/* Step badge — indigo for even steps */
-.nh-hiw2-step:nth-child(even) .nh-step-badge {
-  background: #818cf8;
-  box-shadow: 0 0 0 2px rgba(129,140,248,0.2), 0 2px 8px rgba(129,140,248,0.35);
-}
-
-/* Subtle border tint per step */
-.nh-hiw2-step:nth-child(odd) .nh-hiw2-visual {
-  border-color: rgba(15,186,129,0.14);
-}
-.nh-hiw2-step:nth-child(even) .nh-hiw2-visual {
-  border-color: rgba(129,140,248,0.14);
-}
-
-/* Ghost number color — even steps */
-.nh-hiw2-step:nth-child(even) .nh-step-bg-num {
-  background: linear-gradient(180deg,
-    rgba(129,140,248,0.28) 0%,
-    rgba(129,140,248,0.08) 55%,
-    transparent 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-/* Top shimmer line — even steps */
-.nh-hiw2-step:nth-child(even) .nh-hiw2-visual::before {
-  background: linear-gradient(90deg, transparent, rgba(129,140,248,0.5), transparent);
-}
-
-/* Hover glow — even steps */
-.nh-hiw2-step:nth-child(even):hover .nh-hiw2-visual {
-  border-color: rgba(129,140,248,0.35);
-  box-shadow: 0 24px 56px rgba(0,0,0,0.45),
-              0 0 0 1px rgba(129,140,248,0.12),
-              0 0 20px rgba(129,140,248,0.1);
-}
-
-/* Connector arrows — alternating */
-.nh-hiw2-step:nth-child(2)::after { color: rgba(129,140,248,0.6); }
-.nh-hiw2-step:nth-child(3)::after { color: rgba(15,186,129,0.55); }
-
-.nh-hiw2-title {
-  font-size: 0.9rem;
+/* Labels */
+.nh-hiw-slabel {
+  font-size: 0.88rem;
   font-weight: 700;
   color: #fff;
-  margin-bottom: 5px;
+  margin-bottom: 4px;
+  letter-spacing: -0.1px;
 }
-
-.nh-hiw2-desc {
-  font-size: 0.75rem;
-  color: rgba(255,255,255,0.45);
-  line-height: 1.6;
+.nh-hiw-sdesc {
+  font-size: 0.74rem;
+  color: rgba(255,255,255,0.4);
+  line-height: 1.55;
   margin: 0;
 }
+.nh-hiw-sdesc strong { color: rgba(255,255,255,0.7); font-weight: 600; }
 
-.nh-hiw2-desc strong {
-  color: rgba(255,255,255,0.72);
-  font-weight: 600;
-}
-
-/* ── Step 1 – Mini Phone (white screen) ── */
+/* ════════════════════════════════════════════════════════════
+   STEP 1 – Mini Phone
+   ════════════════════════════════════════════════════════════ */
 .nh-mini-phone {
   width: 110px;
   height: 200px;
@@ -327,7 +335,6 @@
     0 4px 12px rgba(0,0,0,0.18),
     0 16px 36px rgba(0,0,0,0.22);
 }
-
 .nh-mini-phone-island {
   width: 36%;
   height: 7px;
@@ -336,7 +343,6 @@
   margin: 8px auto 6px;
   flex-shrink: 0;
 }
-
 .nh-mini-phone-screen {
   flex: 1;
   padding: 0 8px 4px;
@@ -345,26 +351,14 @@
   gap: 5px;
   overflow: hidden;
 }
-
 .nh-mini-appbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 2px 0;
 }
-
-.nh-mini-appname {
-  font-size: 0.6rem;
-  font-weight: 800;
-  color: rgba(10,10,20,0.88);
-  letter-spacing: -0.2px;
-}
-
-.nh-mini-menu {
-  font-size: 0.5rem;
-  color: rgba(10,10,20,0.35);
-}
-
+.nh-mini-appname { font-size: 0.6rem; font-weight: 800; color: rgba(10,10,20,0.88); letter-spacing: -0.2px; }
+.nh-mini-menu    { font-size: 0.5rem; color: rgba(10,10,20,0.35); }
 .nh-mini-search-bar {
   background: rgba(0,0,0,0.06);
   border-radius: 7px;
@@ -375,25 +369,14 @@
   font-size: 0.4rem;
   color: rgba(0,0,0,0.38);
 }
-
-.nh-mini-search-bar i {
-  font-size: 0.42rem;
-  color: rgba(0,0,0,0.28);
-}
-
-.nh-mini-section-lbl {
-  font-size: 0.4rem;
-  font-weight: 700;
-  color: rgba(0,0,0,0.55);
-}
-
+.nh-mini-search-bar i { font-size: 0.42rem; color: rgba(0,0,0,0.28); }
+.nh-mini-section-lbl  { font-size: 0.4rem; font-weight: 700; color: rgba(0,0,0,0.55); }
 .nh-mini-svc-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 4px;
   flex: 1;
 }
-
 .nh-mini-svc-tile {
   background: rgba(255,255,255,0.7);
   border-radius: 8px;
@@ -406,15 +389,12 @@
   color: rgba(0,0,0,0.48);
   border: 0.5px solid rgba(0,0,0,0.08);
 }
-
 .nh-mini-svc-tile i { font-size: 0.78rem; }
-
 .nh-mini-svc-tile.nh-tile-active {
   background: rgba(15,186,129,0.14);
   border-color: rgba(15,186,129,0.4);
   color: #0a9e6e;
 }
-
 .nh-mini-phone-bar {
   width: 28%;
   height: 3px;
@@ -424,7 +404,9 @@
   flex-shrink: 0;
 }
 
-/* ── Step 2 – AI Radar ── */
+/* ════════════════════════════════════════════════════════════
+   STEP 2 – AI Radar (indigo)
+   ════════════════════════════════════════════════════════════ */
 .nh-ai-radar {
   position: relative;
   width: 110px;
@@ -433,22 +415,14 @@
   align-items: center;
   justify-content: center;
 }
-
 .nh-radar-r1, .nh-radar-r2, .nh-radar-r3 {
   position: absolute;
   border-radius: 50%;
-  border: 1px solid rgba(15,186,129,0.22);
+  border: 1px solid;
 }
-
-.nh-radar-r1 { inset: 0; animation: nhRadarPulse 3s ease-in-out infinite; }
-.nh-radar-r2 { inset: 16px; border-color: rgba(15,186,129,0.32); animation: nhRadarPulse 3s ease-in-out infinite 0.5s; }
-.nh-radar-r3 { inset: 32px; border-color: rgba(15,186,129,0.48); }
-
-@keyframes nhRadarPulse {
-  0%, 100% { opacity: 0.45; }
-  50%       { opacity: 1; }
-}
-
+.nh-radar-r1 { inset: 0; border-color: rgba(129,140,248,0.22); animation: nhRadarPulse 3s ease-in-out infinite; }
+.nh-radar-r2 { inset: 16px; border-color: rgba(129,140,248,0.32); animation: nhRadarPulse 3s ease-in-out infinite 0.5s; }
+.nh-radar-r3 { inset: 32px; border-color: rgba(129,140,248,0.48); }
 .nh-radar-sweep {
   position: absolute;
   inset: 0;
@@ -456,79 +430,61 @@
   background: conic-gradient(
     from 0deg,
     transparent 0deg,
-    rgba(15,186,129,0.16) 55deg,
-    rgba(15,186,129,0.03) 90deg,
+    rgba(129,140,248,0.16) 55deg,
+    rgba(129,140,248,0.03) 90deg,
     transparent 90deg
   );
   animation: nhRadarSpin 3s linear infinite;
 }
-
-@keyframes nhRadarSpin {
-  from { transform: rotate(0deg); }
-  to   { transform: rotate(360deg); }
-}
-
-.nh-radar-ch-h, .nh-radar-ch-v {
-  position: absolute;
-  background: rgba(15,186,129,0.12);
-}
-
+.nh-radar-ch-h, .nh-radar-ch-v { position: absolute; background: rgba(129,140,248,0.12); }
 .nh-radar-ch-h { width: 100%; height: 1px; }
 .nh-radar-ch-v { width: 1px; height: 100%; }
-
 .nh-radar-core {
   width: 34px;
   height: 34px;
-  background: rgba(15,186,129,0.12);
-  border: 1.5px solid rgba(15,186,129,0.5);
+  background: rgba(129,140,248,0.12);
+  border: 1.5px solid rgba(129,140,248,0.5);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
   z-index: 2;
-  box-shadow: 0 0 18px rgba(15,186,129,0.4);
+  box-shadow: 0 0 18px rgba(129,140,248,0.4);
 }
-
-.nh-radar-core i {
-  font-size: 0.9rem;
-  color: var(--nh-teal);
-}
-
+.nh-radar-core i { font-size: 0.9rem; color: #818cf8; }
 .nh-radar-dot {
   position: absolute;
   width: 7px;
   height: 7px;
-  background: var(--nh-teal);
+  background: #818cf8;
   border-radius: 50%;
-  box-shadow: 0 0 8px rgba(15,186,129,0.8);
+  box-shadow: 0 0 8px rgba(129,140,248,0.8);
   z-index: 3;
 }
-
-.rd1 { top: 14px;  left: 20px;  animation: nhDotBlink 2.4s ease-in-out infinite; }
+.rd1 { top: 14px; left: 20px; animation: nhDotBlink 2.4s ease-in-out infinite; }
 .rd2 { bottom: 18px; right: 15px; animation: nhDotBlink 2.4s ease-in-out infinite 0.8s; }
-.rd3 { top: 28px;  right: 22px; animation: nhDotBlink 2.4s ease-in-out infinite 1.6s; }
-
+.rd3 { top: 28px; right: 22px; animation: nhDotBlink 2.4s ease-in-out infinite 1.6s; }
 @keyframes nhDotBlink {
   0%, 100% { opacity: 0.3; transform: scale(0.8); }
   50%       { opacity: 1;   transform: scale(1.25); }
 }
 
-/* ── Step 3 – Connect Visual ── */
+/* ════════════════════════════════════════════════════════════
+   STEP 3 – Connect Visual
+   ════════════════════════════════════════════════════════════ */
 .nh-connect-visual {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 16px;
+  gap: 14px;
   width: 100%;
 }
-
 .nh-connect-btns {
   display: flex;
   align-items: center;
   gap: 10px;
 }
-
 .nh-cv-btn {
   display: flex;
   flex-direction: column;
@@ -540,19 +496,16 @@
   font-weight: 700;
   position: relative;
 }
-
 .nh-cv-call {
   background: rgba(34,197,94,0.1);
   border: 1px solid rgba(34,197,94,0.25);
   color: #22c55e;
 }
-
 .nh-cv-chat {
   background: rgba(96,165,250,0.1);
   border: 1px solid rgba(96,165,250,0.25);
   color: #60a5fa;
 }
-
 .nh-cv-ring {
   position: absolute;
   inset: 0;
@@ -561,23 +514,13 @@
   animation: nhCvRing 2s ease-out infinite;
   pointer-events: none;
 }
-
 .nh-cv-ring2 { animation-delay: 0.9s; }
-
 @keyframes nhCvRing {
-  0%   { transform: scale(1);   opacity: 0.6; }
+  0%   { transform: scale(1);    opacity: 0.6; }
   100% { transform: scale(1.45); opacity: 0; }
 }
-
 .nh-cv-icon { font-size: 1.4rem; line-height: 1; }
-
-.nh-cv-or {
-  font-size: 0.62rem;
-  color: rgba(255,255,255,0.22);
-  font-weight: 600;
-  padding: 0 2px;
-}
-
+.nh-cv-or { font-size: 0.62rem; color: rgba(255,255,255,0.22); font-weight: 600; padding: 0 2px; }
 .nh-cv-estimate {
   background: rgba(15,186,129,0.1);
   border: 1px solid rgba(15,186,129,0.25);
@@ -591,13 +534,14 @@
   gap: 6px;
   animation: nhEstimatePop 2.6s ease-in-out infinite;
 }
-
 @keyframes nhEstimatePop {
   0%, 55%, 100% { opacity: 1;   transform: translateY(0); }
   75%            { opacity: 0.6; transform: translateY(-2px); }
 }
 
-/* ── Step 4 – Invoice Card ── */
+/* ════════════════════════════════════════════════════════════
+   STEP 4 – Invoice Card
+   ════════════════════════════════════════════════════════════ */
 .nh-inv-card {
   width: 152px;
   background: rgba(255,255,255,0.04);
@@ -608,42 +552,11 @@
   flex-direction: column;
   gap: 8px;
 }
-
-.nh-inv-toprow {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.nh-inv-id {
-  font-size: 0.5rem;
-  color: rgba(255,255,255,0.35);
-  font-weight: 600;
-  letter-spacing: 0.02em;
-}
-
-.nh-inv-ok {
-  font-size: 0.5rem;
-  font-weight: 700;
-  color: var(--nh-teal);
-  display: inline-flex;
-  align-items: center;
-  gap: 3px;
-}
-
-.nh-inv-service {
-  font-size: 0.62rem;
-  color: rgba(255,255,255,0.5);
-}
-
-.nh-inv-amount {
-  font-size: 1.5rem;
-  font-weight: 800;
-  color: #fff;
-  letter-spacing: -0.5px;
-  line-height: 1;
-}
-
+.nh-inv-toprow { display: flex; align-items: center; justify-content: space-between; }
+.nh-inv-id     { font-size: 0.5rem; color: rgba(255,255,255,0.35); font-weight: 600; letter-spacing: 0.02em; }
+.nh-inv-ok     { font-size: 0.5rem; font-weight: 700; color: var(--nh-teal); display: inline-flex; align-items: center; gap: 3px; }
+.nh-inv-service { font-size: 0.62rem; color: rgba(255,255,255,0.5); }
+.nh-inv-amount  { font-size: 1.5rem; font-weight: 800; color: #fff; letter-spacing: -0.5px; line-height: 1; }
 .nh-inv-pay {
   background: var(--nh-teal);
   color: #fff;
@@ -660,15 +573,9 @@
   box-shadow: 0 4px 16px rgba(15,186,129,0.35);
   animation: nhPayPulse 2.2s ease-in-out infinite;
 }
-
 @keyframes nhPayPulse {
   0%, 100% { box-shadow: 0 4px 16px rgba(15,186,129,0.35), 0 0 0 0   rgba(15,186,129,0.4); }
   50%       { box-shadow: 0 4px 16px rgba(15,186,129,0.35), 0 0 0 8px rgba(15,186,129,0); }
-}
-
-@keyframes nhDotPulse {
-  0%, 100% { transform: scale(1);   box-shadow: 0 0 0 0   rgba(15,186,129,0.6); }
-  50%       { transform: scale(1.25); box-shadow: 0 0 0 6px rgba(15,186,129,0); }
 }
 
 /* ── Live badge + store buttons ── */
@@ -683,13 +590,17 @@
   display: inline-flex;
   align-items: center;
   gap: 7px;
-  border: 1.5px solid var(--nh-teal);
+  background: rgba(15,186,129,0.1);
+  backdrop-filter: var(--glass-blur-sm);
+  -webkit-backdrop-filter: var(--glass-blur-sm);
+  border: 1.5px solid rgba(15,186,129,0.3);
   color: var(--nh-teal);
   border-radius: 24px;
   padding: 7px 16px;
   font-size: 0.82rem;
   font-weight: 600;
   animation: nhGlow 3s ease-in-out infinite;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.6);
 }
 
 .nh-live-check {
@@ -707,16 +618,19 @@
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  background: var(--nh-dark);
+  background: rgba(10,10,20,0.88);
+  backdrop-filter: var(--glass-blur-sm);
+  -webkit-backdrop-filter: var(--glass-blur-sm);
   color: var(--nh-white);
-  border-radius: 12px;
+  border-radius: 14px;
   padding: 10px 18px;
   text-decoration: none;
-  border: 1px solid rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.12);
   transition: background 0.25s, transform 0.3s cubic-bezier(0.34,1.56,0.64,1),
               box-shadow 0.25s, border-color 0.25s;
   position: relative;
   overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.08);
 }
 
 .nh-store-btn::after {
@@ -789,9 +703,11 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: #fff;
+  background: var(--glass-light);
+  backdrop-filter: var(--glass-blur-sm);
+  -webkit-backdrop-filter: var(--glass-blur-sm);
   color: var(--nh-text);
-  border: 1.5px solid #e2e8f0;
+  border: 1px solid var(--glass-light-border);
   border-radius: 100px;
   padding: 10px 20px;
   font-size: 0.82rem;
@@ -801,7 +717,7 @@
   cursor: pointer;
   position: relative;
   z-index: 1;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  box-shadow: 0 2px 16px rgba(0,0,0,0.08), inset 0 1px 0 rgba(255,255,255,1);
   transition: border-color 0.2s, color 0.2s, transform 0.2s, box-shadow 0.2s;
 }
 
@@ -869,8 +785,8 @@
 .nh-iphone {
   --frame-border: clamp(6px, 0.65vw, 10px);
   --frame-radius: clamp(42px, 4.2vw, 60px);
-  width: 310px;
-  height: 640px;
+  width: 340px;
+  height: 700px;
   border-radius: var(--frame-radius);
   border: var(--frame-border) solid #1c1c1e;
   background: #0d0d0d;
@@ -1288,4 +1204,136 @@
   justify-content: center;
   color: #ffffff;
   font-size: 0.8rem;
+}
+
+/* ════════════════════════════════════════════════════════════
+   RESPONSIVE
+   ════════════════════════════════════════════════════════════ */
+
+/* ── Single-column layout kicks in at 1082px ── */
+@media (max-width: 1082px) {
+  .nh-hero {
+    padding: 100px 20px 60px;
+    align-items: flex-start;
+    min-height: unset;
+    overflow: visible;
+  }
+
+  /* Hide decorative blob pseudo-elements on mobile (they cause h-scroll) */
+  .nh-hero::before,
+  .nh-hero::after {
+    display: none;
+  }
+
+  .nh-hero-inner {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .nh-hero-left  { order: 0; }
+  .nh-hero-right { order: 1; align-items: center; }
+
+  .nh-hero-headline {
+    font-size: clamp(2rem, 5.5vw, 2.8rem);
+  }
+
+  .nh-hero-sub { max-width: 100%; }
+
+  /* HIW grid: 4 cols → 2×2 */
+  .nh-hiw-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .nh-hiw-step:not(:last-child)::after { display: none; }
+
+  /* Back phone: keep the desktop look, just tighten the offset to fit narrower layout */
+  .nh-shell-back {
+    transform: translateX(60px) translateY(40px) scale(0.88);
+    opacity: 0.72;
+    filter: blur(1.5px);
+  }
+
+  /* Wider container so back phone isn't clipped */
+  .nh-phone-duo {
+    width: 390px;
+    height: 660px;
+    margin: 0 auto;
+  }
+}
+
+/* ── Mobile (≤ 768px) ── */
+@media (max-width: 768px) {
+  .nh-hero {
+    padding: 110px 16px 56px;
+    min-height: unset;
+  }
+
+  .nh-hero-inner { gap: 28px; }
+
+  .nh-hero-headline {
+    font-size: 1.9rem;
+    letter-spacing: -1px;
+  }
+
+  .nh-hero-sub { font-size: 0.9rem; }
+
+  .nh-hiw-card { padding: 20px 14px 18px; }
+
+  /* Scale both phones down together to fit mobile width */
+  .nh-phone-duo {
+    transform: scale(0.76);
+    transform-origin: top center;
+    margin-bottom: -158px; /* 660 × 0.24 */
+  }
+
+  .nh-provider-btn { display: none; }
+
+  .nh-store-btns { justify-content: flex-start; }
+}
+
+/* ── Small Mobile (≤ 576px) ── */
+@media (max-width: 576px) {
+  .nh-hero { padding: 104px 14px 40px; }
+
+  .nh-hero-headline {
+    font-size: 1.75rem;
+    letter-spacing: -0.5px;
+  }
+
+  .nh-hiw-card { padding: 16px 10px 14px; }
+
+  .nh-hiw-scard { height: 158px; }
+
+  .nh-hiw-slabel { font-size: 0.8rem; }
+  .nh-hiw-sdesc  { font-size: 0.68rem; }
+
+  .nh-phone-duo {
+    transform: scale(0.60);
+    transform-origin: top center;
+    margin-bottom: -264px; /* 660 × 0.40 */
+  }
+
+  .nh-store-btns {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .nh-store-btn { width: 100%; justify-content: center; }
+
+  .nh-hero-bottom { align-items: flex-start; }
+}
+
+/* ── Very Small Mobile (≤ 430px / iPhone SE range) ── */
+@media (max-width: 430px) {
+  /* Hide phone mockup — too tall for tiny viewports, download buttons do the job */
+  .nh-hero-right {
+    display: none;
+  }
+
+  .nh-hero { padding: 96px 14px 44px; }
+
+  .nh-hero-headline { font-size: 1.65rem; }
+
+  .nh-hiw-scard { height: 148px; }
 }

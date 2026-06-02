@@ -9,7 +9,7 @@ const PlatformSection = () => {
       <div className="nh-section-inner">
         <h2 className="nh-platform-title nh-animate">One Platform. Every Service.</h2>
         <p className="nh-platform-sub nh-animate nh-d1">
-          Connecting you with verified experts to get any job done right.
+          Connecting you with trusted local professionals to get any job done right.
         </p>
         <div className="nh-platform-cards">
 
@@ -20,7 +20,7 @@ const PlatformSection = () => {
             </div>
             <h3 className="nh-pcard-title">Looking for a Service?</h3>
             <p className="nh-pcard-desc">
-              Access verified experts for daily tasks or specialized projects.
+              Access trusted local professionals for daily tasks or specialized projects.
               Reliable, fast, and handled via Prolper.
             </p>
             <div className="nh-qr-box">

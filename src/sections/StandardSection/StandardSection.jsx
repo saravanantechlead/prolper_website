@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./StandardSection.css";
 
-const STAT_VISIBLE = 3, STAT_TOTAL = 4, STAT_GAP = 20, STAT_MAX = 1;
+const STAT_TOTAL = 4, STAT_GAP = 20;
 
 const StandardSection = () => {
   const [statIndex, setStatIndex] = useState(0);
   const [cardPx, setCardPx] = useState(0);
+  const [visibleCount, setVisibleCount] = useState(3);
   const statsCarouselRef = useRef(null);
 
   useEffect(() => {
@@ -13,7 +14,10 @@ const StandardSection = () => {
     if (!el) return;
     const compute = () => {
       const w = el.offsetWidth;
-      setCardPx((w - STAT_GAP * (STAT_VISIBLE - 1)) / STAT_VISIBLE);
+      const vis = w < 640 ? 1 : w < 1024 ? 2 : 3;
+      setVisibleCount(vis);
+      setCardPx((w - STAT_GAP * (vis - 1)) / vis);
+      setStatIndex(0);
     };
     compute();
     const ro = new ResizeObserver(compute);
@@ -21,11 +25,12 @@ const StandardSection = () => {
     return () => ro.disconnect();
   }, []);
 
-  const statGoLeft  = () => setStatIndex(i => Math.max(0, i - 1));
-  const statGoRight = () => setStatIndex(i => Math.min(STAT_MAX, i + 1));
+  const statMax       = STAT_TOTAL - visibleCount;
+  const statGoLeft    = () => setStatIndex(i => Math.max(0, i - 1));
+  const statGoRight   = () => setStatIndex(i => Math.min(statMax, i + 1));
   const statTranslate = statIndex * (cardPx + STAT_GAP);
-  const statThumbW    = (STAT_VISIBLE / STAT_TOTAL) * 100;
-  const statThumbLeft = (statIndex / STAT_MAX) * (100 - statThumbW);
+  const statThumbW    = (visibleCount / STAT_TOTAL) * 100;
+  const statThumbLeft = statMax > 0 ? (statIndex / statMax) * (100 - statThumbW) : 0;
 
   return (
     <section className="nh-standard" id="about-us">
@@ -104,7 +109,7 @@ const StandardSection = () => {
             <button
               className="nh-carousel-btn"
               onClick={statGoRight}
-              disabled={statIndex === STAT_MAX}
+              disabled={statIndex === statMax}
               aria-label="Next"
             >
               <i className="bi bi-chevron-right"></i>

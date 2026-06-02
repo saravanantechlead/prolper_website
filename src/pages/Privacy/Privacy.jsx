@@ -1,246 +1,194 @@
-import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import ReactMarkdown from "react-markdown";
+import { db } from "../../firebase";
+import { doc, getDoc } from "firebase/firestore";
 import "./Privacy.css";
 
-import linkedin from "./../../assets/in.png";
-import facebook from "./../../assets/Vector.png";
-import instagram from "./../../assets/insta.png";
-import twitter from "./../../assets/x.png";
-import logo from "/prolper-cropped.svg";
-
 const Privacy = () => {
+  const navigate = useNavigate();
+  const [markdown, setMarkdown]           = useState("");
+  const [effectiveDate, setEffectiveDate] = useState("");
+  const [lastUpdated, setLastUpdated]     = useState("");
+  const [loading, setLoading]             = useState(true);
+  const [error, setError]                 = useState(false);
+
   useEffect(() => {
     window.scrollTo(0, 0);
+    (async () => {
+      try {
+        const snap = await getDoc(doc(db, "legal", "PrivacyPolicy_2026"));
+        if (snap.exists()) {
+          const d = snap.data();
+          setMarkdown(d.legal_markdown || "");
+          const fmt = (ts) =>
+            ts?.toDate
+              ? ts.toDate().toLocaleDateString("en-CA", {
+                  year: "numeric", month: "long", day: "numeric",
+                })
+              : "";
+          setEffectiveDate(fmt(d.effective_date));
+          setLastUpdated(fmt(d.last_updated));
+        } else {
+          setError(true);
+        }
+      } catch {
+        setError(true);
+      } finally {
+        setLoading(false);
+      }
+    })();
   }, []);
 
-  const tocLinks = [
-    { id: "introduction", label: "Introduction" },
-    { id: "info", label: "1. Information We Collect" },
-    { id: "use", label: "2. How We Use Data" },
-    { id: "sharing", label: "3. Data Sharing" },
-    { id: "security", label: "4. Storage & Security" },
-    { id: "rights", label: "5. Your Rights" },
-    { id: "children", label: "6. Children’s Privacy" },
-    { id: "thirdparty", label: "7. Third‑Party Services" },
-    { id: "changes", label: "8. Policy Changes" },
-    { id: "contact", label: "9. Contact Us" },
-  ];
-
   return (
-    <div className="privacy-page-wrapper">
-      <div className="container py-4 px-lg-5">
-        
-        {/* Modern Gradient Header */}
-        <header className="text-center mb-5">
-          <div className="badge-teal-gradient mb-3">Privacy & Trust</div>
-          <h1 className="fs-2 fw-bold">Privacy Policy</h1>
-          <div className="teal-underline mx-auto"></div>
-          <p className="fs-6 text-muted mt-3">Effective Date: 01/10/2025</p>
-        </header>
+    <div className="pp-root">
 
-        <div className="privacy-layout">
-          {/* Sticky Sidebar TOC */}
-          <aside className="privacy-toc-sidebar d-none d-lg-block">
-            <div className="sticky-nav-container">
-              <h6 className="toc-header">ON THIS PAGE</h6>
-              <nav className="toc-nav">
-                {tocLinks.map((link) => (
-                  <a key={link.id} href={`#${link.id}`} className="toc-link">
-                    {link.label}
-                  </a>
-                ))}
-              </nav>
+      {/* ── Top Bar ── */}
+      <header className="pp-topbar">
+        <div className="pp-topbar-inner">
+          <Link to="/" className="pp-logo">Prolper</Link>
+          <button className="pp-back-btn" onClick={() => navigate(-1)}>
+            <i className="bi bi-arrow-left"></i>
+            Back
+          </button>
+        </div>
+      </header>
+
+      {/* ── Hero ── */}
+      <div className="pp-hero">
+        <div className="pp-hero-inner">
+          <div className="pp-hero-icon">
+            <i className="bi bi-shield-lock-fill"></i>
+          </div>
+          <div className="pp-hero-badge">Privacy &amp; Trust</div>
+          <h1 className="pp-hero-title">Privacy Policy</h1>
+          <p className="pp-hero-sub">
+            We are committed to protecting your personal data and being transparent
+            about how we use it.
+          </p>
+          {(effectiveDate || lastUpdated) && (
+            <div className="pp-hero-dates">
+              {effectiveDate && (
+                <span><i className="bi bi-calendar3"></i> Effective {effectiveDate}</span>
+              )}
+              {lastUpdated && (
+                <span><i className="bi bi-arrow-clockwise"></i> Updated {lastUpdated}</span>
+              )}
             </div>
-          </aside>
-
-          {/* Main Content Area */}
-          <main className="privacy-content-area">
-            
-            {/* Introduction */}
-            <section id="introduction" className="glass-card mb-4">
-              <p className="fs-5 text-slate lh-base">
-                {/* ("Company", "we", "us", or "our") */}
-                Thank you for choosing Prolper. We respect your privacy and are committed to protecting your personal information.
-              </p>
-              <div className="app-scope-box mt-3">
-                <span className="fw-bold text-teal d-block mb-1">This policy applies to:</span>
-                <ul className="m-0 text-slate">
-                  <li>Prolper Customer App</li>
-                  <li>Prolper Business App</li>
-                </ul>
-              </div>
-              <p className="fs-6 text-muted mt-3">By using our apps, you agree to this Privacy Policy.</p>
-            </section>
-
-            {/* 1. Information We Collect */}
-            <PolicySection id="info" step="1" title="Information We Collect">
-              <p className="fs-6 text-slate mb-4">We collect information depending on your role and how you use our apps.</p>
-              <div className="row g-3">
-                <div className="col-md-6">
-                  <div className="sub-data-card customer-gradient">
-                    <h4 className="fs-6 fw-bold mb-2">A. Customers (Customer App)</h4>
-                    <ul className="fs-6 text-slate ps-3">
-                      <li>Phone number (for OTP login)</li>
-                      <li>Google details (name, email, photo)</li>
-                      <li>Location (if required for services)</li>
-                      <li>Service request details</li>
-                    </ul>
-                  </div>
-                </div>
-                <div className="col-md-6">
-                  <div className="sub-data-card business-gradient">
-                    <h4 className="fs-6 fw-bold mb-2">B. Business Users (Business App)</h4>
-                    <ul className="fs-6 text-slate ps-3">
-                      <li>Email and password (authentication)</li>
-                      <li>Service status updates</li>
-                      <li>Business profile information</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </PolicySection>
-
-            {/* 2. How We Use Information */}
-            <PolicySection id="use" step="2" title="How We Use Information">
-              <p className="fs-6 text-slate mb-3">We use the information we collect to operate and improve the Prolper platform for both customers and local providers:</p>
-              <div className="row g-3 mb-3">
-                <div className="col-md-6">
-                  <div className="sub-data-card customer-gradient">
-                    <h4 className="fs-6 fw-bold mb-2">For Customers</h4>
-                    <ul className="fs-6 text-slate ps-3">
-                      <li>Authenticate your account (Phone/Google)</li>
-                      <li>Match you with available local providers</li>
-                      <li>Process and track your service requests</li>
-                      <li>Enable in-app chat and calling</li>
-                      <li>Facilitate secure payments</li>
-                      <li>Send service updates and notifications</li>
-                    </ul>
-                  </div>
-                </div>
-                <div className="col-md-6">
-                  <div className="sub-data-card business-gradient">
-                    <h4 className="fs-6 fw-bold mb-2">For Local Providers</h4>
-                    <ul className="fs-6 text-slate ps-3">
-                      <li>Authenticate your business account</li>
-                      <li>Send relevant service requests to you</li>
-                      <li>Manage your schedule and availability</li>
-                      <li>Display your business profile to customers</li>
-                      <li>Process payments and earnings</li>
-                      <li>Collect and display customer ratings</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-              <ul className="fs-6 text-slate lh-lg">
-                <li>Maintain records and improve user experience</li>
-                <li>Prevent fraud and ensure platform safety</li>
-                <li>Comply with legal obligations</li>
-              </ul>
-            </PolicySection>
-
-            {/* 3. Data Sharing */}
-            <PolicySection id="sharing" step="3" title="Data Sharing and Disclosure">
-              <p className="fs-6 text-slate">We do not sell or rent your personal data. We may share limited data in the following circumstances:</p>
-              <ul className="fs-6 text-slate">
-                <li><strong>Between customers and local providers:</strong> Only the information necessary to complete a service request is shared (e.g., service location for providers). Personal contact details are not shared.</li>
-                <li><strong>With technology partners (Firebase):</strong> For authentication, data storage, and app infrastructure.</li>
-                <li><strong>To comply with legal obligations:</strong> When required by law or to protect the rights and safety of users.</li>
-                <li><strong>To protect the platform:</strong> To investigate fraud, abuse, or violations of our Terms of Use.</li>
-              </ul>
-            </PolicySection>
-
-            {/* 4. Data Storage */}
-            <PolicySection id="security" step="4" title="Data Storage and Security">
-              <div className="security-gradient-box">
-                <ul className="fs-6 text-slate mb-0">
-                  <li>All data is stored using <strong>Google Firebase</strong> (Authentication and Firestore)</li>
-                  <li>Encryption and access controls are applied to all stored data</li>
-                  <li>Passwords are never stored in plain text</li>
-                  <li>Payment transactions are processed through secure, PCI-compliant channels</li>
-                  <li>We regularly review our data practices to maintain security standards</li>
-                </ul>
-              </div>
-            </PolicySection>
-
-            {/* 5. Your Rights */}
-            <PolicySection id="rights" step="5" title="Your Rights">
-              <p className="fs-6 text-slate mb-3">Regardless of whether you are a customer or a local provider, you have the following rights regarding your personal data:</p>
-              <ul className="fs-6 text-slate mb-3">
-                <li><strong>Access:</strong> Request a copy of the personal data we hold about you.</li>
-                <li><strong>Correction:</strong> Request correction of inaccurate or incomplete data.</li>
-                <li><strong>Deletion:</strong> Request deletion of your account and associated data.</li>
-                <li><strong>Portability:</strong> Request your data in a portable format.</li>
-                <li><strong>Withdrawal of Consent:</strong> Withdraw consent for data processing at any time by deleting your account.</li>
-              </ul>
-              <div className="action-box-teal">
-                <p className="mb-0">To exercise your rights, contact us at: <strong>contact@prolper.com</strong></p>
-              </div>
-            </PolicySection>
-
-            {/* 6. Children's Privacy */}
-            <PolicySection id="children" step="6" title="Children’s Privacy">
-              <p className="fs-6 text-slate">Apps are not intended for children under 13. We do not knowingly collect their data.</p>
-            </PolicySection>
-
-            {/* 7. Third‑Party Services */}
-            <PolicySection id="thirdparty" step="7" title="Third‑Party Services">
-              <p className="fs-6 text-slate">We use Firebase Authentication and Firestore. These services have their own privacy policies.</p>
-            </PolicySection>
-
-            {/* 8. Changes to Policy */}
-            <PolicySection id="changes" step="8" title="Policy Changes">
-              <p className="fs-6 text-slate">Policy updates will be reflected in the “Effective Date” at the top.</p>
-            </PolicySection>
-
-            {/* 9. Contact Us */}
-            <PolicySection id="contact" step="9" title="Contact Us">
-              <div className="contact-grid-card">
-                <p className="mb-1 text-slate"><strong>Email:</strong> contact@prolper.com</p>
-                <p className="mb-1 text-slate"><strong>Company:</strong> Prolper</p>
-                <p className="mb-0 text-slate"><strong>Address:</strong> Mississauga, Ontario, Canada</p>
-              </div>
-            </PolicySection>
-
-          </main>
+          )}
         </div>
       </div>
 
-      {/* Synchronized Professional Footer */}
-      <footer className="pro-footer-dark mt-5">
-        <div className="container">
-          <div className="footer-main-row">
-            <div className="footer-brand">
-              <Link to="/"><img src={logo} alt="Prolper" className="logo-black" /></Link>
-              <p className="footer-mini-text">Intelligent Service Matching</p>
+      {/* ── Content ── */}
+      <main className="pp-content">
+        <div className="pp-content-inner">
+          {loading ? (
+            <div className="pp-loading">
+              <div className="pp-spinner"></div>
+              <span>Loading policy…</span>
             </div>
-            <div className="footer-social-group">
-              <Link to="https://facebook.com/Prolper/" target="_blank" className="social-btn"><img src={facebook} alt="FB" /></Link>
-              <Link to="https://linkedin.com/company/prolper" target="_blank" className="social-btn"><img src={linkedin} alt="IN" /></Link>
-              <Link to="https://instagram.com/prolperapp/" target="_blank" className="social-btn"><img src={instagram} alt="IG" /></Link>
-              <Link to="https://x.com/ProlperApp" target="_blank" className="social-btn"><img src={twitter} alt="X" /></Link>
+          ) : error ? (
+            <div className="pp-error">
+              <i className="bi bi-exclamation-circle"></i>
+              <p>Unable to load the privacy policy. Please try again later.</p>
+              <button onClick={() => window.location.reload()} className="pp-retry-btn">
+                Try again
+              </button>
+            </div>
+          ) : (
+            <article className="pp-article">
+              <ReactMarkdown
+                components={{
+                  h1: ({ children }) => (
+                    <h1 className="pp-h1">{children}</h1>
+                  ),
+                  h2: ({ children }) => (
+                    <h2 className="pp-h2">
+                      <span className="pp-h2-accent"></span>
+                      {children}
+                    </h2>
+                  ),
+                  h3: ({ children }) => <h3 className="pp-h3">{children}</h3>,
+                  p:  ({ children }) => <p  className="pp-p">{children}</p>,
+                  ul: ({ children }) => <ul className="pp-ul">{children}</ul>,
+                  ol: ({ children }) => <ol className="pp-ol">{children}</ol>,
+                  li: ({ children }) => (
+                    <li className="pp-li">
+                      <span className="pp-li-dot"></span>
+                      <span>{children}</span>
+                    </li>
+                  ),
+                  strong: ({ children }) => (
+                    <strong className="pp-strong">{children}</strong>
+                  ),
+                  hr: () => <div className="pp-divider"></div>,
+                  a: ({ href, children }) => (
+                    <a href={href} className="pp-link" target="_blank" rel="noreferrer">
+                      {children}
+                    </a>
+                  ),
+                  blockquote: ({ children }) => (
+                    <blockquote className="pp-blockquote">{children}</blockquote>
+                  ),
+                }}
+              >
+                {markdown}
+              </ReactMarkdown>
+            </article>
+          )}
+        </div>
+      </main>
+
+      {/* ── Footer ── */}
+      <footer className="pp-footer">
+        <div className="pp-footer-inner">
+
+          <div className="pp-footer-top">
+            <div className="pp-footer-brand">
+              <span className="pp-footer-logo">Prolper</span>
+              <p className="pp-footer-tagline">
+                Intelligent service matching — connecting people with trusted local professionals.
+              </p>
+            </div>
+
+            <div className="pp-footer-links-col">
+              <h6 className="pp-footer-col-title">Legal</h6>
+              <Link to="/privacy-policy" className="pp-footer-link">Privacy Policy</Link>
+              <Link to="/legal"          className="pp-footer-link">Terms &amp; Conditions</Link>
+            </div>
+
+            <div className="pp-footer-links-col">
+              <h6 className="pp-footer-col-title">Company</h6>
+              <Link to="/"                className="pp-footer-link">Home</Link>
+              <a href="mailto:contact@prolper.com" className="pp-footer-link">contact@prolper.com</a>
+              <span className="pp-footer-link-text">Mississauga, Ontario, Canada</span>
             </div>
           </div>
-          <div className="footer-bottom-bar">
-            <div className="footer-copyright">© 2026 Prolper. All rights reserved.</div>
-            <div className="footer-legal-links">
-              <Link to="/privacy-policy" className="legal-link">Privacy Policy</Link>
-              <span className="separator">|</span>
-              <Link to="/legal" className="legal-link">Legal</Link>
+
+          <div className="pp-footer-bottom">
+            <span className="pp-footer-copy">© 2026 Prolper Inc. All rights reserved.</span>
+
+            <div className="pp-social-row">
+              <a href="https://www.facebook.com/Prolperapp"   target="_blank" rel="noreferrer" className="pp-social-btn" aria-label="Facebook">
+                <i className="bi bi-facebook"></i>
+              </a>
+              <a href="https://www.instagram.com/prolperapp"  target="_blank" rel="noreferrer" className="pp-social-btn" aria-label="Instagram">
+                <i className="bi bi-instagram"></i>
+              </a>
+              <a href="https://x.com/ProlperApp"              target="_blank" rel="noreferrer" className="pp-social-btn" aria-label="X">
+                <i className="bi bi-twitter-x"></i>
+              </a>
+              <a href="https://www.linkedin.com/company/prolper" target="_blank" rel="noreferrer" className="pp-social-btn" aria-label="LinkedIn">
+                <i className="bi bi-linkedin"></i>
+              </a>
             </div>
           </div>
+
         </div>
       </footer>
+
     </div>
   );
 };
-
-// Internal reusable card component
-const PolicySection = ({ id, step, title, children }) => (
-  <section id={id} className="glass-card mb-4 position-relative overflow-hidden">
-    <div className="section-step-tag">{step}</div>
-    <h2 className="fs-4 fw-bold teal-text mb-3">{title}</h2>
-    <div className="section-body">{children}</div>
-  </section>
-);
 
 export default Privacy;

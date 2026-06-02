@@ -365,9 +365,9 @@ const Legal = () => {
               <p className="footer-mini-text">Streamlining services with intelligent matching.</p>
             </div>
             <div className="footer-social-group">
-              <Link to="https://facebook.com/Prolper/" target="_blank" className="social-btn"><img src={facebook} alt="FB" /></Link>
-              <Link to="https://linkedin.com/company/prolper" target="_blank" className="social-btn"><img src={linkedin} alt="IN" /></Link>
-              <Link to="https://instagram.com/prolperapp/" target="_blank" className="social-btn"><img src={instagram} alt="IG" /></Link>
+              <Link to="https://www.facebook.com/Prolperapp" target="_blank" className="social-btn"><img src={facebook} alt="FB" /></Link>
+              <Link to="https://www.linkedin.com/company/prolper" target="_blank" className="social-btn"><img src={linkedin} alt="IN" /></Link>
+              <Link to="https://www.instagram.com/prolperapp" target="_blank" className="social-btn"><img src={instagram} alt="IG" /></Link>
               <Link to="https://x.com/ProlperApp" target="_blank" className="social-btn"><img src={twitter} alt="X" /></Link>
             </div>
           </div>
