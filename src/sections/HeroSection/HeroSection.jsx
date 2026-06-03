@@ -12,30 +12,24 @@ const HeroSection = () => {
 
         {/* LEFT */}
         <div className="nh-hero-left">
-          <div className="nh-hero-eyebrow">
-            <span className="nh-eyebrow-dot"></span>
-            Now Live · iOS &amp; Android
-          </div>
           <h1 className="nh-hero-headline">
-            Finding Service<br />
-            Providers,<br />
-            <span className="nh-teal">Made Easy.</span>
+            Find Your<br />
+            <span className="nh-teal">Pro Helper.</span>
           </h1>
           <p className="nh-hero-sub">
-            With just a couple of clicks, our advanced AI-based algorithm quickly
-            identifies the best available local providers tailored to your preferred
-            location, date, and time. Whether you're in need of Handyman, Painting,
-            Cleaning, Car Detailing, Pet Care, CPA Services, Tutoring, or Fitness
-            Coaching, Prolper has you covered across 8 service categories.
+            With just a few clicks, Prolper connects you with local service
+            providers based on your location, preferred date, and time. Whether
+            you need help at home, for your business, or for your personal needs,
+            Prolper makes finding the right professional simple, fast, and reliable.
           </p>
 
-          {/* How It Works card */}
+          {/* How It Works card — 3 steps */}
           <div className="nh-hiw-card" id="how-section">
             <h3 className="nh-hiw-title">How It Works</h3>
-            <p className="nh-hiw-sub">Your service sorted in four simple steps.</p>
-            <div className="nh-hiw-grid">
+            <p className="nh-hiw-sub">Three simple steps to get it done.</p>
+            <div className="nh-hiw-grid nh-hiw-grid-3">
 
-              {/* Step 1 */}
+              {/* Step 1 – Select a Service */}
               <div className="nh-hiw-step">
                 <div className="nh-hiw-scard nh-hiw-scard-teal">
                   <span className="nh-hiw-bgnum">1</span>
@@ -52,7 +46,7 @@ const HeroSection = () => {
                           <i className="bi bi-search"></i>
                           <span>Try &lsquo;Handyman&rsquo;</span>
                         </div>
-                        <div className="nh-mini-section-lbl">Suggestions</div>
+                        <div className="nh-mini-section-lbl">Categories</div>
                         <div className="nh-mini-svc-grid">
                           <div className="nh-mini-svc-tile nh-tile-active"><i className="bi bi-tools"></i><span>Handyman</span></div>
                           <div className="nh-mini-svc-tile"><i className="bi bi-brush-fill"></i><span>Painting</span></div>
@@ -65,38 +59,14 @@ const HeroSection = () => {
                   </div>
                 </div>
                 <h4 className="nh-hiw-slabel">Select a Service</h4>
-                <p className="nh-hiw-sdesc">Browse 8 categories and pick what you need.</p>
+                <p className="nh-hiw-sdesc">Browse categories, pick what you need and when.</p>
               </div>
 
-              {/* Step 2 */}
+              {/* Step 2 – Connect with Your Pro */}
               <div className="nh-hiw-step">
                 <div className="nh-hiw-scard nh-hiw-scard-indigo">
                   <span className="nh-hiw-bgnum">2</span>
                   <div className="nh-hiw-pill nh-hiw-pill-indigo">02</div>
-                  <div className="nh-hiw-vis">
-                    <div className="nh-ai-radar">
-                      <span className="nh-radar-r1"></span>
-                      <span className="nh-radar-r2"></span>
-                      <span className="nh-radar-r3"></span>
-                      <span className="nh-radar-sweep"></span>
-                      <span className="nh-radar-ch-h"></span>
-                      <span className="nh-radar-ch-v"></span>
-                      <div className="nh-radar-core"><i className="bi bi-cpu-fill"></i></div>
-                      <span className="nh-radar-dot rd1"></span>
-                      <span className="nh-radar-dot rd2"></span>
-                      <span className="nh-radar-dot rd3"></span>
-                    </div>
-                  </div>
-                </div>
-                <h4 className="nh-hiw-slabel">AI Smart Match</h4>
-                <p className="nh-hiw-sdesc">AI finds the best-rated local pro near you.</p>
-              </div>
-
-              {/* Step 3 */}
-              <div className="nh-hiw-step">
-                <div className="nh-hiw-scard nh-hiw-scard-teal">
-                  <span className="nh-hiw-bgnum">3</span>
-                  <div className="nh-hiw-pill nh-hiw-pill-teal">03</div>
                   <div className="nh-hiw-vis">
                     <div className="nh-connect-visual">
                       <div className="nh-connect-btns">
@@ -118,29 +88,32 @@ const HeroSection = () => {
                     </div>
                   </div>
                 </div>
-                <h4 className="nh-hiw-slabel">Provider Connects</h4>
-                <p className="nh-hiw-sdesc">Chat or call, accept the estimate, pay &amp; get it done.</p>
+                <h4 className="nh-hiw-slabel">Connect with Your Pro</h4>
+                <p className="nh-hiw-sdesc">Chat or call, receive an estimate, and pay to confirm.</p>
               </div>
 
-              {/* Step 4 */}
+              {/* Step 3 – Get It Done & Rate */}
               <div className="nh-hiw-step">
-                <div className="nh-hiw-scard nh-hiw-scard-indigo">
-                  <span className="nh-hiw-bgnum">4</span>
-                  <div className="nh-hiw-pill nh-hiw-pill-indigo">04</div>
+                <div className="nh-hiw-scard nh-hiw-scard-teal">
+                  <span className="nh-hiw-bgnum">3</span>
+                  <div className="nh-hiw-pill nh-hiw-pill-teal">03</div>
                   <div className="nh-hiw-vis">
-                    <div className="nh-inv-card">
-                      <div className="nh-inv-toprow">
-                        <span className="nh-inv-id">Invoice #1042</span>
-                        <span className="nh-inv-ok"><i className="bi bi-check-circle-fill"></i> Approved</span>
+                    <div className="nh-rate-visual">
+                      <div className="nh-rate-done">
+                        <i className="bi bi-check-circle-fill"></i>
+                        <span>Service Complete</span>
                       </div>
-                      <div className="nh-inv-service">Handyman · 2 hrs</div>
-                      <div className="nh-inv-amount">$120</div>
-                      <button className="nh-inv-pay"><i className="bi bi-lock-fill"></i> Pay Securely</button>
+                      <div className="nh-rate-stars">
+                        {[1,2,3,4,5].map(s => (
+                          <i key={s} className="bi bi-star-fill nh-star"></i>
+                        ))}
+                      </div>
+                      <div className="nh-rate-label">Rate your experience</div>
                     </div>
                   </div>
                 </div>
-                <h4 className="nh-hiw-slabel">Approve &amp; Pay</h4>
-                <p className="nh-hiw-sdesc">Accept, get the job done, pay securely.</p>
+                <h4 className="nh-hiw-slabel">Get It Done &amp; Rate</h4>
+                <p className="nh-hiw-sdesc">Service delivered, balance settled, leave a rating.</p>
               </div>
 
             </div>

@@ -3,6 +3,37 @@ import "./StandardSection.css";
 
 const STAT_TOTAL = 4, STAT_GAP = 20;
 
+const CARDS = [
+  {
+    icon: "bi-stars",
+    color: "#0fba81",
+    colorBg: "rgba(15,186,129,0.1)",
+    label: "Unbiased Matching",
+    desc: "Matched with the right provider for your needs.",
+  },
+  {
+    icon: "bi-geo-alt-fill",
+    color: "#0fba81",
+    colorBg: "rgba(15,186,129,0.1)",
+    label: "Local First",
+    desc: "Connecting you with local professionals.",
+  },
+  {
+    icon: "bi-shield-lock-fill",
+    color: "#7c3aed",
+    colorBg: "rgba(124,58,237,0.1)",
+    label: "Privacy Protected",
+    desc: "Your personal information stays private.",
+  },
+  {
+    icon: "bi-star-fill",
+    color: "#f59e0b",
+    colorBg: "rgba(245,158,11,0.1)",
+    label: "Trusted Reviews",
+    desc: "Real ratings and reviews from real customers.",
+  },
+];
+
 const StandardSection = () => {
   const [statIndex, setStatIndex] = useState(0);
   const [cardPx, setCardPx] = useState(0);
@@ -35,59 +66,34 @@ const StandardSection = () => {
   return (
     <section className="nh-standard" id="about-us">
       <div className="nh-section-inner">
-        <h2 className="nh-standard-title nh-animate">The Prolper Standard</h2>
-        <p className="nh-standard-sub nh-animate nh-d1">Quality isn't an option—it's our foundation.</p>
+
+        {/* Header */}
+        <div className="nh-standard-header nh-animate">
+          <span className="nh-standard-eyebrow">Why us</span>
+          <h2 className="nh-standard-title">The Prolper Standard</h2>
+          <p className="nh-standard-lead">Why thousands choose Prolper for their local services.</p>
+        </div>
+
         {/* Scrollable carousel */}
         <div className="nh-stats-carousel nh-animate nh-d2" ref={statsCarouselRef}>
           <div
             className="nh-stats-track"
             style={{ transform: `translateX(-${statTranslate}px)` }}
           >
-
-            <div className="nh-stat-card" style={{ width: cardPx || undefined }}>
-              <div className="nh-stat-top">
-                <div className="nh-stat-icon-badge" style={{ background: "rgba(15,186,129,0.1)", color: "#0fba81" }}>
-                  <i className="bi bi-stars"></i>
+            {CARDS.map((card) => (
+              <div key={card.label} className="nh-stat-card" style={{ width: cardPx || undefined }}>
+                <div className="nh-stat-top">
+                  <div
+                    className="nh-stat-icon-badge"
+                    style={{ background: card.colorBg, color: card.color }}
+                  >
+                    <i className={`bi ${card.icon}`}></i>
+                  </div>
                 </div>
-                <span className="nh-stat-num" style={{ color: "#0fba81" }}>99%</span>
+                <h4 className="nh-stat-label">{card.label}</h4>
+                <p className="nh-stat-desc">{card.desc}</p>
               </div>
-              <h4 className="nh-stat-label">Unbiased AI</h4>
-              <p className="nh-stat-desc">Our algorithms match you based solely on performance data.</p>
-            </div>
-
-            <div className="nh-stat-card" style={{ width: cardPx || undefined }}>
-              <div className="nh-stat-top">
-                <div className="nh-stat-icon-badge" style={{ background: "rgba(15,186,129,0.1)", color: "#0fba81" }}>
-                  <i className="bi bi-shield-check"></i>
-                </div>
-                <span className="nh-stat-num" style={{ color: "#0fba81" }}>24/7</span>
-              </div>
-              <h4 className="nh-stat-label">Rigorous Vetting</h4>
-              <p className="nh-stat-desc">Providers who fail standards are immediately delisted.</p>
-            </div>
-
-            <div className="nh-stat-card" style={{ width: cardPx || undefined }}>
-              <div className="nh-stat-top">
-                <div className="nh-stat-icon-badge" style={{ background: "rgba(124,58,237,0.1)", color: "#7c3aed" }}>
-                  <i className="bi bi-lock"></i>
-                </div>
-                <span className="nh-stat-num" style={{ color: "#7c3aed" }}>100%</span>
-              </div>
-              <h4 className="nh-stat-label">Shielded Privacy</h4>
-              <p className="nh-stat-desc">Your personal contact details are never shared with providers.</p>
-            </div>
-
-            <div className="nh-stat-card" style={{ width: cardPx || undefined }}>
-              <div className="nh-stat-top">
-                <div className="nh-stat-icon-badge" style={{ background: "rgba(245,158,11,0.1)", color: "#f59e0b" }}>
-                  <i className="bi bi-people"></i>
-                </div>
-                <span className="nh-stat-num" style={{ color: "#f59e0b" }}>5K+</span>
-              </div>
-              <h4 className="nh-stat-label">Verified Feedback</h4>
-              <p className="nh-stat-desc">A marketplace built on genuine trust and community.</p>
-            </div>
-
+            ))}
           </div>
 
           {/* Navigation */}
@@ -116,6 +122,7 @@ const StandardSection = () => {
             </button>
           </div>
         </div>
+
       </div>
     </section>
   );

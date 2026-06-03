@@ -20,7 +20,7 @@ const PlatformSection = () => {
             </div>
             <h3 className="nh-pcard-title">Looking for a Service?</h3>
             <p className="nh-pcard-desc">
-              Access trusted local professionals for daily tasks or specialized projects.
+              Access local professionals for daily tasks or specialized projects.
               Reliable, fast, and handled via Prolper.
             </p>
             <div className="nh-qr-box">
@@ -31,12 +31,12 @@ const PlatformSection = () => {
           <div className="nh-pcard nh-animate-right nh-d2">
             <div className="nh-pcard-badge">
               <i className="bi bi-check-circle-fill"></i>
-              ARE YOU A SERVICE PROVIDER?
+              ARE YOU A SERVICE PRO?
             </div>
-            <h3 className="nh-pcard-title">Providing a Service?</h3>
+            <h3 className="nh-pcard-title">Prolper Pro</h3>
             <p className="nh-pcard-desc">
               Turn your expertise into a business. Find new clients, manage
-              schedule, and grow on your own terms.
+              your schedule, and grow on your own terms.
             </p>
             <div className="nh-qr-box">
               <img src={businessQrImg} alt="Provider App QR" className="nh-qr-img" />

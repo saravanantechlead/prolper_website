@@ -40,15 +40,15 @@ const FooterSection = () => {
           <div className="nh-ticker-inner">
             {[1, 2, 3, 4].map((_, r) => (
               <React.Fragment key={r}>
-                <span><i className="bi bi-star-fill"></i> In-app calling coming soon</span>
+                <span><i className="bi bi-telephone-fill"></i> In-app calling</span>
                 <span className="nh-dot">•</span>
-                <span><i className="bi bi-lightning-fill"></i> Live tracking coming soon</span>
-                <span className="nh-dot">•</span>
-                <span><i className="bi bi-geo-alt-fill"></i> Prolper launching in Mississauga</span>
-                <span className="nh-dot">•</span>
-                <span><i className="bi bi-cpu-fill"></i> AI Smart Matching now live</span>
+                <span><i className="bi bi-geo-alt-fill"></i> Live in Mississauga</span>
                 <span className="nh-dot">•</span>
                 <span><i className="bi bi-shield-check-fill"></i> Secure in-app payments</span>
+                <span className="nh-dot">•</span>
+                <span><i className="bi bi-star-fill"></i> Real Ratings from Real Customers</span>
+                <span className="nh-dot">•</span>
+                <span><i className="bi bi-tools"></i> Built for Local Service Pros</span>
                 <span className="nh-dot">•</span>
               </React.Fragment>
             ))}
@@ -76,7 +76,7 @@ const FooterSection = () => {
             <div className="nh-footer-newsletter">
               <h4 className="nh-nl-title">Stay in the Loop</h4>
               <p className="nh-nl-sub">
-                Get notified about our launch, exclusive features, and special offers.
+                Get notified about our Exclusive Content.
               </p>
               <form onSubmit={handleNewsletterSubmit} className="nh-nl-form">
                 <input
