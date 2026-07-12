@@ -46,9 +46,9 @@
   display: inline-flex;
   align-items: center;
   gap: 7px;
-  background: rgba(15,186,129,0.12);
-  border: 1px solid rgba(15,186,129,0.28);
-  color: #0fba81;
+  background: rgba(20,184,166,0.12);
+  border: 1px solid rgba(20,184,166,0.28);
+  color: #14b8a6;
   border-radius: 100px;
   padding: 8px 16px;
   font-size: 0.82rem;
@@ -58,8 +58,8 @@
 }
 
 .lp-toggle-btn:hover {
-  background: rgba(15,186,129,0.22);
-  color: #0fba81;
+  background: rgba(20,184,166,0.22);
+  color: #14b8a6;
 }
 
 .lp-back-btn {
@@ -199,7 +199,7 @@
 .lp-spinner {
   width: 40px;
   height: 40px;
-  border: 3px solid rgba(15,186,129,0.15);
+  border: 3px solid rgba(20,184,166,0.15);
   border-radius: 50%;
   animation: lpSpin 0.75s linear infinite;
 }
@@ -216,7 +216,7 @@
 
 .lp-retry-btn {
   margin-top: 16px;
-  background: #0fba81;
+  background: #14b8a6;
   color: #fff;
   border: none;
   border-radius: 10px;
@@ -227,7 +227,7 @@
   transition: background 0.2s, transform 0.2s;
 }
 
-.lp-retry-btn:hover { background: #0da872; transform: translateY(-1px); }
+.lp-retry-btn:hover { background: #0d9e95; transform: translateY(-1px); }
 
 /* Article */
 .lp-article {
@@ -288,12 +288,59 @@
 
 .lp-strong { font-weight: 700; color: #1e293b; }
 
-.lp-link { color: #0fba81; text-decoration: underline; text-decoration-color: rgba(15,186,129,0.3); text-underline-offset: 3px; }
-.lp-link:hover { color: #0da872; }
+.lp-link { color: #14b8a6; text-decoration: underline; text-decoration-color: rgba(20,184,166,0.3); text-underline-offset: 3px; }
+.lp-link:hover { color: #0d9e95; }
 
 .lp-divider { height: 1px; background: linear-gradient(90deg, transparent, #e2e8f0 20%, #e2e8f0 80%, transparent); margin: 32px 0; }
 
-.lp-blockquote { border-left: 3px solid #0fba81; background: #f0fdf9; border-radius: 0 12px 12px 0; padding: 16px 20px; margin: 20px 0; color: #475569; font-size: 0.93rem; line-height: 1.7; }
+.lp-blockquote { border-left: 3px solid #14b8a6; background: #f0fdf9; border-radius: 0 12px 12px 0; padding: 16px 20px; margin: 20px 0; color: #475569; font-size: 0.93rem; line-height: 1.7; }
+
+/* ── Tables ── */
+.lp-table-wrap {
+  overflow-x: auto;
+  margin: 20px 0 24px;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+}
+
+.lp-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+  color: #374151;
+}
+
+.lp-thead {
+  background: linear-gradient(135deg, var(--lp-accent, #818cf8) 0%, #818cf8 100%);
+}
+
+.lp-th {
+  padding: 12px 16px;
+  text-align: left;
+  font-weight: 700;
+  color: #ffffff;
+  white-space: nowrap;
+  letter-spacing: 0.01em;
+  font-size: 0.82rem;
+}
+
+.lp-tbody .lp-tr:nth-child(odd)  { background: #f8fafc; }
+.lp-tbody .lp-tr:nth-child(even) { background: #ffffff; }
+.lp-tbody .lp-tr:hover           { background: #f0fdf9; transition: background 0.15s; }
+
+.lp-td {
+  padding: 11px 16px;
+  border-bottom: 1px solid #f1f5f9;
+  line-height: 1.6;
+  vertical-align: top;
+}
+
+.lp-tbody .lp-tr:last-child .lp-td { border-bottom: none; }
+
+@media (max-width: 600px) {
+  .lp-th, .lp-td { padding: 9px 12px; font-size: 0.82rem; }
+}
 
 /* ── Footer ── */
 .lp-footer { background: linear-gradient(180deg, #07070e 0%, #0d0d18 100%); border-top: 1px solid rgba(255,255,255,0.06); }
@@ -313,7 +360,7 @@
 .lp-footer-tagline { font-size: 0.84rem; color: rgba(255,255,255,0.35); line-height: 1.65; margin: 0; max-width: 300px; }
 .lp-footer-col-title { font-size: 0.7rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 14px; }
 .lp-footer-link { display: block; font-size: 0.88rem; color: rgba(255,255,255,0.55); text-decoration: none; margin-bottom: 10px; transition: color 0.2s; }
-.lp-footer-link:hover { color: #0fba81; }
+.lp-footer-link:hover { color: #14b8a6; }
 .lp-footer-link-text { display: block; font-size: 0.88rem; color: rgba(255,255,255,0.35); margin-bottom: 10px; }
 
 .lp-footer-bottom { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
@@ -333,9 +380,9 @@
 }
 
 .lp-social-btn:hover {
-  background: #0fba81; border-color: #0fba81; color: #ffffff;
+  background: #14b8a6; border-color: #14b8a6; color: #ffffff;
   transform: translateY(-3px);
-  box-shadow: 0 8px 20px rgba(15,186,129,0.35);
+  box-shadow: 0 8px 20px rgba(20,184,166,0.35);
 }
 
 /* ── Responsive ── */

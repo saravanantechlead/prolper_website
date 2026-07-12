@@ -1,0 +1,160 @@
+/* ══════════════════════════════════════════════════════════
+   CATEGORIES SECTION — service icon grid (Jiffy-style)
+   ══════════════════════════════════════════════════════════ */
+.nh-cats {
+  position: relative;
+  padding: 88px 0;
+  background:
+    radial-gradient(ellipse at 15% 0%, rgba(20,184,166,0.05) 0%, transparent 45%),
+    radial-gradient(ellipse at 90% 100%, rgba(129,140,248,0.05) 0%, transparent 45%),
+    #ffffff;
+}
+
+.nh-cats-header {
+  text-align: center;
+  max-width: 620px;
+  margin: 0 auto 48px;
+}
+.nh-cats-eyebrow {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--nh-teal);
+  background: rgba(20,184,166,0.1);
+  padding: 6px 14px;
+  border-radius: 999px;
+  margin-bottom: 16px;
+}
+.nh-cats-title {
+  font-size: clamp(1.7rem, 3.4vw, 2.5rem);
+  font-weight: 900;
+  letter-spacing: -0.5px;
+  color: var(--nh-text);
+  margin-bottom: 12px;
+}
+.nh-cats-lead {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--nh-muted);
+}
+
+.nh-cats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+}
+
+.nh-cat-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  gap: 4px;
+  padding: 22px 20px;
+  background: #ffffff;
+  border: 1px solid rgba(15,23,42,0.07);
+  border-radius: 18px;
+  cursor: pointer;
+  overflow: hidden;
+  font-family: inherit;
+  box-shadow: 0 4px 18px rgba(15,23,42,0.04);
+  transition: transform 0.28s cubic-bezier(0.4,0,0.2,1),
+              box-shadow 0.28s cubic-bezier(0.4,0,0.2,1),
+              border-color 0.28s ease;
+}
+.nh-cat-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, color-mix(in srgb, var(--cat-accent) 8%, transparent), transparent 60%);
+  opacity: 0;
+  transition: opacity 0.28s ease;
+}
+.nh-cat-card:hover {
+  transform: translateY(-6px);
+  border-color: color-mix(in srgb, var(--cat-accent) 35%, transparent);
+  box-shadow: 0 18px 40px color-mix(in srgb, var(--cat-accent) 16%, transparent);
+}
+.nh-cat-card:hover::before { opacity: 1; }
+
+.nh-cat-icon {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  margin-bottom: 12px;
+  font-size: 1.5rem;
+  color: var(--cat-accent);
+  background: color-mix(in srgb, var(--cat-accent) 12%, transparent);
+  transition: transform 0.28s ease;
+}
+.nh-cat-card:hover .nh-cat-icon {
+  transform: scale(1.08) rotate(-4deg);
+}
+.nh-cat-label {
+  position: relative;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--nh-text);
+}
+.nh-cat-desc {
+  position: relative;
+  font-size: 0.82rem;
+  color: var(--nh-muted);
+}
+.nh-cat-arrow {
+  position: absolute;
+  top: 22px;
+  right: 20px;
+  color: var(--cat-accent);
+  opacity: 0;
+  transform: translateX(-6px);
+  transition: opacity 0.28s ease, transform 0.28s ease;
+}
+.nh-cat-card:hover .nh-cat-arrow {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Empty / error state */
+.nh-cats-empty {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--nh-muted);
+}
+.nh-cats-empty i { font-size: 1.8rem; color: #cbd5e1; display: block; margin-bottom: 10px; }
+.nh-cats-empty p { font-size: 0.95rem; }
+
+/* Loading skeletons */
+.nh-cat-skeleton { pointer-events: none; }
+.nh-cat-skeleton .nh-cat-icon,
+.nh-cat-skeleton .nh-cat-label,
+.nh-cat-skeleton .nh-cat-desc {
+  background: linear-gradient(90deg, #eef2f6 25%, #f6f9fb 37%, #eef2f6 63%);
+  background-size: 400% 100%;
+  animation: nhSkeleton 1.4s ease infinite;
+  border-radius: 8px;
+  color: transparent;
+}
+.nh-cat-skeleton .nh-cat-label { width: 70%; height: 14px; margin-bottom: 6px; }
+.nh-cat-skeleton .nh-cat-desc  { width: 90%; height: 11px; }
+@keyframes nhSkeleton {
+  0%   { background-position: 100% 0; }
+  100% { background-position: -100% 0; }
+}
+
+@media (max-width: 900px) {
+  .nh-cats-grid { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 640px) {
+  .nh-cats { padding: 64px 0; }
+  .nh-cats-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .nh-cat-card { padding: 18px 16px; }
+  .nh-cat-icon { width: 46px; height: 46px; font-size: 1.3rem; }
+}

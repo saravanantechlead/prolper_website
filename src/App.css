@@ -6,8 +6,8 @@
   --ios-gray-nav: rgba(28, 28, 30, 0.72);
   --ios-border: rgba(255, 255, 255, 0.12);
   --ios-glow: rgba(255, 255, 255, 0.4);
-  --teal-primary: #0d9488;
-  --teal-hover: #0f766e;
+  --teal-primary: #14b8a6;
+  --teal-hover: #0d9488;
   --teal-light: #f0fdfa;
   --text-main: #1e293b;
   --text-muted: #64748b;
@@ -38,19 +38,19 @@ html, body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(13, 148, 136, 0.35);
+  background: rgba(20, 184, 166, 0.35);
   border-radius: 100px;
   transition: background 0.2s ease;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(13, 148, 136, 0.75);
+  background: rgba(20, 184, 166, 0.75);
 }
 
 /* Firefox */
 * {
   scrollbar-width: thin;
-  scrollbar-color: rgba(13, 148, 136, 0.35) transparent;
+  scrollbar-color: rgba(20, 184, 166, 0.35) transparent;
 }
 
 /* ==========================================================================
@@ -62,12 +62,12 @@ html, body {
   -webkit-backdrop-filter: blur(48px) saturate(160%) brightness(0.75);
   border-radius: 20px !important;
   border: 1px solid rgba(255, 255, 255, 0.10) !important;
-  padding: 18px 40px !important;
+  padding: 15px 28px !important;
   top: 16px !important;
   left: 50% !important;
   right: auto !important;
   transform: translateX(-50%);
-  width: calc(100% - 48px) !important;
+  width: 90% !important;
   max-width: 1240px !important;
   z-index: 1050;
   box-shadow:
@@ -107,10 +107,11 @@ html, body {
 .ios-link {
   font-family: "Inter", -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif;
   font-weight: 500;
-  font-size: 16px !important;
-  color: rgba(255, 255, 255, 0.7) !important;
-  padding: 10px 18px !important;
+  font-size: 15px !important;
+  color: rgba(255, 255, 255, 0.72) !important;
+  padding: 9px 13px !important;
   border-radius: 10px;
+  white-space: nowrap;
   transition: color 0.2s ease, background 0.2s ease !important;
   letter-spacing: -0.1px;
 }
@@ -125,14 +126,21 @@ html, body {
   width: 1px;
   height: 22px;
   background: rgba(255,255,255,0.12);
-  margin: 0 8px;
+  margin: 0 6px;
 }
 
 /* Social Group */
 .ios-social-group {
   display: flex;
-  gap: 6px;
+  gap: 5px;
   align-items: center;
+}
+
+/* Hide social icons on mid-large widths so nav links never crowd/wrap;
+   they reappear on very wide screens and in the mobile menu. */
+@media (min-width: 992px) and (max-width: 1200px) {
+  .ios-social-group,
+  .ios-nav-divider { display: none !important; }
 }
 
 .ios-social-icon {
@@ -198,6 +206,19 @@ html, body {
 
 .ios-toggler-icon::before { top: -7px; }
 .ios-toggler-icon::after  { top: 7px;  }
+
+/* Animate hamburger → X when menu is open */
+.navbar-toggler:not(.collapsed) .ios-toggler-icon {
+  background: transparent;
+}
+.navbar-toggler:not(.collapsed) .ios-toggler-icon::before {
+  transform: rotate(45deg);
+  top: 0;
+}
+.navbar-toggler:not(.collapsed) .ios-toggler-icon::after {
+  transform: rotate(-45deg);
+  top: 0;
+}
 
 /* ==========================================================================
    3. HERO SECTION (SPLIT LAYOUT)
@@ -267,7 +288,7 @@ html, body {
 .btn-primary-teal:hover {
   background-color: var(--teal-hover);
   transform: translateY(-3px);
-  box-shadow: 0 10px 20px rgba(13, 148, 136, 0.2);
+  box-shadow: 0 10px 20px rgba(20, 184, 166, 0.2);
   color: white;
 }
 
@@ -283,18 +304,19 @@ html, body {
 
 /* Download CTA button */
 .ios-cta-glass {
-  background: #0fba81 !important;
+  background: #14b8a6 !important;
   color: #ffffff !important;
   border: none !important;
   border-radius: 13px !important;
-  padding: 12px 28px !important;
+  padding: 12px 26px !important;
   font-size: 15.5px !important;
   font-weight: 700 !important;
   text-decoration: none !important;
   letter-spacing: -0.2px;
+  white-space: nowrap;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 2px 12px rgba(15,186,129,0.35);
+  box-shadow: 0 2px 12px rgba(20,184,166,0.35);
   transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1),
               box-shadow 0.25s ease,
               background 0.2s ease !important;
@@ -313,17 +335,17 @@ html, body {
 }
 
 .ios-cta-glass:hover {
-  background: #0da876 !important;
+  background: #0da89a !important;
   color: #ffffff !important;
   transform: translateY(-3px) scale(1.05);
-  box-shadow: 0 8px 28px rgba(15,186,129,0.45) !important;
+  box-shadow: 0 8px 28px rgba(20,184,166,0.45) !important;
 }
 
 .ios-cta-glass:hover::before { left: 130%; }
 
 .ios-cta-glass:active {
   transform: scale(0.96) !important;
-  box-shadow: 0 2px 8px rgba(15,186,129,0.2) !important;
+  box-shadow: 0 2px 8px rgba(20,184,166,0.2) !important;
 }
 
 /* ==========================================================================
@@ -355,6 +377,48 @@ html, body {
 /* ==========================================================================
    5. MOBILE RESPONSIVE (OVERFLOW FIX)
    ========================================================================== */
+/* Desktop: gap between nav items */
+@media (min-width: 992px) {
+  .navbar-nav {
+    gap: 2px;
+  }
+}
+
+/* Large screen (≥1400px): stretch the pill wider */
+@media (min-width: 1400px) {
+  .ios-nav {
+    width: 88% !important;
+    max-width: 1600px !important;
+  }
+}
+
+/* XL screen (≥1600px): even wider + roomier padding */
+@media (min-width: 1600px) {
+  .ios-nav {
+    width: 90% !important;
+    max-width: 1800px !important;
+    padding: 20px 52px !important;
+  }
+  .nav-scrolled {
+    padding: 16px 52px !important;
+  }
+  .ios-link {
+    padding: 10px 22px !important;
+  }
+}
+
+/* Ultra-wide (≥2000px): near full-width, capped generously */
+@media (min-width: 2000px) {
+  .ios-nav {
+    width: 90% !important;
+    max-width: 2100px !important;
+    padding: 22px 60px !important;
+  }
+  .nav-scrolled {
+    padding: 18px 60px !important;
+  }
+}
+
 @media (max-width: 991px) {
   .hero-split-section {
     padding: 120px 0 60px;
@@ -439,4 +503,23 @@ html, body {
     padding: 10px 18px !important;
     font-size: 14px !important;
   }
+}
+
+/* ── Viewport-height–based navbar compaction ── */
+@media (max-height: 900px) and (min-width: 992px) {
+  .ios-nav    { top: 14px !important; padding: 13px 36px !important; }
+  .nav-scrolled { padding: 10px 36px !important; }
+  .ios-logo   { height: 34px; }
+}
+
+@media (max-height: 820px) and (min-width: 992px) {
+  .ios-nav    { top: 12px !important; padding: 11px 32px !important; }
+  .nav-scrolled { padding: 9px 32px !important; }
+  .ios-logo   { height: 30px; }
+}
+
+@media (max-height: 720px) and (min-width: 992px) {
+  .ios-nav    { top: 10px !important; padding: 9px 28px !important; }
+  .nav-scrolled { padding: 7px 28px !important; }
+  .ios-logo   { height: 28px; }
 }

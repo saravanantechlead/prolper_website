@@ -236,7 +236,7 @@ const Legal = () => {
               <p className="fs-6 text-slate mb-3">These terms apply to individuals and businesses using the <strong>Prolper Business App</strong> to offer services to customers.</p>
               <div className="mb-3">
                 <h3 className="fs-6 fw-bold text-dark mb-1">Eligibility</h3>
-                <p className="fs-6 text-slate">Local providers must be legally authorized to offer the services listed on their profile. Prolper reserves the right to verify credentials and may remove providers who misrepresent their qualifications.</p>
+                <p className="fs-6 text-slate">Local providers must be legally authorized to offer the services listed on their profile. Prolper reserves the right to review credentials and may remove providers who misrepresent their qualifications.</p>
               </div>
               <div className="mb-3">
                 <h3 className="fs-6 fw-bold text-dark mb-1">Accepting Service Requests</h3>

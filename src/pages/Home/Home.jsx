@@ -2,8 +2,9 @@ import React, { useEffect } from "react";
 import "./Home.css";
 
 import HeroSection from "../../sections/HeroSection/HeroSection";
-import PlatformSection from "../../sections/PlatformSection/PlatformSection";
+import HowItWorksSection from "../../sections/HowItWorksSection/HowItWorksSection";
 import StandardSection from "../../sections/StandardSection/StandardSection";
+import GetAppSection from "../../sections/GetAppSection/GetAppSection";
 import ContactSection from "../../sections/ContactSection/ContactSection";
 import FooterSection from "../../sections/FooterSection/FooterSection";
 
@@ -28,8 +29,9 @@ const Home = () => {
   return (
     <div className="nh-page">
       <HeroSection />
-      <PlatformSection />
+      <HowItWorksSection />
       <StandardSection />
+      <GetAppSection />
       <ContactSection />
       <FooterSection />
     </div>

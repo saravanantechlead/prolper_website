@@ -1,152 +1,71 @@
 import React from "react";
+import { HOW_STEPS } from "../../data/siteContent";
 import "./HowItWorksSection.css";
 
-const HowItWorksSection = () => (
-  <section className="nhiw-section" id="how-section">
-    <div className="nhiw-blob nhiw-blob-teal" aria-hidden="true"></div>
-    <div className="nhiw-blob nhiw-blob-indigo" aria-hidden="true"></div>
+/* A small action chip per step, floated on the photo. */
+const CHIPS = [
+  { icon: "bi-ui-checks-grid", label: "Pick a service" },
+  { icon: "bi-chat-dots-fill", label: "Chat & agree a price" },
+  { icon: "bi-star-fill",      label: "Leave a review" },
+];
 
-    <div className="nhiw-inner">
+const HowItWorksSection = () => {
+  // Mouse-tracking 3D tilt + glare (subtle).
+  const handleMove = (e) => {
+    const c = e.currentTarget;
+    const r = c.getBoundingClientRect();
+    const px = (e.clientX - r.left) / r.width;
+    const py = (e.clientY - r.top) / r.height;
+    c.style.setProperty("--ry", ((px - 0.5) * 8).toFixed(2) + "deg");
+    c.style.setProperty("--rx", ((0.5 - py) * 8).toFixed(2) + "deg");
+    c.style.setProperty("--mx", (px * 100).toFixed(1) + "%");
+    c.style.setProperty("--my", (py * 100).toFixed(1) + "%");
+  };
+  const handleLeave = (e) => {
+    e.currentTarget.style.setProperty("--rx", "0deg");
+    e.currentTarget.style.setProperty("--ry", "0deg");
+  };
 
-      {/* ── Header ── */}
-      <div className="nhiw-header">
-        <div className="nhiw-eyebrow nh-animate">
-          <span className="nhiw-eyebrow-dot"></span>
-          Simple &amp; Fast
-        </div>
-        <h2 className="nhiw-title nh-animate nh-d1">How It Works</h2>
-        <p className="nhiw-sub nh-animate nh-d2">Your service sorted in four simple steps.</p>
-      </div>
-
-      {/* ── Steps ── */}
-      <div className="nhiw-grid">
-
-        {/* Step 1 – Select a Service */}
-        <div className="nhiw-step nh-animate nh-d1">
-          <div className="nhiw-card nhiw-card-teal">
-            <span className="nhiw-bg-num">1</span>
-            <div className="nhiw-pill nhiw-pill-teal">01</div>
-            <div className="nhiw-visual">
-              <div className="nhiw-phone">
-                <div className="nhiw-ph-island"></div>
-                <div className="nhiw-ph-screen">
-                  <div className="nhiw-ph-appbar">
-                    <span>Prolper</span>
-                    <i className="bi bi-three-dots"></i>
-                  </div>
-                  <div className="nhiw-ph-search">
-                    <i className="bi bi-search"></i>
-                    <span>Try &lsquo;Handyman&rsquo;</span>
-                  </div>
-                  <div className="nhiw-ph-lbl">Suggestions</div>
-                  <div className="nhiw-ph-grid">
-                    <div className="nhiw-ph-tile nhiw-tile-active">
-                      <i className="bi bi-tools"></i><span>Handyman</span>
-                    </div>
-                    <div className="nhiw-ph-tile">
-                      <i className="bi bi-brush-fill"></i><span>Painting</span>
-                    </div>
-                    <div className="nhiw-ph-tile">
-                      <i className="bi bi-house-heart-fill"></i><span>Cleaning</span>
-                    </div>
-                    <div className="nhiw-ph-tile">
-                      <i className="bi bi-car-front-fill"></i><span>Car Detail</span>
-                    </div>
-                  </div>
-                </div>
-                <div className="nhiw-ph-bar"></div>
-              </div>
-            </div>
-          </div>
-          <h4 className="nhiw-step-title">Select a Service</h4>
-          <p className="nhiw-step-desc">Browse 8 categories and pick exactly what you need.</p>
+  return (
+    <section className="nh-how" id="how-it-works">
+      <div className="nh-how-inner">
+        <div className="nh-how-head nh-animate">
+          <span className="nh-how-eyebrow">How it works</span>
+          <h2 className="nh-how-title">Get it done in three simple steps</h2>
+          <p className="nh-how-lead">
+            No phone tag, no chasing quotes. Prolper handles matching, messaging and
+            payment, so you can just get the job done.
+          </p>
         </div>
 
-        {/* Step 2 – AI Smart Match */}
-        <div className="nhiw-step nh-animate nh-d2">
-          <div className="nhiw-card nhiw-card-indigo">
-            <span className="nhiw-bg-num">2</span>
-            <div className="nhiw-pill nhiw-pill-indigo">02</div>
-            <div className="nhiw-visual">
-              <div className="nhiw-radar">
-                <span className="nhiw-rr nhiw-rr1"></span>
-                <span className="nhiw-rr nhiw-rr2"></span>
-                <span className="nhiw-rr nhiw-rr3"></span>
-                <span className="nhiw-rsweep"></span>
-                <span className="nhiw-rch nhiw-rch-h"></span>
-                <span className="nhiw-rch nhiw-rch-v"></span>
-                <div className="nhiw-rcore">
-                  <i className="bi bi-cpu-fill"></i>
-                </div>
-                <span className="nhiw-rdot nrd1"></span>
-                <span className="nhiw-rdot nrd2"></span>
-                <span className="nhiw-rdot nrd3"></span>
-              </div>
-            </div>
-          </div>
-          <h4 className="nhiw-step-title">AI Smart Match</h4>
-          <p className="nhiw-step-desc">Our AI instantly finds the best-rated local pro near you.</p>
-        </div>
-
-        {/* Step 3 – Provider Connects */}
-        <div className="nhiw-step nh-animate nh-d3">
-          <div className="nhiw-card nhiw-card-teal">
-            <span className="nhiw-bg-num">3</span>
-            <div className="nhiw-pill nhiw-pill-teal">03</div>
-            <div className="nhiw-visual">
-              <div className="nhiw-connect">
-                <div className="nhiw-conn-btns">
-                  <div className="nhiw-conn-btn nhiw-conn-call">
-                    <div className="nhiw-conn-ring"></div>
-                    <div className="nhiw-conn-ring nhiw-conn-ring2"></div>
-                    <div className="nhiw-conn-icon"><i className="bi bi-telephone-fill"></i></div>
-                    <span>Call</span>
-                  </div>
-                  <div className="nhiw-conn-or">or</div>
-                  <div className="nhiw-conn-btn nhiw-conn-chat">
-                    <div className="nhiw-conn-icon"><i className="bi bi-chat-dots-fill"></i></div>
-                    <span>Chat</span>
-                  </div>
-                </div>
-                <div className="nhiw-conn-estimate">
-                  <i className="bi bi-file-earmark-text-fill"></i>
-                  Estimate Sent
-                </div>
-              </div>
-            </div>
-          </div>
-          <h4 className="nhiw-step-title">Provider Connects</h4>
-          <p className="nhiw-step-desc">Your pro reaches out via call or chat with a live estimate.</p>
-        </div>
-
-        {/* Step 4 – Approve & Pay */}
-        <div className="nhiw-step nh-animate nh-d4">
-          <div className="nhiw-card nhiw-card-indigo">
-            <span className="nhiw-bg-num">4</span>
-            <div className="nhiw-pill nhiw-pill-indigo">04</div>
-            <div className="nhiw-visual">
-              <div className="nhiw-invoice">
-                <div className="nhiw-inv-top">
-                  <span className="nhiw-inv-id">Invoice #1042</span>
-                  <span className="nhiw-inv-ok">
-                    <i className="bi bi-check-circle-fill"></i> Approved
+        <div className="nh-how-grid nh-animate">
+          {HOW_STEPS.map((s, i) => (
+            <div
+              className={`nh-how-card nh-animate nh-d${i + 1}`}
+              key={s.n}
+              onMouseMove={handleMove}
+              onMouseLeave={handleLeave}
+            >
+              <div className="nh-how-tilt">
+                <div className="nh-how-img">
+                  <img src={s.img} alt={s.title} loading="lazy" />
+                  <span className="nh-how-glare" aria-hidden="true"></span>
+                  <span className="nh-how-num">{s.n}</span>
+                  <span className="nh-how-chip">
+                    <i className={`bi ${CHIPS[i].icon}`}></i> {CHIPS[i].label}
                   </span>
                 </div>
-                <div className="nhiw-inv-svc">Handyman &middot; 2 hrs</div>
-                <div className="nhiw-inv-amount">$120</div>
-                <button className="nhiw-inv-pay">
-                  <i className="bi bi-lock-fill"></i> Pay Securely
-                </button>
+                <div className="nh-how-body">
+                  <h3 className="nh-how-step-title">{s.title}</h3>
+                  <p className="nh-how-step-desc">{s.desc}</p>
+                </div>
               </div>
             </div>
-          </div>
-          <h4 className="nhiw-step-title">Approve &amp; Pay</h4>
-          <p className="nhiw-step-desc">Accept the estimate, get the job done, and pay securely in-app.</p>
+          ))}
         </div>
-
       </div>
-    </div>
-  </section>
-);
+    </section>
+  );
+};
 
 export default HowItWorksSection;

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 import { db } from "../../firebase";
 import { doc, getDoc } from "firebase/firestore";
 import "./Privacy.css";
@@ -98,6 +99,7 @@ const Privacy = () => {
           ) : (
             <article className="pp-article">
               <ReactMarkdown
+                remarkPlugins={[remarkGfm]}
                 components={{
                   h1: ({ children }) => (
                     <h1 className="pp-h1">{children}</h1>
@@ -130,6 +132,26 @@ const Privacy = () => {
                   blockquote: ({ children }) => (
                     <blockquote className="pp-blockquote">{children}</blockquote>
                   ),
+                  table: ({ children }) => (
+                    <div className="pp-table-wrap">
+                      <table className="pp-table">{children}</table>
+                    </div>
+                  ),
+                  thead: ({ children }) => (
+                    <thead className="pp-thead">{children}</thead>
+                  ),
+                  tbody: ({ children }) => (
+                    <tbody className="pp-tbody">{children}</tbody>
+                  ),
+                  tr: ({ children }) => (
+                    <tr className="pp-tr">{children}</tr>
+                  ),
+                  th: ({ children }) => (
+                    <th className="pp-th">{children}</th>
+                  ),
+                  td: ({ children }) => (
+                    <td className="pp-td">{children}</td>
+                  ),
                 }}
               >
                 {markdown}
@@ -147,7 +169,7 @@ const Privacy = () => {
             <div className="pp-footer-brand">
               <span className="pp-footer-logo">Prolper</span>
               <p className="pp-footer-tagline">
-                Intelligent service matching — connecting people with trusted local professionals.
+                Intelligent service matching that connects people with local professionals.
               </p>
             </div>
 

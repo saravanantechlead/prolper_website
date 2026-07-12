@@ -374,7 +374,7 @@
 
 // export default App;
 
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import {
   BrowserRouter as Router,
   Routes,
@@ -389,9 +389,12 @@ import About from "./pages/About/About";
 import Legal from "./pages/HowItWorks/Legal";
 import LegalPage from "./pages/Legal/LegalPage";
 import AppDownload from "./pages/AppDownload/AppDownload";
+import BecomeProvider from "./pages/BecomeProvider/BecomeProvider";
+import ServiceLanding from "./pages/ServiceLanding/ServiceLanding";
 import Social from "./pages/Social/Social";
 import Privacy from "./pages/Privacy/Privacy";
 import logo from "/prolper-cropped.svg";
+import MobileAppBar from "./components/MobileAppBar/MobileAppBar";
 import linkedin from "./assets/in.png";
 import facebook from "./assets/Vector.png";
 import instagram from "./assets/insta.png";
@@ -402,6 +405,7 @@ function App() {
   return (
     <Router basename="/">
       <Navbar />
+      <MobileAppBar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
@@ -410,7 +414,10 @@ function App() {
         <Route path="/privacy-policy" element={<Privacy />} />
         <Route path="/privacy" element={<Navigate to="/privacy-policy" replace />} />
         <Route path="/legal/:type" element={<LegalPage />} />
-        <Route path="/app"         element={<AppDownload />} />
+        <Route path="/app"         element={<AppDownload appType="customer" />} />
+        <Route path="/get-app"     element={<AppDownload appType="business" />} />
+        <Route path="/become-a-provider" element={<BecomeProvider />} />
+        <Route path="/service/:id" element={<ServiceLanding />} />
       </Routes>
     </Router>
   );
@@ -434,6 +441,7 @@ function Navbar() {
   const location = useLocation();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const navRef = useRef(null);
 
   // Handle scroll state for styling
   useEffect(() => {
@@ -442,34 +450,61 @@ function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Close mobile menu when clicking outside the navbar
+  useEffect(() => {
+    if (!isMobileMenuOpen) return;
+    const handleClickOutside = (e) => {
+      if (navRef.current && !navRef.current.contains(e.target)) {
+        setIsMobileMenuOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [isMobileMenuOpen]);
+
   const handleNavigateAndScroll = useCallback((e, sectionId) => {
     e.preventDefault();
+    const wasMenuOpen = isMobileMenuOpen;
     setIsMobileMenuOpen(false); // Close mobile menu on click
 
     const action = () => {
       const section = document.getElementById(sectionId);
-      if (section) {
-        const offset = 90;
-        const bodyRect = document.body.getBoundingClientRect().top;
-        const elementRect = section.getBoundingClientRect().top;
-        const elementPosition = elementRect - bodyRect;
-        const offsetPosition = elementPosition - offset;
+      if (!section) return;
 
-        window.scrollTo({
-          top: offsetPosition,
-          behavior: "smooth",
-        });
+      // Measure the real (collapsed) navbar height so this works on any device.
+      const nav = document.querySelector(".ios-nav");
+      const navBottom = nav ? nav.getBoundingClientRect().bottom : 90;
+      const gap = 18;
+
+      const rect = section.getBoundingClientRect();
+      const sectionTop = rect.top + window.scrollY+40;
+      const available = window.innerHeight - navBottom - gap;
+
+      // Sections that fit the screen get centered in view; taller sections
+      // align just under the navbar so their top is fully visible.
+      let target;
+      if (rect.height <= available) {
+        target = sectionTop - navBottom - Math.max(gap, (available - rect.height) / 2);
+      } else {
+        target = sectionTop - navBottom - gap;
       }
+
+      window.scrollTo({ top: Math.max(0, target), behavior: "smooth" });
     };
 
     if (location.pathname !== "/") {
       navigate("/");
-      // Increased timeout slightly to ensure DOM is ready on slow devices
-      setTimeout(action, 500);
+      setTimeout(action, 520);
     } else {
-      action();
+      // Give the mobile menu time to collapse before measuring the navbar.
+      setTimeout(action, wasMenuOpen ? 340 : 30);
     }
-  }, [location.pathname, navigate]);
+  }, [location.pathname, navigate, isMobileMenuOpen]);
+
+  // Close mobile menu on route change
+  useEffect(() => {
+    setIsMobileMenuOpen(false);
+  }, [location.pathname]);
 
   // Hide site navbar on standalone pages
   if (
@@ -478,7 +513,7 @@ function Navbar() {
   ) return null;
 
   return (
-    <nav className={`navbar navbar-expand-lg fixed-top ios-nav ${isScrolled ? "nav-scrolled" : ""}`}>
+    <nav ref={navRef} className={`navbar navbar-expand-xl fixed-top ios-nav ${isScrolled ? "nav-scrolled" : ""}`}>
       <div className="container">
         <Link 
           className="navbar-brand" 
@@ -501,7 +536,12 @@ function Navbar() {
         <div className={`collapse navbar-collapse ${isMobileMenuOpen ? "show" : ""}`} id="iosNavbar">
           <ul className="navbar-nav ms-auto align-items-center">
             <li className="nav-item">
-              <a href="#about-us" className="nav-link ios-link" onClick={(e) => handleNavigateAndScroll(e, "about-us")}>
+              <a href="#how-it-works" className="nav-link ios-link" onClick={(e) => handleNavigateAndScroll(e, "how-it-works")}>
+                How it works
+              </a>
+            </li>
+            <li className="nav-item">
+              <a href="#why-us" className="nav-link ios-link" onClick={(e) => handleNavigateAndScroll(e, "why-us")}>
                 Why us
               </a>
             </li>
@@ -511,11 +551,7 @@ function Navbar() {
               </a>
             </li>
 
-            <li className="nav-item d-none d-lg-flex align-items-center">
-              <div className="ios-nav-divider"></div>
-            </li>
-
-            <li className="nav-item px-lg-2">
+            <li className="nav-item">
               <div className="ios-social-group">
                 <SocialIcon url="https://www.facebook.com/Prolperapp" icon={facebook} alt="Facebook" />
                 <SocialIcon url="https://www.instagram.com/prolperapp" icon={instagram} alt="Instagram" />
@@ -524,13 +560,17 @@ function Navbar() {
               </div>
             </li>
 
-            <li className="nav-item d-none d-lg-flex align-items-center">
+            <li className="nav-item d-none d-xl-flex align-items-center">
               <div className="ios-nav-divider"></div>
             </li>
 
             <li className="nav-item">
-              <a href="#download-section" className="btn ios-cta-glass" onClick={(e) => handleNavigateAndScroll(e, "download-section")}>
-                Download
+              <a
+                href="#get-app"
+                className="btn ios-cta-glass"
+                onClick={(e) => handleNavigateAndScroll(e, "get-app")}
+              >
+                Get the app
               </a>
             </li>
           </ul>

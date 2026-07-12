@@ -9,6 +9,13 @@
           "prolper-client"
         ]
       }
+    },
+    "prolper-apps": {
+      "hosting": {
+        "prolper-client": [
+          "prolper-apps"
+        ]
+      }
     }
   },
   "etags": {}

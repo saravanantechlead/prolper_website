@@ -80,7 +80,7 @@ const About = () => {
                   Source of Rating
                 </td>
                 <td style={{ backgroundColor: "#f0f0f0", color: "black" }}>
-                  May not be Rated by a verified customer.
+                  May not be Rated by a real customer.
                 </td>
                 <td style={{ backgroundColor: "white", color: "black" }}>
                   Ratings are given exclusively by real customers.

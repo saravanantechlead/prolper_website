@@ -1,585 +1,151 @@
-/* ═══════════════════════════════════════════════════════════
-   HOW IT WORKS — STANDALONE SECTION
-   ═══════════════════════════════════════════════════════════ */
+/* ══════════════════════════════════════════════════════════
+   HOW IT WORKS — interactive 3-step section
+   ══════════════════════════════════════════════════════════ */
+.nh-how {
+  padding: 88px 24px;
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(20,184,166,0.05) 0%, transparent 42%),
+    #f8fafc;
+}
+.nh-how-inner { max-width: 1140px; margin: 0 auto; }
 
-.nhiw-section {
-  background: #07070e;
-  padding: 110px 24px 100px;
+.nh-how-head { text-align: center; max-width: 640px; margin: 0 auto 52px; }
+.nh-how-eyebrow {
+  display: inline-block; font-size: 0.75rem; font-weight: 700; letter-spacing: 1.5px;
+  text-transform: uppercase; color: var(--nh-teal);
+  background: rgba(20,184,166,0.1); padding: 6px 14px; border-radius: 999px; margin-bottom: 16px;
+}
+.nh-how-title {
+  font-size: clamp(1.7rem, 3.4vw, 2.5rem); font-weight: 900; letter-spacing: -0.5px;
+  color: var(--nh-text); margin-bottom: 12px;
+}
+.nh-how-lead { font-size: 1rem; line-height: 1.6; color: var(--nh-muted); }
+
+/* ── Grid + animated flow connector ── */
+.nh-how-grid {
   position: relative;
-  overflow: hidden;
-}
-
-/* ── Ambient light blobs ── */
-.nhiw-blob {
-  position: absolute;
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 0;
-}
-.nhiw-blob-teal {
-  width: 640px;
-  height: 640px;
-  background: radial-gradient(circle, rgba(15,186,129,0.09) 0%, transparent 62%);
-  top: -120px;
-  left: -160px;
-  animation: nhBlobDrift 16s ease-in-out infinite;
-}
-.nhiw-blob-indigo {
-  width: 540px;
-  height: 540px;
-  background: radial-gradient(circle, rgba(129,140,248,0.07) 0%, transparent 62%);
-  bottom: -100px;
-  right: -120px;
-  animation: nhBlobDrift 22s ease-in-out infinite reverse;
-}
-
-/* ── Inner container ── */
-.nhiw-inner {
-  max-width: 1200px;
-  margin: 0 auto;
-  position: relative;
-  z-index: 1;
-}
-
-/* ════════════════════════════════════════════════════════════
-   HEADER
-   ════════════════════════════════════════════════════════════ */
-.nhiw-header {
-  text-align: center;
-  margin-bottom: 68px;
-}
-
-.nhiw-eyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: rgba(15,186,129,0.08);
-  color: #0fba81;
-  border: 1px solid rgba(15,186,129,0.2);
-  border-radius: 100px;
-  padding: 6px 16px;
-  font-size: 0.78rem;
-  font-weight: 600;
-  margin-bottom: 18px;
-}
-
-.nhiw-eyebrow-dot {
-  width: 7px;
-  height: 7px;
-  background: #0fba81;
-  border-radius: 50%;
-  flex-shrink: 0;
-  animation: nhDotPulse 1.6s ease-in-out infinite;
-}
-
-.nhiw-title {
-  font-size: clamp(2.2rem, 4vw, 3.2rem);
-  font-weight: 900;
-  color: #ffffff;
-  letter-spacing: -1.8px;
-  line-height: 1.06;
-  margin-bottom: 14px;
-}
-
-.nhiw-sub {
-  font-size: 1rem;
-  color: rgba(255,255,255,0.38);
-  font-weight: 400;
-}
-
-/* ════════════════════════════════════════════════════════════
-   STEP GRID
-   ════════════════════════════════════════════════════════════ */
-.nhiw-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 18px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
 }
-
-/* ── Individual step ── */
-.nhiw-step {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  position: relative;
-}
-
-/* Connector arrows (desktop 4-col only) */
-.nhiw-step:not(:last-child)::after {
-  content: '→';
+.nh-how-grid.nh-animate { opacity: 1; transform: none; transition: none; }
+/* dashed connector that draws in, then the dashes flow toward the next step */
+.nh-how-grid::before {
+  content: "";
   position: absolute;
-  right: -15px;
-  top: 148px;
-  font-size: 1.05rem;
-  color: rgba(15,186,129,0.38);
-  z-index: 4;
-  pointer-events: none;
-  line-height: 1;
-}
-.nhiw-step:nth-child(2)::after { color: rgba(129,140,248,0.42); }
-.nhiw-step:nth-child(3)::after { color: rgba(15,186,129,0.38); }
-
-/* ── Card shell ── */
-.nhiw-card {
-  width: 100%;
-  height: 310px;
-  background: linear-gradient(158deg, #111122 0%, #0c0c1a 55%, #08080f 100%);
-  border-radius: 24px;
-  border: 1px solid rgba(255,255,255,0.07);
-  position: relative;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 20px;
-  transition:
-    transform 0.35s cubic-bezier(0.34,1.56,0.64,1),
-    border-color 0.3s ease,
-    box-shadow 0.3s ease;
-  box-shadow: 0 4px 28px rgba(0,0,0,0.45);
-}
-
-/* Top shimmer line */
-.nhiw-card::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 12%; right: 12%;
-  height: 1px;
-  z-index: 1;
-}
-
-.nhiw-card-teal {
-  border-color: rgba(15,186,129,0.13);
-}
-.nhiw-card-teal::before {
-  background: linear-gradient(90deg, transparent, rgba(15,186,129,0.55), transparent);
-}
-
-.nhiw-card-indigo {
-  border-color: rgba(129,140,248,0.13);
-}
-.nhiw-card-indigo::before {
-  background: linear-gradient(90deg, transparent, rgba(129,140,248,0.55), transparent);
-}
-
-/* Hover lift + glow */
-.nhiw-step:hover .nhiw-card-teal {
-  transform: translateY(-10px);
-  border-color: rgba(15,186,129,0.32);
-  box-shadow:
-    0 32px 72px rgba(0,0,0,0.55),
-    0 0 0 1px rgba(15,186,129,0.08),
-    0 0 44px rgba(15,186,129,0.07);
-}
-.nhiw-step:hover .nhiw-card-indigo {
-  transform: translateY(-10px);
-  border-color: rgba(129,140,248,0.32);
-  box-shadow:
-    0 32px 72px rgba(0,0,0,0.55),
-    0 0 0 1px rgba(129,140,248,0.08),
-    0 0 44px rgba(129,140,248,0.07);
-}
-
-/* ── Ghost background number ── */
-.nhiw-bg-num {
-  position: absolute;
-  top: -16px;
-  right: 10px;
-  font-size: 9rem;
-  font-weight: 900;
-  line-height: 1;
-  pointer-events: none;
-  user-select: none;
-  letter-spacing: -8px;
-  z-index: 0;
-}
-.nhiw-card-teal .nhiw-bg-num {
-  background: linear-gradient(180deg,
-    rgba(15,186,129,0.28) 0%,
-    rgba(15,186,129,0.07) 52%,
-    transparent 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-.nhiw-card-indigo .nhiw-bg-num {
-  background: linear-gradient(180deg,
-    rgba(129,140,248,0.28) 0%,
-    rgba(129,140,248,0.07) 52%,
-    transparent 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-/* ── Step number pill ── */
-.nhiw-pill {
-  position: absolute;
-  top: 15px;
-  left: 15px;
-  font-size: 0.66rem;
-  font-weight: 800;
-  border-radius: 100px;
-  padding: 4px 10px;
-  z-index: 3;
-  letter-spacing: 0.05em;
-}
-.nhiw-pill-teal {
-  background: rgba(15,186,129,0.14);
-  color: #0fba81;
-  border: 1px solid rgba(15,186,129,0.28);
-}
-.nhiw-pill-indigo {
-  background: rgba(129,140,248,0.14);
-  color: #818cf8;
-  border: 1px solid rgba(129,140,248,0.28);
-}
-
-/* ── Illustration container ── */
-.nhiw-visual {
-  position: relative;
-  z-index: 2;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* ── Labels below each card ── */
-.nhiw-step-title {
-  font-size: 1.02rem;
-  font-weight: 700;
-  color: #ffffff;
-  margin-bottom: 8px;
-  letter-spacing: -0.2px;
-}
-
-.nhiw-step-desc {
-  font-size: 0.83rem;
-  color: rgba(255,255,255,0.4);
-  line-height: 1.65;
-  margin: 0;
-  max-width: 200px;
-}
-
-/* ════════════════════════════════════════════════════════════
-   STEP 1 — Mini Phone
-   ════════════════════════════════════════════════════════════ */
-.nhiw-phone {
-  width: 128px;
-  height: 232px;
-  background: #f5f6f8;
-  border-radius: 20px;
-  border: 2.5px solid #d4d8e2;
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  overflow: hidden;
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,0.9),
-    0 4px 14px rgba(0,0,0,0.22),
-    0 20px 44px rgba(0,0,0,0.26);
-}
-
-.nhiw-ph-island {
-  width: 36%;
-  height: 7px;
-  background: #1a1a22;
-  border-radius: 5px;
-  margin: 9px auto 7px;
-  flex-shrink: 0;
-}
-
-.nhiw-ph-screen {
-  flex: 1;
-  padding: 0 9px 5px;
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-  overflow: hidden;
-}
-
-.nhiw-ph-appbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 2px 0;
-}
-.nhiw-ph-appbar span { font-size: 0.62rem; font-weight: 800; color: rgba(10,10,20,0.88); }
-.nhiw-ph-appbar i    { font-size: 0.48rem; color: rgba(10,10,20,0.32); }
-
-.nhiw-ph-search {
-  background: rgba(0,0,0,0.06);
-  border-radius: 8px;
-  padding: 4px 8px;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  font-size: 0.42rem;
-  color: rgba(0,0,0,0.36);
-}
-.nhiw-ph-search i { font-size: 0.44rem; color: rgba(0,0,0,0.26); }
-
-.nhiw-ph-lbl { font-size: 0.42rem; font-weight: 700; color: rgba(0,0,0,0.52); }
-
-.nhiw-ph-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 5px;
-  flex: 1;
-}
-
-.nhiw-ph-tile {
-  background: rgba(255,255,255,0.72);
-  border-radius: 9px;
-  padding: 6px 4px 5px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 3px;
-  font-size: 0.37rem;
-  color: rgba(0,0,0,0.45);
-  border: 0.5px solid rgba(0,0,0,0.07);
-}
-.nhiw-ph-tile i { font-size: 0.86rem; }
-
-.nhiw-tile-active {
-  background: rgba(15,186,129,0.14);
-  border-color: rgba(15,186,129,0.38);
-  color: #0a9e6e;
-}
-
-.nhiw-ph-bar {
-  width: 28%;
-  height: 3px;
-  background: rgba(0,0,0,0.17);
+  top: 92px; left: 12%; right: 12%;
+  height: 3px; z-index: 0;
+  background: repeating-linear-gradient(90deg, rgba(20,184,166,0.55) 0 9px, transparent 9px 20px);
+  background-size: 20px 100%;
   border-radius: 3px;
-  margin: 5px auto 7px;
-  flex-shrink: 0;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 1.1s cubic-bezier(0.4,0,0.2,1) 0.2s;
 }
+.nh-how-grid.nh-visible::before {
+  transform: scaleX(1);
+  animation: nhHowDash 0.85s linear infinite 1.3s;
+}
+@keyframes nhHowDash { to { background-position: 20px 0; } }
 
-/* ════════════════════════════════════════════════════════════
-   STEP 2 — AI Radar (indigo)
-   ════════════════════════════════════════════════════════════ */
-.nhiw-radar {
+/* ── Card: entrance + tilt ── */
+.nh-how-card.nh-animate { opacity: 0; transform: translateY(46px) scale(0.94); }
+.nh-how-card.nh-animate.nh-visible { opacity: 1; transform: none; }
+.nh-how-card {
   position: relative;
-  width: 150px;
-  height: 150px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  z-index: 1;
 }
-
-.nhiw-rr {
-  position: absolute;
-  border-radius: 50%;
-  border: 1px solid;
-}
-.nhiw-rr1 {
-  inset: 0;
-  border-color: rgba(129,140,248,0.2);
-  animation: nhRadarPulse 3s ease-in-out infinite;
-}
-.nhiw-rr2 {
-  inset: 22px;
-  border-color: rgba(129,140,248,0.3);
-  animation: nhRadarPulse 3s ease-in-out infinite 0.5s;
-}
-.nhiw-rr3 {
-  inset: 44px;
-  border-color: rgba(129,140,248,0.46);
-}
-
-.nhiw-rsweep {
-  position: absolute;
-  inset: 0;
-  border-radius: 50%;
-  background: conic-gradient(
-    from 0deg,
-    transparent 0deg,
-    rgba(129,140,248,0.18) 55deg,
-    rgba(129,140,248,0.04) 90deg,
-    transparent 90deg
-  );
-  animation: nhRadarSpin 3s linear infinite;
-}
-
-.nhiw-rch {
-  position: absolute;
-}
-.nhiw-rch-h { width: 100%; height: 1px; background: rgba(129,140,248,0.11); }
-.nhiw-rch-v { width: 1px; height: 100%; background: rgba(129,140,248,0.11); }
-
-.nhiw-rcore {
-  width: 42px;
-  height: 42px;
-  background: rgba(129,140,248,0.12);
-  border: 1.5px solid rgba(129,140,248,0.5);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.nh-how-tilt {
   position: relative;
-  z-index: 2;
-  box-shadow: 0 0 24px rgba(129,140,248,0.38);
+  background: #fff;
+  border: 1px solid rgba(15,23,42,0.07);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 8px 26px rgba(15,23,42,0.05);
+  transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) translateY(var(--lift, 0px));
+  transition: transform 0.18s ease-out, box-shadow 0.3s ease;
+  will-change: transform;
 }
-.nhiw-rcore i { font-size: 1rem; color: #818cf8; }
-
-.nhiw-rdot {
-  position: absolute;
-  width: 8px;
-  height: 8px;
-  background: #818cf8;
-  border-radius: 50%;
-  box-shadow: 0 0 10px rgba(129,140,248,0.8);
-  z-index: 3;
-}
-.nrd1 { top: 20px;  left: 26px;  animation: nhDotBlink 2.4s ease-in-out infinite; }
-.nrd2 { bottom: 24px; right: 20px; animation: nhDotBlink 2.4s ease-in-out infinite 0.8s; }
-.nrd3 { top: 36px;  right: 30px; animation: nhDotBlink 2.4s ease-in-out infinite 1.6s; }
-
-/* ════════════════════════════════════════════════════════════
-   STEP 3 — Connect Visual
-   ════════════════════════════════════════════════════════════ */
-.nhiw-connect {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 18px;
+.nh-how-card:hover .nh-how-tilt {
+  --lift: -6px;
+  box-shadow: 0 30px 56px rgba(15,23,42,0.16);
 }
 
-.nhiw-conn-btns {
-  display: flex;
-  align-items: center;
-  gap: 12px;
+/* ── Image + effects ── */
+.nh-how-img { position: relative; aspect-ratio: 16 / 10; overflow: hidden; }
+.nh-how-img img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+  transform: scale(1.02);
+  transition: transform 0.7s cubic-bezier(0.4,0,0.2,1);
+}
+.nh-how-card:hover .nh-how-img img { transform: scale(1.09); }
+/* diagonal shine sweep */
+.nh-how-img::after {
+  content: ""; position: absolute; inset: 0; z-index: 2; pointer-events: none;
+  background: linear-gradient(105deg, transparent 32%, rgba(255,255,255,0.4) 48%, transparent 64%);
+  transform: translateX(-120%);
+  transition: transform 0.8s ease;
+}
+.nh-how-card:hover .nh-how-img::after { transform: translateX(120%); }
+/* cursor-following glare */
+.nh-how-glare {
+  position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background: radial-gradient(circle at var(--mx, 50%) var(--my, 50%), rgba(255,255,255,0.3), transparent 42%);
+  opacity: 0; transition: opacity 0.3s ease;
+}
+.nh-how-card:hover .nh-how-glare { opacity: 1; }
+
+/* ── Number badge (shimmer + pulse) ── */
+.nh-how-num {
+  position: absolute; top: 14px; left: 14px; z-index: 3;
+  width: 46px; height: 46px; border-radius: 13px;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-size: 1.15rem; font-weight: 900; color: #fff;
+  background: linear-gradient(120deg, #14b8a6, #2dd4bf, #0d9488, #14b8a6);
+  background-size: 220% 220%;
+  box-shadow: 0 8px 20px rgba(20,184,166,0.42);
+  animation: nhHowShimmer 4s linear infinite;
+}
+.nh-how-num::after {
+  content: ""; position: absolute; inset: 0; border-radius: inherit;
+  animation: nhHowPulse 2.6s ease-out infinite;
+}
+.nh-how-card:hover .nh-how-num { transform: rotate(-5deg) scale(1.08); transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1); }
+
+/* ── Floating action chip on the photo ── */
+.nh-how-chip {
+  position: absolute; left: 14px; bottom: 14px; z-index: 3;
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 0.74rem; font-weight: 700; color: #0f172a;
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,0.85);
+  padding: 6px 12px; border-radius: 999px;
+  box-shadow: 0 8px 18px rgba(15,23,42,0.2);
+  animation: nhHowChipFloat 4.5s ease-in-out infinite;
+}
+.nh-how-chip i { color: var(--nh-teal); font-size: 0.82rem; }
+
+.nh-how-body { padding: 22px 22px 26px; }
+.nh-how-step-title { font-size: 1.18rem; font-weight: 800; color: var(--nh-text); margin-bottom: 8px; }
+.nh-how-step-desc { font-size: 0.92rem; line-height: 1.6; color: var(--nh-muted); }
+
+/* ── Keyframes ── */
+@keyframes nhHowShimmer { 0% { background-position: 0% 50%; } 100% { background-position: 220% 50%; } }
+@keyframes nhHowPulse {
+  0%   { box-shadow: 0 0 0 0 rgba(20,184,166,0.5); }
+  70%  { box-shadow: 0 0 0 13px rgba(20,184,166,0); }
+  100% { box-shadow: 0 0 0 0 rgba(20,184,166,0); }
+}
+@keyframes nhHowChipFloat { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+
+@media (max-width: 860px) {
+  .nh-how { padding: 64px 18px; }
+  .nh-how-grid { grid-template-columns: 1fr; gap: 20px; max-width: 460px; margin: 0 auto; }
+  .nh-how-grid::before { display: none; }
 }
 
-.nhiw-conn-btn {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-  padding: 16px 20px 12px;
-  border-radius: 18px;
-  font-size: 0.68rem;
-  font-weight: 700;
-  position: relative;
-}
-
-.nhiw-conn-call {
-  background: rgba(34,197,94,0.1);
-  border: 1px solid rgba(34,197,94,0.24);
-  color: #22c55e;
-}
-.nhiw-conn-chat {
-  background: rgba(96,165,250,0.1);
-  border: 1px solid rgba(96,165,250,0.24);
-  color: #60a5fa;
-}
-
-.nhiw-conn-ring {
-  position: absolute;
-  inset: 0;
-  border-radius: 18px;
-  border: 1.5px solid rgba(34,197,94,0.34);
-  animation: nhCvRing 2s ease-out infinite;
-  pointer-events: none;
-}
-.nhiw-conn-ring2 { animation-delay: 0.9s; }
-
-.nhiw-conn-icon { font-size: 1.6rem; line-height: 1; }
-
-.nhiw-conn-or {
-  font-size: 0.62rem;
-  color: rgba(255,255,255,0.2);
-  font-weight: 600;
-}
-
-.nhiw-conn-estimate {
-  background: rgba(15,186,129,0.1);
-  border: 1px solid rgba(15,186,129,0.24);
-  color: #0fba81;
-  border-radius: 100px;
-  padding: 7px 16px;
-  font-size: 0.7rem;
-  font-weight: 700;
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  animation: nhEstimatePop 2.6s ease-in-out infinite;
-}
-
-/* ════════════════════════════════════════════════════════════
-   STEP 4 — Invoice
-   ════════════════════════════════════════════════════════════ */
-.nhiw-invoice {
-  width: 172px;
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.1);
-  border-radius: 18px;
-  padding: 16px 16px 14px;
-  display: flex;
-  flex-direction: column;
-  gap: 9px;
-}
-
-.nhiw-inv-top {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-.nhiw-inv-id {
-  font-size: 0.52rem;
-  color: rgba(255,255,255,0.32);
-  font-weight: 600;
-  letter-spacing: 0.02em;
-}
-.nhiw-inv-ok {
-  font-size: 0.52rem;
-  font-weight: 700;
-  color: #0fba81;
-  display: inline-flex;
-  align-items: center;
-  gap: 3px;
-}
-.nhiw-inv-svc {
-  font-size: 0.65rem;
-  color: rgba(255,255,255,0.48);
-}
-.nhiw-inv-amount {
-  font-size: 1.7rem;
-  font-weight: 800;
-  color: #fff;
-  letter-spacing: -1px;
-  line-height: 1;
-}
-.nhiw-inv-pay {
-  background: #0fba81;
-  color: #fff;
-  border: none;
-  border-radius: 11px;
-  padding: 9px 0;
-  font-size: 0.68rem;
-  font-weight: 700;
-  cursor: default;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  box-shadow: 0 4px 18px rgba(15,186,129,0.38);
-  animation: nhPayPulse 2.2s ease-in-out infinite;
-}
-
-/* ════════════════════════════════════════════════════════════
-   RESPONSIVE
-   ════════════════════════════════════════════════════════════ */
-@media (max-width: 1023px) {
-  .nhiw-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
-  .nhiw-step:not(:last-child)::after { display: none; }
-}
-
-@media (max-width: 600px) {
-  .nhiw-section { padding: 80px 16px 80px; }
-  .nhiw-grid { grid-template-columns: 1fr; }
-  .nhiw-card { height: 280px; }
+@media (prefers-reduced-motion: reduce) {
+  .nh-how-num, .nh-how-num::after, .nh-how-chip, .nh-how-grid.nh-visible::before { animation: none; }
+  .nh-how-tilt { transform: none !important; }
 }

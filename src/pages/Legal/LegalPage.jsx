@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 import { db } from "../../firebase";
 import { doc, getDoc } from "firebase/firestore";
 import "./LegalPage.css";
@@ -9,7 +10,7 @@ const CONFIG = {
   business: {
     docId:    "BusinessLegal_2026",
     badge:    "Service Providers",
-    title:    "Business Legal Terms",
+    title:    "Pro Helper Terms of Use",
     sub:      "Terms and conditions governing service providers registered on the Prolper Business platform.",
     icon:     "bi-briefcase-fill",
     accent:   "#818cf8",
@@ -17,7 +18,7 @@ const CONFIG = {
   customer: {
     docId:    "CustomerLegal_2026",
     badge:    "Customers",
-    title:    "Customer Legal Terms",
+    title:    "Customer Terms of Use",
     sub:      "Terms and conditions for customers using the Prolper app to book local service professionals.",
     icon:     "bi-person-fill",
     accent:   "#0fba81",
@@ -131,6 +132,7 @@ const LegalPage = () => {
           ) : (
             <article className="lp-article">
               <ReactMarkdown
+                remarkPlugins={[remarkGfm]}
                 components={{
                   h1: ({ children }) => <h1 className="lp-h1">{children}</h1>,
                   h2: ({ children }) => (
@@ -157,6 +159,16 @@ const LegalPage = () => {
                   blockquote: ({ children }) => (
                     <blockquote className="lp-blockquote">{children}</blockquote>
                   ),
+                  table: ({ children }) => (
+                    <div className="lp-table-wrap">
+                      <table className="lp-table">{children}</table>
+                    </div>
+                  ),
+                  thead: ({ children }) => <thead className="lp-thead">{children}</thead>,
+                  tbody: ({ children }) => <tbody className="lp-tbody">{children}</tbody>,
+                  tr:    ({ children }) => <tr    className="lp-tr">{children}</tr>,
+                  th:    ({ children }) => <th    className="lp-th">{children}</th>,
+                  td:    ({ children }) => <td    className="lp-td">{children}</td>,
                 }}
               >
                 {markdown}
@@ -173,13 +185,13 @@ const LegalPage = () => {
             <div className="lp-footer-brand">
               <span className="lp-footer-logo">Prolper</span>
               <p className="lp-footer-tagline">
-                Intelligent service matching — connecting people with trusted local professionals.
+                Intelligent service matching that connects people with local professionals.
               </p>
             </div>
             <div className="lp-footer-links-col">
               <h6 className="lp-footer-col-title">Legal</h6>
-              <Link to="/legal/business"  className="lp-footer-link">Business Legal</Link>
-              <Link to="/legal/customer"  className="lp-footer-link">Customer Legal</Link>
+              <Link to="/legal/business"  className="lp-footer-link">Pro Helper Terms of Use</Link>
+              <Link to="/legal/customer"  className="lp-footer-link">Customer Terms of Use</Link>
               <Link to="/privacy-policy"  className="lp-footer-link">Privacy Policy</Link>
             </div>
             <div className="lp-footer-links-col">

@@ -6,12 +6,12 @@
 
 /* Typography Consistency */
 .text-slate { color: #475569; }
-.teal-text { color: #0d9488; }
+.teal-text { color: #14b8a6; }
 
 .teal-underline {
     width: 60px;
     height: 4px;
-    background-color: #0d9488;
+    background-color: #14b8a6;
     border-radius: 2px;
 }
 
@@ -26,8 +26,8 @@
 }
 
 .legal-section-card:hover {
-    border-color: #0d9488;
-    box-shadow: 0 4px 20px rgba(13, 148, 136, 0.04);
+    border-color: #14b8a6;
+    box-shadow: 0 4px 20px rgba(20, 184, 166, 0.04);
 }
 
 /* Numbered Tag for Modern Look */
@@ -35,7 +35,7 @@
     position: absolute;
     top: -14px;
     left: 25px;
-    background-color: #0d9488;
+    background-color: #14b8a6;
     color: white;
     width: 28px;
     height: 28px;
@@ -45,5 +45,5 @@
     align-items: center;
     justify-content: center;
     border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(13, 148, 136, 0.2);
+    box-shadow: 0 4px 10px rgba(20, 184, 166, 0.2);
 }
