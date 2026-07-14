@@ -1,108 +1,106 @@
-import React, { useEffect, useMemo } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import customerAppImg from "../../assets/iphone customer app.png";
-import useServiceManifest, { biIcon, CATEGORY_ACCENTS } from "../../hooks/useServiceManifest";
+import { SERVICE_CONTENT, relatedServices } from "../../data/services";
 import useAppLinks from "../../hooks/useAppLinks";
+import Seo from "../../components/Seo/Seo";
 import FooterSection from "../../sections/FooterSection/FooterSection";
 import "./ServiceLanding.css";
+
+const SITE = "https://www.prolper.com";
 
 const ServiceLanding = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { services, categories, loading } = useServiceManifest();
   const appLinks = useAppLinks();
+  const [openFaq, setOpenFaq] = useState(0);
 
-  useEffect(() => { window.scrollTo(0, 0); }, [id]);
+  useEffect(() => { window.scrollTo(0, 0); setOpenFaq(0); }, [id]);
 
-  // Resolve the service: prefer the enabled services map, fall back to the
-  // curated category list (covers categories that aren't a 1:1 service id).
-  const svc = useMemo(() => {
-    const fromServices = services.find((s) => s.id === id);
-    if (fromServices) return fromServices;
-    const cat = categories.find((c) => c.serviceId === id);
-    if (cat) {
-      return {
-        id: cat.serviceId,
-        title: cat.name,
-        category: cat.name,
-        description: cat.description || "",
-        iconName: cat.iconName || "",
-        tags: [],
-      };
-    }
-    return null;
-  }, [id, services, categories]);
-
-  // A few related services from the same category to cross-link.
-  const related = useMemo(() => {
-    if (!svc) return [];
-    return services
-      .filter((s) => s.id !== svc.id && s.category === svc.category)
-      .slice(0, 4);
-  }, [svc, services]);
-
-  const accent = useMemo(() => {
-    const idx = Math.max(0, categories.findIndex((c) => c.serviceId === id));
-    return CATEGORY_ACCENTS[idx % CATEGORY_ACCENTS.length] || "#14b8a6";
-  }, [id, categories]);
-
-  if (loading) {
-    return (
-      <div className="nh-page sl-page">
-        <div className="sl-loading"><div className="sl-spinner" /></div>
-      </div>
-    );
-  }
+  const svc = SERVICE_CONTENT[id];
 
   if (!svc) {
     return (
       <div className="nh-page sl-page">
+        <Seo title="Service not found | Prolper" description="Browse local services on Prolper." path={`/service/${id || ""}`} noindex />
         <div className="sl-notfound">
           <i className="bi bi-search"></i>
           <h1>Service not found</h1>
           <p>We couldn't find that service. Browse everything Prolper offers instead.</p>
-          <Link to="/#categories" className="sl-btn sl-btn-primary" onClick={() => navigate("/")}>
-            Browse services
-          </Link>
+          <Link to="/#services" className="sl-btn sl-btn-primary">Browse services</Link>
         </div>
       </div>
     );
   }
 
+  const related = relatedServices(svc.id, 4);
+
   const STEPS = [
-    { icon: "bi-download",      title: "Download Prolper",   desc: "Get the free app from the App Store or Google Play." },
-    { icon: "bi-search",        title: `Search "${svc.title}"`, desc: "Pick this service and set your location, date, and time." },
-    { icon: "bi-chat-dots-fill",title: "Connect with a pro", desc: "Chat or call, receive an estimate, and pay to confirm." },
-    { icon: "bi-star-fill",     title: "Get it done & rate", desc: "Your pro completes the job, then you leave a review." },
+    { icon: "bi-download",       title: "Download Prolper",        desc: "Get the free app from the App Store or Google Play." },
+    { icon: "bi-search",         title: `Search "${svc.title}"`,   desc: "Pick this service and set your location, date, and time." },
+    { icon: "bi-chat-dots-fill", title: "Connect with a pro",      desc: "Chat or call, receive an estimate, and pay to confirm." },
+    { icon: "bi-star-fill",      title: "Get it done & rate",      desc: "Your pro completes the job, then you leave a review." },
   ];
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Service",
+        name: svc.title,
+        serviceType: svc.title,
+        description: svc.intro,
+        areaServed: { "@type": "City", name: "Mississauga" },
+        provider: { "@type": "Organization", name: "Prolper", url: `${SITE}/` },
+      },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Home", item: `${SITE}/` },
+          { "@type": "ListItem", position: 2, name: "Services", item: `${SITE}/#services` },
+          { "@type": "ListItem", position: 3, name: svc.title, item: `${SITE}/service/${svc.id}` },
+        ],
+      },
+      ...(svc.faqs.length
+        ? [{
+            "@type": "FAQPage",
+            mainEntity: svc.faqs.map((f) => ({
+              "@type": "Question",
+              name: f.q,
+              acceptedAnswer: { "@type": "Answer", text: f.a },
+            })),
+          }]
+        : []),
+    ],
+  };
+
   return (
-    <div className="nh-page sl-page" style={{ "--sl-accent": accent }}>
+    <div className="nh-page sl-page" style={{ "--sl-accent": svc.accent }}>
+      <Seo
+        title={`${svc.title} in Mississauga, ON | Book a Local Pro | Prolper`}
+        description={svc.intro}
+        path={`/service/${svc.id}`}
+        jsonLd={jsonLd}
+      />
 
       {/* HERO */}
       <section className="sl-hero">
         <div className="sl-hero-inner">
           <div className="sl-hero-left">
-            <nav className="sl-crumbs">
+            <nav className="sl-crumbs" aria-label="Breadcrumb">
               <Link to="/">Home</Link>
               <i className="bi bi-chevron-right"></i>
-              <Link to="/#categories" onClick={() => navigate("/")}>Services</Link>
+              <Link to="/#services">Services</Link>
               <i className="bi bi-chevron-right"></i>
               <span>{svc.title}</span>
             </nav>
 
             <span className="sl-badge">
-              <i className={`bi ${biIcon(svc.iconName)}`}></i>
-              {svc.category || "Service"}
+              <i className={`bi ${svc.icon}`}></i>
+              {svc.category}
             </span>
-            <h1 className="sl-title">{svc.title}</h1>
-            <p className="sl-desc">{svc.description}</p>
-
-            {svc.tags?.length > 0 && (
-              <div className="sl-tags">
-                {svc.tags.map((t) => <span key={t} className="sl-tag">{t}</span>)}
-              </div>
-            )}
+            <h1 className="sl-title">{svc.title} in Mississauga</h1>
+            <p className="sl-desc">{svc.intro}</p>
 
             <div className="sl-cta">
               <a href={appLinks.customer_ios} className="sl-store-btn" target="_blank" rel="noopener noreferrer">
@@ -116,22 +114,39 @@ const ServiceLanding = () => {
             </div>
             <p className="sl-cta-note">
               <i className="bi bi-patch-check-fill"></i>
-              Book <strong>{svc.title}</strong> in minutes with trusted local pros and secure in-app payment.
+              Book <strong>{svc.title}</strong> in minutes with local pros and secure in-app payment.
             </p>
           </div>
 
           <div className="sl-hero-right">
             <div className="sl-phone-glow" />
             <div className="sl-icon-float">
-              <i className={`bi ${biIcon(svc.iconName)}`}></i>
+              <i className={`bi ${svc.icon}`}></i>
             </div>
             <div className="sl-phone">
               <div className="sl-phone-island" />
-              <img src={customerAppImg} alt={`Book ${svc.title} on Prolper`} />
+              <img src={customerAppImg} alt={`Book ${svc.title} on the Prolper app`} width="280" height="580" />
             </div>
           </div>
         </div>
       </section>
+
+      {/* WHAT'S INCLUDED */}
+      {svc.included.length > 0 && (
+        <section className="sl-included-sec">
+          <div className="nh-section-inner">
+            <div className="sl-head">
+              <span className="sl-head-eyebrow">What you can book</span>
+              <h2 className="sl-head-title">{svc.title} services in Mississauga</h2>
+            </div>
+            <ul className="sl-included">
+              {svc.included.map((item) => (
+                <li key={item}><i className="bi bi-check-circle-fill"></i> {item}</li>
+              ))}
+            </ul>
+          </div>
+        </section>
+      )}
 
       {/* HOW TO BOOK */}
       <section className="sl-steps">
@@ -153,26 +168,44 @@ const ServiceLanding = () => {
         </div>
       </section>
 
+      {/* FAQ */}
+      {svc.faqs.length > 0 && (
+        <section className="sl-faq">
+          <div className="nh-section-inner">
+            <div className="sl-head">
+              <span className="sl-head-eyebrow">Questions</span>
+              <h2 className="sl-head-title">{svc.title} in Mississauga — FAQs</h2>
+            </div>
+            <div className="sl-faq-list">
+              {svc.faqs.map((f, i) => (
+                <div className={`sl-faq-item ${openFaq === i ? "is-open" : ""}`} key={f.q}>
+                  <button className="sl-faq-q" onClick={() => setOpenFaq(openFaq === i ? -1 : i)}>
+                    <span>{f.q}</span>
+                    <i className={`bi ${openFaq === i ? "bi-dash-lg" : "bi-plus-lg"}`}></i>
+                  </button>
+                  <div className="sl-faq-a"><p>{f.a}</p></div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* RELATED */}
       {related.length > 0 && (
         <section className="sl-related">
           <div className="nh-section-inner">
             <div className="sl-head">
-              <span className="sl-head-eyebrow">More in {svc.category}</span>
-              <h2 className="sl-head-title">Related services</h2>
+              <span className="sl-head-eyebrow">Explore more</span>
+              <h2 className="sl-head-title">Other local services</h2>
             </div>
             <div className="sl-related-grid">
               {related.map((r) => (
-                <button
-                  key={r.id}
-                  type="button"
-                  className="sl-related-card"
-                  onClick={() => navigate(`/service/${r.id}`)}
-                >
-                  <span className="sl-related-icon"><i className={`bi ${biIcon(r.iconName)}`}></i></span>
+                <Link key={r.id} to={`/service/${r.id}`} className="sl-related-card">
+                  <span className="sl-related-icon"><i className={`bi ${r.icon}`}></i></span>
                   <span className="sl-related-name">{r.title}</span>
                   <i className="bi bi-arrow-right"></i>
-                </button>
+                </Link>
               ))}
             </div>
           </div>
@@ -184,7 +217,7 @@ const ServiceLanding = () => {
         <div className="nh-section-inner">
           <div className="sl-final-card">
             <h2 className="sl-final-title">Ready to book {svc.title}?</h2>
-            <p className="sl-final-sub">Download Prolper and get matched with a trusted local pro today.</p>
+            <p className="sl-final-sub">Download Prolper and get matched with a local pro today.</p>
             <div className="sl-cta">
               <a href={appLinks.customer_ios} className="sl-store-btn sl-store-light" target="_blank" rel="noopener noreferrer">
                 <i className="bi bi-apple"></i>

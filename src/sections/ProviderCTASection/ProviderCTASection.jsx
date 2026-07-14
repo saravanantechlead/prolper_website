@@ -23,7 +23,7 @@ const ProviderCTASection = () => (
             Turn your skills into <span className="nh-teal">steady income.</span>
           </h2>
           <p className="nh-provcta-lead">
-            Join thousands of trusted professionals growing their business on Prolper.
+            Join thousands of professionals growing their business on Prolper.
             Get matched with customers near you and get paid securely — no cold calls,
             no chasing invoices.
           </p>

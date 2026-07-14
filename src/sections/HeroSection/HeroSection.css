@@ -10,10 +10,19 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: clamp(120px, 14vh, 160px) 24px clamp(44px, 6vh, 72px);
+  padding: clamp(140px, 16vh, 184px) 24px clamp(44px, 6vh, 72px);
   background:
     radial-gradient(ellipse at 50% -10%, rgba(20,184,166,0.08) 0%, transparent 55%),
     #f7fbfa;
+}
+/* Short viewports: compact spacing so the two service rows still fit one screen */
+@media (max-height: 900px) {
+  .nh-hero { padding: clamp(104px, 13vh, 140px) 24px clamp(22px, 3vh, 40px); }
+  .nh-hero-eyebrow { margin-bottom: 12px; }
+  .nh-hero-title { margin-bottom: 8px; }
+  .nh-hero-sub { margin-bottom: 16px; }
+  .nh-hero-panel-head { padding: 12px 20px; }
+  .nh-hero-services { padding: 15px; gap: 11px; }
 }
 
 /* Playful background shapes ------------------------------------------------ */
@@ -150,9 +159,9 @@
 /* Service icon row --------------------------------------------------------- */
 .nh-hero-services {
   display: grid;
-  grid-template-columns: repeat(8, 1fr);
-  gap: 10px;
-  padding: 20px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  padding: 22px;
 }
 .nh-hero-svc {
   position: relative;
@@ -172,7 +181,8 @@
   100% { opacity: 1; transform: translateY(0) scale(1); }
 }
 .nh-hero-svc-img {
-  display: block; position: relative; aspect-ratio: 3 / 4; overflow: hidden;
+  display: block; position: relative; overflow: hidden;
+  height: clamp(110px, 16.5vh, 205px);
 }
 .nh-hero-svc-img img {
   width: 100%; height: 100%; object-fit: cover; display: block;

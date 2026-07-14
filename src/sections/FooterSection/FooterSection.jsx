@@ -131,7 +131,7 @@ const FooterSection = () => {
             <div className="nh-footer-brand">
               <h2 className="nh-footer-logo">Prolper</h2>
               <p className="nh-footer-tagline">
-                Book trusted local pros for your home, business and personal
+                Book local pros for your home, business and personal
                 needs. Get matched, chat, pay and rate, all in one app.
               </p>
               <div className="nh-footer-loc">

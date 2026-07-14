@@ -2,18 +2,12 @@ import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import useAppLinks from "../../hooks/useAppLinks";
 import useQrLinks from "../../hooks/useQrLinks";
+import Seo from "../../components/Seo/Seo";
 import FooterSection from "../../sections/FooterSection/FooterSection";
 import "./BecomeProvider.css";
 
 const face = (id) =>
   `https://images.unsplash.com/photo-${id}?w=120&q=80&auto=format&fit=crop&crop=faces`;
-
-const STATS = [
-  { icon: "bi-people-fill",     end: 5000,  suffix: "+",  label: "Active local pros" },
-  { icon: "bi-cash-stack",      end: 2.4,   prefix: "$", suffix: "M+", label: "Paid out to pros" },
-  { icon: "bi-briefcase-fill",  end: 12000, suffix: "+",  label: "Jobs matched / month" },
-  { icon: "bi-star-fill",       end: 4.8,   label: "Average pro rating" },
-];
 
 const STEPS = [
   { icon: "bi-person-plus-fill", title: "Create your profile",  desc: "Sign up in minutes, list your skills and set your service area." },
@@ -33,7 +27,7 @@ const BENEFITS = [
 
 const VOICES = [
   { name: "Marcus T.", trade: "Handyman",     img: face("1500648767791-00dcc994a43e"), quote: "I get steady local jobs without spending a cent on ads. The app handles quotes and payment, so I just show up and do great work." },
-  { name: "David R.",  trade: "Plumber",      img: face("1560250097-0b93528c311a"),   quote: "Payments hit my account fast, no chasing invoices. Best decision I made for my business this year." },
+  { name: "Amara O.",  trade: "Cleaner",      img: face("1580489944761-15a19d654956"), quote: "Payments hit my account fast, no chasing invoices. Best decision I made for my business this year." },
   { name: "Jason L.",  trade: "Auto Detailer",img: face("1519085360753-af0119f7cbe7"), quote: "I pick the jobs that fit my schedule. Booked solid most weekends now thanks to Prolper." },
   { name: "Priya S.",  trade: "Pet Groomer",  img: face("1573496359142-b8d87734a5a2"), quote: "Started with zero reviews, now I'm one of the top-rated pros in my area. The ratings really bring in work." },
 ];
@@ -69,11 +63,9 @@ const CountUp = ({ end, duration = 1500, prefix = "", suffix = "", active }) => 
 
 const BecomeProvider = () => {
   const [openFaq, setOpenFaq] = useState(0);
-  const [statsOn, setStatsOn] = useState(false);
   const appLinks = useAppLinks();
   const qr = useQrLinks();
   const heroRef = useRef(null);
-  const statsRef = useRef(null);
   const raf = useRef(0);
 
   useEffect(() => {
@@ -86,17 +78,7 @@ const BecomeProvider = () => {
     );
     document.querySelectorAll(".nh-animate, .nh-animate-left, .nh-animate-right")
       .forEach((el) => observer.observe(el));
-
-    // Stats count-up trigger
-    let statObs;
-    if (statsRef.current) {
-      statObs = new IntersectionObserver(
-        ([e]) => { if (e.isIntersecting) { setStatsOn(true); statObs.disconnect(); } },
-        { threshold: 0.4 }
-      );
-      statObs.observe(statsRef.current);
-    }
-    return () => { observer.disconnect(); statObs && statObs.disconnect(); };
+    return () => observer.disconnect();
   }, []);
 
   const onParallax = (e) => {
@@ -112,8 +94,24 @@ const BecomeProvider = () => {
     });
   };
 
+  const faqJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: FAQS.map((f) => ({
+      "@type": "Question",
+      name: f.q,
+      acceptedAnswer: { "@type": "Answer", text: f.a },
+    })),
+  };
+
   return (
     <div className="nh-page bp-page">
+      <Seo
+        title="Become a Pro on Prolper — Get Local Jobs in Mississauga"
+        description="Grow your business with Prolper. Get matched with local customers in Mississauga, set your own schedule, and get paid securely in-app. Free to join, no monthly fees."
+        path="/become-a-provider"
+        jsonLd={faqJsonLd}
+      />
 
       {/* HERO */}
       <section className="bp-hero" ref={heroRef} onMouseMove={onParallax}>
@@ -129,7 +127,7 @@ const BecomeProvider = () => {
               Grow your business,<br /><span className="nh-teal">one job at a time.</span>
             </h1>
             <p className="bp-hero-sub">
-              Join thousands of trusted local professionals earning more with Prolper.
+              Join thousands of local professionals earning more with Prolper.
               We bring the customers to you, so you focus on doing great work.
             </p>
             <div className="bp-hero-actions">
@@ -137,11 +135,6 @@ const BecomeProvider = () => {
                 Get the Pro app <i className="bi bi-arrow-right"></i>
               </a>
               <Link to="/" className="bp-btn bp-btn-ghost">Looking for a service?</Link>
-            </div>
-            <div className="bp-hero-trust">
-              <span><i className="bi bi-people-fill"></i> 5,000+ active pros</span>
-              <span><i className="bi bi-star-fill"></i> 4.8 average rating</span>
-              <span><i className="bi bi-cash-coin"></i> Paid weekly</span>
             </div>
           </div>
 
@@ -174,25 +167,6 @@ const BecomeProvider = () => {
               <span className="bp-float-ic bp-float-ic-green"><i className="bi bi-cash-coin"></i></span>
               <div><strong>Payment received</strong><span>+$180 · just now</span></div>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* STATS STRIP */}
-      <section className="bp-stats" ref={statsRef}>
-        <div className="nh-section-inner">
-          <div className="bp-stats-card">
-            {STATS.map((s, i) => (
-              <div className="bp-stat" key={s.label} style={{ "--d": `${i * 90}ms` }}>
-                <span className="bp-stat-ic"><i className={`bi ${s.icon}`}></i></span>
-                <div className="bp-stat-txt">
-                  <span className="bp-stat-val">
-                    <CountUp end={s.end} prefix={s.prefix || ""} suffix={s.suffix || ""} active={statsOn} />
-                  </span>
-                  <span className="bp-stat-lbl">{s.label}</span>
-                </div>
-              </div>
-            ))}
           </div>
         </div>
       </section>

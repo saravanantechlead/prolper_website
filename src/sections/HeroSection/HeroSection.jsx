@@ -1,11 +1,9 @@
 import React, { useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import useAppLinks from "../../hooks/useAppLinks";
 import { SERVICES } from "../../data/siteContent";
 import "./HeroSection.css";
 
 const HeroSection = () => {
-  const appLinks = useAppLinks();
   const navigate = useNavigate();
   const goToService = (id) => navigate(`/service/${id}`);
   const heroRef = useRef(null);
@@ -45,15 +43,15 @@ const HeroSection = () => {
         </h1>
 
         <p className="nh-hero-sub">
-          Tell us the task and we'll match you with a rated local pro in minutes.
-          Chat or call your pro, pay and rate, all in one app.
+          Tell us what you need, get matched, chat and call, pay and rate,
+          all in one app.
         </p>
 
         {/* Branded service picker panel — services right from the get-go */}
         <div className="nh-hero-panel" id="services">
           <div className="nh-hero-panel-head">
             <i className="bi bi-ui-checks-grid"></i>
-            What do you need done?
+            Our services
           </div>
 
           <div className="nh-hero-services">
@@ -72,24 +70,6 @@ const HeroSection = () => {
               </button>
             ))}
           </div>
-        </div>
-
-        {/* App stores + trust */}
-        <div className="nh-hero-stores">
-          <a href={appLinks.customer_ios} className="nh-store-mini" target="_blank" rel="noopener noreferrer">
-            <i className="bi bi-apple"></i> App Store
-          </a>
-          <a href={appLinks.customer_android} className="nh-store-mini" target="_blank" rel="noopener noreferrer">
-            <i className="bi bi-google-play"></i> Google Play
-          </a>
-        </div>
-
-        <div className="nh-hero-trust">
-          <span><i className="bi bi-star-fill"></i> 4.8 average rating</span>
-          <span className="nh-dot">·</span>
-          <span>Local pros</span>
-          <span className="nh-dot">·</span>
-          <span>Secure in-app payments</span>
         </div>
       </div>
     </section>

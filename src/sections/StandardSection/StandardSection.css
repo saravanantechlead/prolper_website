@@ -3,14 +3,14 @@
    ────────────────────────────────────────────────────────── */
 .nh-standard {
   background: var(--mesh-light);
-  padding: 110px 0 120px;
+  padding: clamp(60px, 8vh, 110px) 0 clamp(56px, 7vh, 110px);
   position: relative;
   overflow: hidden; /* contains the full-width reviews marquee */
 }
 
 .nh-standard-header {
   text-align: center;
-  margin-bottom: 64px;
+  margin-bottom: clamp(30px, 4.5vh, 60px);
 }
 
 .nh-standard-eyebrow {
@@ -284,7 +284,7 @@
 
 /* ── Single-line customer reviews marquee (full-width) ── */
 .nh-std-reviews {
-  margin-top: 56px;
+  margin-top: clamp(30px, 4vh, 56px);
   width: 100%;
 }
 .nh-std-reviews-label {
@@ -401,6 +401,17 @@
 
 /* Reduced motion: auto-scroll is disabled in JS; the prev/next buttons
    still let people move through the reviews manually. */
+
+/* Short viewports: compact so the whole section centers in one screen */
+@media (min-width: 769px) and (max-height: 860px) {
+  .nh-stat-card { padding: 26px 26px 24px; }
+  .nh-standard-title { font-size: clamp(1.7rem, 3vw, 2.3rem); }
+  .nh-standard-lead { font-size: 1rem; }
+  .nh-carousel-nav { margin-top: 22px; }
+  .nh-std-review-av { width: 40px; height: 40px; }
+  .nh-std-review { padding: 9px 22px 9px 10px; }
+  .nh-std-review-text { font-size: 0.94rem; }
+}
 
 /* ════════════════════════════════════════════════════════════
    RESPONSIVE

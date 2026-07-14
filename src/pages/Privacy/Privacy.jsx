@@ -4,6 +4,7 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { db } from "../../firebase";
 import { doc, getDoc } from "firebase/firestore";
+import Seo from "../../components/Seo/Seo";
 import "./Privacy.css";
 
 const Privacy = () => {
@@ -43,6 +44,11 @@ const Privacy = () => {
 
   return (
     <div className="pp-root">
+      <Seo
+        title="Privacy Policy | Prolper"
+        description="How Prolper collects, uses and protects your personal information."
+        path="/privacy-policy"
+      />
 
       {/* ── Top Bar ── */}
       <header className="pp-topbar">

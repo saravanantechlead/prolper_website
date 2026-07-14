@@ -4,6 +4,7 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { db } from "../../firebase";
 import { doc, getDoc } from "firebase/firestore";
+import Seo from "../../components/Seo/Seo";
 import "./LegalPage.css";
 
 const CONFIG = {
@@ -69,6 +70,11 @@ const LegalPage = () => {
 
   return (
     <div className="lp-root">
+      <Seo
+        title={`${cfg.title} | Prolper`}
+        description={cfg.sub}
+        path={`/legal/${type === "business" ? "business" : "customer"}`}
+      />
 
       {/* ── Top Bar ── */}
       <header className="lp-topbar">

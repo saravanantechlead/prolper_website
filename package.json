@@ -7,7 +7,9 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "prerender": "node scripts/prerender.mjs",
+    "build:prod": "vite build && node scripts/prerender.mjs"
   },
   "dependencies": {
     "axios": "^1.8.4",
@@ -17,6 +19,7 @@
     "lucide-react": "^0.562.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-helmet-async": "^3.0.0",
     "react-markdown": "^10.1.0",
     "react-router-dom": "^7.3.0",
     "react-scripts": "^5.0.1",

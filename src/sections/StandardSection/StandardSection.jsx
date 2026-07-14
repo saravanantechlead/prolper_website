@@ -10,14 +10,14 @@ const CARDS = [
     color: "#0fba81",
     colorBg: "rgba(15,186,129,0.1)",
     label: "Unbiased Matching",
-    desc: "Matched with the right provider for your needs.",
+    desc: "Up to 3 local pros respond to your job. You choose the best fit.",
   },
   {
     icon: "bi-geo-alt-fill",
     color: "#0fba81",
     colorBg: "rgba(15,186,129,0.1)",
     label: "Local First",
-    desc: "Connecting you with local professionals.",
+    desc: "Connecting you with local professionals in your area.",
   },
   {
     icon: "bi-shield-lock-fill",
@@ -30,7 +30,7 @@ const CARDS = [
     icon: "bi-star-fill",
     color: "#f59e0b",
     colorBg: "rgba(245,158,11,0.1)",
-    label: "Trusted Reviews",
+    label: "Real Reviews",
     desc: "Real ratings and reviews from real customers.",
   },
 ];
@@ -115,7 +115,7 @@ const StandardSection = () => {
         <div className="nh-standard-header nh-animate">
           <span className="nh-standard-eyebrow">Why us</span>
           <h2 className="nh-standard-title">The Prolper Standard</h2>
-          <p className="nh-standard-lead">Why thousands choose Prolper for their local services.</p>
+          <p className="nh-standard-lead">Why locals choose Prolper for their services.</p>
         </div>
 
         {/* Scrollable carousel */}

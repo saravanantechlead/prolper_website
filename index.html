@@ -2,25 +2,44 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/prolper-cropped.svg" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="apple-touch-icon" href="/favicon-180.png" />
+    <link rel="manifest" href="/site.webmanifest" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#14b8a6" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="author" content="Prolper" />
 
-    <!-- Primary meta -->
-    <title>Prolper — Find your local Pro Helper in Mississauga</title>
-    <meta name="description" content="Book trusted local pros in minutes — handyman, cleaning, painting, pet care, tutoring and more. Get matched, chat, pay and rate, all in the Prolper app. Now serving Mississauga, ON." />
-    <link rel="canonical" href="https://prolper.com/" />
+    <!-- Primary meta. Per-page <title>, description and canonical are managed at
+         runtime by react-helmet-async (src/components/Seo) so each route gets its
+         own. The <title> here is the pre-JS fallback for the home page. -->
+    <title>Local Services in Mississauga: Handyman, Cleaning &amp; More | Prolper</title>
+    <meta name="keywords" content="local services Mississauga, handyman Mississauga, house cleaning, painting, car detailing, pet care, tutoring, CPA, personal trainer, book a pro, Prolper" />
+
+    <!-- Geo targeting (Mississauga, Ontario) -->
+    <meta name="geo.region" content="CA-ON" />
+    <meta name="geo.placename" content="Mississauga" />
+    <meta name="geo.position" content="43.5890;-79.6441" />
+    <meta name="ICBM" content="43.5890, -79.6441" />
 
     <!-- Open Graph / social -->
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Prolper" />
-    <meta property="og:title" content="Prolper — Find your local Pro Helper" />
-    <meta property="og:description" content="Book trusted local pros in minutes — handyman, cleaning, painting, pet care and more. All in one app, now serving Mississauga, ON." />
-    <meta property="og:url" content="https://prolper.com/" />
-    <meta property="og:image" content="https://prolper.com/prolper-cropped.svg" />
+    <meta property="og:locale" content="en_CA" />
+    <meta property="og:title" content="Prolper — Find your local Pro Helper in Mississauga" />
+    <meta property="og:description" content="Book local pros in minutes: handyman, cleaning, painting, pet care and more. Get matched, chat or call, pay and rate, all in the Prolper app." />
+    <meta property="og:url" content="https://www.prolper.com/" />
+    <meta property="og:image" content="https://www.prolper.com/banner1.png" />
+    <meta property="og:image:width" content="1294" />
+    <meta property="og:image:height" content="646" />
+    <meta property="og:image:alt" content="Prolper — book local pros in Mississauga" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Prolper — Find your local Pro Helper" />
-    <meta name="twitter:description" content="Book trusted local pros in minutes. All in one app, now serving Mississauga, ON." />
+    <meta name="twitter:site" content="@ProlperApp" />
+    <meta name="twitter:title" content="Prolper — Find your local Pro Helper in Mississauga" />
+    <meta name="twitter:description" content="Book local pros in minutes. Get matched, chat or call, pay and rate, all in the Prolper app." />
+    <meta name="twitter:image" content="https://www.prolper.com/banner1.png" />
 
     <!-- Perf: warm up the image + font + icon CDNs -->
     <link rel="preconnect" href="https://images.unsplash.com" crossorigin>
@@ -32,6 +51,70 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Structured data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "@id": "https://www.prolper.com/#organization",
+          "name": "Prolper",
+          "url": "https://www.prolper.com/",
+          "logo": "https://www.prolper.com/prolper.png",
+          "description": "Prolper connects you with local professionals for home, business and personal services in Mississauga, Ontario.",
+          "areaServed": { "@type": "City", "name": "Mississauga" },
+          "sameAs": [
+            "https://www.facebook.com/Prolperapp",
+            "https://www.instagram.com/prolperapp",
+            "https://x.com/ProlperApp",
+            "https://www.linkedin.com/company/prolper"
+          ]
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://www.prolper.com/#website",
+          "url": "https://www.prolper.com/",
+          "name": "Prolper",
+          "publisher": { "@id": "https://www.prolper.com/#organization" },
+          "inLanguage": "en-CA"
+        },
+        {
+          "@type": "MobileApplication",
+          "name": "Prolper",
+          "operatingSystem": "iOS, Android",
+          "applicationCategory": "LifestyleApplication",
+          "url": "https://www.prolper.com/",
+          "offers": { "@type": "Offer", "price": "0", "priceCurrency": "CAD" }
+        },
+        {
+          "@type": "Service",
+          "serviceType": "Local home and personal services",
+          "provider": { "@id": "https://www.prolper.com/#organization" },
+          "areaServed": {
+            "@type": "City",
+            "name": "Mississauga",
+            "containedInPlace": { "@type": "AdministrativeArea", "name": "Ontario, Canada" }
+          },
+          "hasOfferCatalog": {
+            "@type": "OfferCatalog",
+            "name": "Prolper services",
+            "itemListElement": [
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Handyman" } },
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Painting" } },
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Cleaning" } },
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Car Detailing" } },
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Pet Care" } },
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "CPA Services" } },
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Tutor" } },
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Fitness Coach" } }
+            ]
+          }
+        }
+      ]
+    }
+    </script>
 
   </head>
   <body>

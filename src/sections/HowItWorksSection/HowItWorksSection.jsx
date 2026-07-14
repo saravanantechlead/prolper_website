@@ -5,7 +5,7 @@ import "./HowItWorksSection.css";
 /* A small action chip per step, floated on the photo. */
 const CHIPS = [
   { icon: "bi-ui-checks-grid", label: "Pick a service" },
-  { icon: "bi-chat-dots-fill", label: "Chat & agree a price" },
+  { icon: "bi-chat-dots-fill", label: "Chat or call, agree a price" },
   { icon: "bi-star-fill",      label: "Leave a review" },
 ];
 
@@ -33,8 +33,8 @@ const HowItWorksSection = () => {
           <span className="nh-how-eyebrow">How it works</span>
           <h2 className="nh-how-title">Get it done in three simple steps</h2>
           <p className="nh-how-lead">
-            No phone tag, no chasing quotes. Prolper handles matching, messaging and
-            payment, so you can just get the job done.
+            No phone tag, no chasing quotes. Post your job, get matched, and manage
+            everything from chat or call to payment, all in one app.
           </p>
         </div>
 

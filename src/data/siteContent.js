@@ -25,27 +25,27 @@ export const HOW_STEPS = [
   {
     n: "01",
     title: "Tell us what you need",
-    desc: "Pick a service, choose your location, date and time. It takes less than a minute.",
+    desc: "Pick a service, describe what you need, choose your preferred date and time. Done in under a minute.",
     img: U("1512428559087-560fa5ceab42"),
   },
   {
     n: "02",
     title: "Get matched with a local pro",
-    desc: "Chat or call your pro, receive a clear estimate, and pay securely to confirm the job.",
-    img: U("1530983822321-fcac2d3c0f06"),
+    desc: "Up to 3 local pros respond. Chat or call, review estimates, and confirm your booking inside the app.",
+    img: "/call.jpg",
   },
   {
     n: "03",
     title: "Job done, you rate it",
-    desc: "Your pro completes the work, any balance is settled in-app, and you leave a review.",
-    img: U("1616377230292-97f202692d74"),
+    desc: "Your pro completes the work, the remaining balance is settled securely in-app, and you rate and review your pro.",
+    img: "/step%203.jpg",
   },
 ];
 
 /* Reviews — real customer faces */
 export const REVIEWS = [
   { name: "Sarah M.",  location: "Mississauga, ON", service: "House Cleaning",   rating: 5, img: U("1573496359142-b8d87734a5a2", 200), text: "Booked a deep clean and someone was at my door the next morning. Friendly, thorough, and the price matched the estimate exactly." },
-  { name: "David R.",  location: "Mississauga, ON", service: "Plumbing",         rating: 5, img: U("1560250097-0b93528c311a", 200),  text: "Chatted with a pro in the app, got a quote in minutes, and it was fixed the same day. Prolper is my go-to now." },
+  { name: "David R.",  location: "Mississauga, ON", service: "Handyman",         rating: 5, img: U("1560250097-0b93528c311a", 200),  text: "Chatted with a pro in the app, got a quote in minutes, and it was fixed the same day. Prolper is my go-to now." },
   { name: "Amina K.",  location: "Mississauga, ON", service: "Painting",         rating: 5, img: U("1573497019940-1c28c88b4f3e", 200), text: "Loved seeing ratings before choosing. The painter was exactly as advertised, clean, punctual and professional." },
   { name: "Marcus T.", location: "Mississauga, ON", service: "Handyman",         rating: 5, img: U("1500648767791-00dcc994a43e", 200), text: "Paying through the app made everything feel safe. Estimate up front, work done, balance settled. Simple." },
   { name: "Priya S.",  location: "Mississauga, ON", service: "Pet Care",         rating: 4, img: U("1627161683077-e34782c24d81", 200), text: "My dog was groomed at home while I worked. Great communication throughout. Would absolutely use again." },

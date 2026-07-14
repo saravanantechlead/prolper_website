@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import "./Home.css";
 
+import Seo from "../../components/Seo/Seo";
 import HeroSection from "../../sections/HeroSection/HeroSection";
 import HowItWorksSection from "../../sections/HowItWorksSection/HowItWorksSection";
 import StandardSection from "../../sections/StandardSection/StandardSection";
@@ -28,6 +29,11 @@ const Home = () => {
 
   return (
     <div className="nh-page">
+      <Seo
+        title="Local Services in Mississauga: Handyman, Cleaning & More | Prolper"
+        description="Book local pros in Mississauga in minutes: handyman, cleaning, painting, car detailing, pet care, tutoring, CPA and fitness. Get matched, chat or call, pay and rate in the Prolper app."
+        path="/"
+      />
       <HeroSection />
       <HowItWorksSection />
       <StandardSection />
