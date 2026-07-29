@@ -43,8 +43,24 @@ const HeroSection = () => {
         </h1>
 
         <p className="nh-hero-sub">
-          Tell us what you need, get matched, chat and call, pay and rate,
-          all in one app.
+          Tell us what you need and get matched with a trusted local pro —
+          book online in minutes, no app required to start.
+        </p>
+
+        <div className="nh-hero-cta">
+          <button className="nh-hero-book-btn" onClick={() => navigate("/book")}>
+            <i className="bi bi-calendar-check"></i>
+            <span>Book a service</span>
+            <i className="bi bi-arrow-right nh-hero-book-arrow"></i>
+          </button>
+          <a href="/#services" className="nh-hero-book-ghost">
+            <i className="bi bi-grid-3x3-gap-fill"></i> Browse services
+          </a>
+        </div>
+        <p className="nh-hero-trust">
+          <span><i className="bi bi-shield-check"></i> Verified local pros</span>
+          <span><i className="bi bi-lightning-charge-fill"></i> Free to request</span>
+          <span><i className="bi bi-phone"></i> No app needed to start</span>
         </p>
 
         {/* Branded service picker panel — services right from the get-go */}

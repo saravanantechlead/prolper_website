@@ -262,13 +262,26 @@
   .nh-hero-panel-foot { flex-direction: column; align-items: flex-start; }
 }
 @media (max-width: 560px) {
-  .nh-hero { padding: 108px 16px 56px; }
+  /* Flow content from the top (not vertically centered) so there are no big
+     empty gaps, and let the hero grow with content instead of clipping it. */
+  .nh-hero {
+    justify-content: flex-start;
+    padding: 112px 18px 36px;
+  }
+  /* Declutter decorative shapes on small screens */
+  .nh-hero-ring, .nh-hero-stripes, .nh-hero-dots { display: none; }
+  .nh-hero-blob-1, .nh-hero-blob-2 { width: 180px; height: 180px; opacity: 0.55; }
+
+  .nh-hero-eyebrow { font-size: 0.74rem; margin-bottom: 15px; padding: 6px 13px; }
+  .nh-hero-title { font-size: clamp(2rem, 9vw, 2.6rem); margin-bottom: 12px; max-width: 15ch; }
+  .nh-hero-sub { font-size: 1rem; line-height: 1.55; margin-bottom: 18px; max-width: 400px; }
+
+  .nh-hero-panel { margin-bottom: 0; }
   .nh-hero-services { grid-template-columns: repeat(4, 1fr); gap: 8px; padding: 16px 14px 4px; }
   .nh-hero-svc { border-radius: 13px; }
   .nh-hero-svc-label { font-size: 0.68rem; padding: 6px 4px 7px; }
   .nh-hero-panel-head { font-size: 0.92rem; padding: 13px 16px; }
   .nh-hero-panel-foot { padding: 12px 14px 16px; }
-  .nh-hero-blob-1, .nh-hero-blob-2 { width: 200px; height: 200px; }
 }
 @media (max-width: 380px) {
   .nh-hero-services { grid-template-columns: repeat(3, 1fr); }
@@ -283,4 +296,83 @@
   .nh-hero-blob, .nh-hero-ring, .nh-hero-stripes, .nh-hero-dots {
     transform: none !important;
   }
+}
+
+/* ── Hero booking CTA ─────────────────────────────────────────────────────── */
+.nh-hero-cta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin: 2px 0 10px;
+}
+.nh-hero-book-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(135deg, #16c3b0 0%, #0d9488 100%);
+  color: #fff;
+  font-weight: 700;
+  font-size: 14.5px;
+  font-family: inherit;
+  border: none;
+  padding: 11px 20px;
+  border-radius: 12px;
+  cursor: pointer;
+  box-shadow: 0 14px 30px -10px rgba(13, 148, 136, 0.6),
+              inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  overflow: hidden;
+  transition: transform 0.16s cubic-bezier(0.16,1,0.3,1), box-shadow 0.2s ease;
+}
+/* sheen sweep on hover */
+.nh-hero-book-btn::after {
+  content: "";
+  position: absolute; inset: 0;
+  background: linear-gradient(115deg, transparent 30%, rgba(255,255,255,0.28) 50%, transparent 70%);
+  transform: translateX(-120%);
+  transition: transform 0.6s ease;
+}
+.nh-hero-book-btn:hover { transform: translateY(-3px); box-shadow: 0 20px 40px -12px rgba(13,148,136,0.7); }
+.nh-hero-book-btn:hover::after { transform: translateX(120%); }
+.nh-hero-book-btn:active { transform: translateY(-1px); }
+.nh-hero-book-btn i { font-size: 16px; position: relative; z-index: 1; }
+.nh-hero-book-btn span { position: relative; z-index: 1; }
+.nh-hero-book-arrow { transition: transform 0.2s ease; }
+.nh-hero-book-btn:hover .nh-hero-book-arrow { transform: translateX(4px); }
+
+.nh-hero-book-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-weight: 600;
+  font-size: 14px;
+  color: #0f766e;
+  text-decoration: none;
+  padding: 10px 18px;
+  border-radius: 12px;
+  border: 1.5px solid rgba(13, 148, 136, 0.28);
+  background: rgba(255, 255, 255, 0.6);
+  transition: border-color 0.15s ease, background 0.15s ease, transform 0.12s ease;
+}
+.nh-hero-book-ghost:hover { border-color: rgba(13,148,136,0.55); background: #fff; transform: translateY(-2px); }
+
+/* Trust row */
+.nh-hero-trust {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 18px;
+  margin: 0 0 14px;
+  font-size: 12.5px;
+  color: var(--text-muted, #64748b);
+  font-weight: 500;
+}
+.nh-hero-trust span { display: inline-flex; align-items: center; gap: 6px; }
+.nh-hero-trust i { color: var(--teal-primary, #14b8a6); font-size: 14px; }
+
+@media (max-width: 560px) {
+  .nh-hero-cta { flex-direction: column; align-items: stretch; }
+  .nh-hero-book-btn { justify-content: center; font-size: 16px; }
+  .nh-hero-book-ghost { justify-content: center; }
+  .nh-hero-trust { gap: 6px 16px; justify-content: center; text-align: center; }
 }

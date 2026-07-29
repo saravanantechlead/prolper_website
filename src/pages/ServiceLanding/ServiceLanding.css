@@ -233,3 +233,32 @@
 @media (max-width: 620px) {
   .sl-included { grid-template-columns: 1fr; }
 }
+
+/* ── Web booking CTA (primary action; app stores are secondary) ──────────── */
+.sl-book-cta { margin-bottom: 14px; }
+.sl-book-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--sl-accent, #14b8a6);
+  color: #fff;
+  font-weight: 700;
+  font-size: 16px;
+  padding: 15px 28px;
+  border-radius: 14px;
+  text-decoration: none;
+  box-shadow: 0 10px 24px -8px color-mix(in srgb, var(--sl-accent, #14b8a6) 60%, transparent);
+  transition: transform 0.12s ease, box-shadow 0.2s ease, filter 0.2s ease;
+}
+.sl-book-btn i { font-size: 18px; }
+.sl-book-btn:hover { transform: translateY(-2px); filter: brightness(1.03); }
+.sl-book-btn:active { transform: translateY(0); }
+/* On the dark final-CTA card, use a white button with accent text */
+.sl-book-btn-light {
+  background: #fff;
+  color: var(--sl-accent, #14b8a6);
+  box-shadow: 0 10px 24px -8px rgba(0, 0, 0, 0.25);
+}
+@media (max-width: 560px) {
+  .sl-book-btn { width: 100%; justify-content: center; }
+}

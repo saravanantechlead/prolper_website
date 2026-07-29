@@ -391,6 +391,7 @@ import LegalPage from "./pages/Legal/LegalPage";
 import AppDownload from "./pages/AppDownload/AppDownload";
 import BecomeProvider from "./pages/BecomeProvider/BecomeProvider";
 import ServiceLanding from "./pages/ServiceLanding/ServiceLanding";
+import Book from "./pages/Book/Book";
 import Social from "./pages/Social/Social";
 import Privacy from "./pages/Privacy/Privacy";
 import logo from "/prolper-cropped.svg";
@@ -404,8 +405,7 @@ import "./App.css";
 function App() {
   return (
     <Router basename="/">
-      <Navbar />
-      <MobileAppBar />
+      <AppChrome />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
@@ -418,8 +418,22 @@ function App() {
         <Route path="/get-app"     element={<AppDownload appType="business" />} />
         <Route path="/become-a-provider" element={<BecomeProvider />} />
         <Route path="/service/:id" element={<ServiceLanding />} />
+        <Route path="/book" element={<Book />} />
+        <Route path="/book/:serviceId" element={<Book />} />
       </Routes>
     </Router>
+  );
+}
+
+// Hides the marketing navbar/app-bar on the full-screen booking funnel.
+function AppChrome() {
+  const location = useLocation();
+  if (location.pathname.startsWith("/book")) return null;
+  return (
+    <>
+      <Navbar />
+      <MobileAppBar />
+    </>
   );
 }
 

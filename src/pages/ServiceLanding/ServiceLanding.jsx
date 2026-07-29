@@ -102,6 +102,11 @@ const ServiceLanding = () => {
             <h1 className="sl-title">{svc.title} in Mississauga</h1>
             <p className="sl-desc">{svc.intro}</p>
 
+            <div className="sl-book-cta">
+              <Link to={`/book/${svc.id}`} className="sl-book-btn">
+                <i className="bi bi-calendar-check"></i> Book {svc.title} now
+              </Link>
+            </div>
             <div className="sl-cta">
               <a href={appLinks.customer_ios} className="sl-store-btn" target="_blank" rel="noopener noreferrer">
                 <i className="bi bi-apple"></i>
@@ -114,7 +119,7 @@ const ServiceLanding = () => {
             </div>
             <p className="sl-cta-note">
               <i className="bi bi-patch-check-fill"></i>
-              Book <strong>{svc.title}</strong> in minutes with local pros and secure in-app payment.
+              Book <strong>{svc.title}</strong> online in minutes — then finish in the app with secure payment.
             </p>
           </div>
 
@@ -217,7 +222,12 @@ const ServiceLanding = () => {
         <div className="nh-section-inner">
           <div className="sl-final-card">
             <h2 className="sl-final-title">Ready to book {svc.title}?</h2>
-            <p className="sl-final-sub">Download Prolper and get matched with a local pro today.</p>
+            <p className="sl-final-sub">Request a local pro online in minutes — no app needed to start.</p>
+            <div className="sl-book-cta">
+              <Link to={`/book/${svc.id}`} className="sl-book-btn sl-book-btn-light">
+                <i className="bi bi-calendar-check"></i> Book {svc.title} now
+              </Link>
+            </div>
             <div className="sl-cta">
               <a href={appLinks.customer_ios} className="sl-store-btn sl-store-light" target="_blank" rel="noopener noreferrer">
                 <i className="bi bi-apple"></i>
