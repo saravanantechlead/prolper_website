@@ -16,6 +16,7 @@ import { chromium } from "playwright";
 import { spawn } from "node:child_process";
 import { mkdirSync, writeFileSync, existsSync } from "node:fs";
 import { dirname, join } from "node:path";
+import { AREA_ROUTES } from "../src/data/neighborhoods.js";
 
 const DIST = join(process.cwd(), "dist");
 const PORT = 4321;
@@ -34,6 +35,8 @@ const ROUTES = [
   "/service/cpa-services",
   "/service/tutor",
   "/service/fitness-coach",
+  // Service × Mississauga-neighbourhood pages (local SEO long-tail).
+  ...AREA_ROUTES,
 ];
 
 if (!existsSync(join(DIST, "index.html"))) {

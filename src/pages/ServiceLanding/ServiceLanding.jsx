@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import customerAppImg from "../../assets/iphone customer app.png";
 import { SERVICE_CONTENT, relatedServices } from "../../data/services";
+import { NEIGHBORHOODS, NEIGHBORHOOD_SLUGS, LOCAL_SERVICE_IDS } from "../../data/neighborhoods";
 import useAppLinks from "../../hooks/useAppLinks";
 import Seo from "../../components/Seo/Seo";
 import FooterSection from "../../sections/FooterSection/FooterSection";
@@ -10,7 +11,7 @@ import "./ServiceLanding.css";
 const SITE = "https://www.prolper.com";
 
 const ServiceLanding = () => {
-  const { id } = useParams();
+  const { id, area } = useParams();
   const navigate = useNavigate();
   const appLinks = useAppLinks();
   const [openFaq, setOpenFaq] = useState(0);
@@ -33,6 +34,25 @@ const ServiceLanding = () => {
     );
   }
 
+  // Optional neighbourhood dimension: /service/:id/:area
+  const hood = area ? NEIGHBORHOODS[area] : null;
+  if (area && !hood) {
+    return (
+      <div className="nh-page sl-page">
+        <Seo title="Area not found | Prolper" description="Browse local services on Prolper." path={`/service/${svc.id}`} noindex />
+        <div className="sl-notfound">
+          <i className="bi bi-geo-alt"></i>
+          <h1>Area not found</h1>
+          <p>We couldn't find that area. See {svc.title} across Mississauga instead.</p>
+          <Link to={`/service/${svc.id}`} className="sl-btn sl-btn-primary">{svc.title} in Mississauga</Link>
+        </div>
+      </div>
+    );
+  }
+  const place = hood ? hood.name : "Mississauga";
+  const path = hood ? `/service/${svc.id}/${area}` : `/service/${svc.id}`;
+  const isLocalSvc = LOCAL_SERVICE_IDS.includes(svc.id);
+
   const related = relatedServices(svc.id, 4);
 
   const STEPS = [
@@ -50,7 +70,9 @@ const ServiceLanding = () => {
         name: svc.title,
         serviceType: svc.title,
         description: svc.intro,
-        areaServed: { "@type": "City", name: "Mississauga" },
+        areaServed: hood
+          ? { "@type": "Place", name: `${hood.name}, Mississauga`, containedInPlace: { "@type": "City", name: "Mississauga" } }
+          : { "@type": "City", name: "Mississauga" },
         provider: { "@type": "Organization", name: "Prolper", url: `${SITE}/` },
       },
       {
@@ -59,6 +81,7 @@ const ServiceLanding = () => {
           { "@type": "ListItem", position: 1, name: "Home", item: `${SITE}/` },
           { "@type": "ListItem", position: 2, name: "Services", item: `${SITE}/#services` },
           { "@type": "ListItem", position: 3, name: svc.title, item: `${SITE}/service/${svc.id}` },
+          ...(hood ? [{ "@type": "ListItem", position: 4, name: hood.name, item: `${SITE}${path}` }] : []),
         ],
       },
       ...(svc.faqs.length
@@ -77,9 +100,13 @@ const ServiceLanding = () => {
   return (
     <div className="nh-page sl-page" style={{ "--sl-accent": svc.accent }}>
       <Seo
-        title={`${svc.title} in Mississauga, ON | Book a Local Pro | Prolper`}
-        description={svc.intro}
-        path={`/service/${svc.id}`}
+        title={hood
+          ? `${svc.title} in ${hood.name}, Mississauga | Book a Local Pro | Prolper`
+          : `${svc.title} in Mississauga, ON | Book a Local Pro | Prolper`}
+        description={hood
+          ? `Book ${svc.title.toLowerCase()} in ${hood.name}, Mississauga. Get matched with a trusted local pro serving ${hood.name} — request online in minutes, finish in the app.`
+          : svc.intro}
+        path={path}
         jsonLd={jsonLd}
       />
 
@@ -92,15 +119,21 @@ const ServiceLanding = () => {
               <i className="bi bi-chevron-right"></i>
               <Link to="/#services">Services</Link>
               <i className="bi bi-chevron-right"></i>
-              <span>{svc.title}</span>
+              {hood ? <Link to={`/service/${svc.id}`}>{svc.title}</Link> : <span>{svc.title}</span>}
+              {hood && (<><i className="bi bi-chevron-right"></i><span>{hood.name}</span></>)}
             </nav>
 
             <span className="sl-badge">
               <i className={`bi ${svc.icon}`}></i>
               {svc.category}
             </span>
-            <h1 className="sl-title">{svc.title} in Mississauga</h1>
+            <h1 className="sl-title">{svc.title} in {place}</h1>
             <p className="sl-desc">{svc.intro}</p>
+            {hood && (
+              <p className="sl-desc sl-hood-context">
+                {hood.context} Prolper connects you with {svc.title.toLowerCase()} pros who serve {hood.name} and the surrounding Mississauga area — book online and a local pro sends you a quote.
+              </p>
+            )}
 
             <div className="sl-book-cta">
               <Link to={`/book/${svc.id}`} className="sl-book-btn">
@@ -142,7 +175,7 @@ const ServiceLanding = () => {
           <div className="nh-section-inner">
             <div className="sl-head">
               <span className="sl-head-eyebrow">What you can book</span>
-              <h2 className="sl-head-title">{svc.title} services in Mississauga</h2>
+              <h2 className="sl-head-title">{svc.title} services in {place}</h2>
             </div>
             <ul className="sl-included">
               {svc.included.map((item) => (
@@ -179,7 +212,7 @@ const ServiceLanding = () => {
           <div className="nh-section-inner">
             <div className="sl-head">
               <span className="sl-head-eyebrow">Questions</span>
-              <h2 className="sl-head-title">{svc.title} in Mississauga — FAQs</h2>
+              <h2 className="sl-head-title">{svc.title} in {place} — FAQs</h2>
             </div>
             <div className="sl-faq-list">
               {svc.faqs.map((f, i) => (
@@ -190,6 +223,28 @@ const ServiceLanding = () => {
                   </button>
                   <div className="sl-faq-a"><p>{f.a}</p></div>
                 </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* AREAS WE SERVE (internal linking for local SEO) */}
+      {isLocalSvc && (
+        <section className="sl-areas">
+          <div className="nh-section-inner">
+            <div className="sl-head">
+              <span className="sl-head-eyebrow">Areas we serve</span>
+              <h2 className="sl-head-title">{svc.title} across Mississauga</h2>
+            </div>
+            <div className="sl-areas-grid">
+              {hood
+                ? <Link to={`/service/${svc.id}`} className="sl-area-link"><i className="bi bi-geo-alt"></i> {svc.title} in all of Mississauga</Link>
+                : <span className="sl-area-current"><i className="bi bi-geo-alt-fill"></i> All of Mississauga</span>}
+              {NEIGHBORHOOD_SLUGS.filter((s) => s !== area).map((s) => (
+                <Link key={s} to={`/service/${svc.id}/${s}`} className="sl-area-link">
+                  <i className="bi bi-geo-alt"></i> {svc.title} in {NEIGHBORHOODS[s].name}
+                </Link>
               ))}
             </div>
           </div>

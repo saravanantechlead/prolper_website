@@ -418,6 +418,7 @@ function App() {
         <Route path="/get-app"     element={<AppDownload appType="business" />} />
         <Route path="/become-a-provider" element={<BecomeProvider />} />
         <Route path="/service/:id" element={<ServiceLanding />} />
+        <Route path="/service/:id/:area" element={<ServiceLanding />} />
         <Route path="/book" element={<Book />} />
         <Route path="/book/:serviceId" element={<Book />} />
       </Routes>
