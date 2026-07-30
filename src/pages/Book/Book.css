@@ -131,6 +131,14 @@
   font-size: 13.5px; color: #0f766e; font-weight: 600;
 }
 .bk-addr-ok i { color: var(--bk-accent); }
+.bk-addr-momentum {
+  display: flex; align-items: center; gap: 10px; margin-top: 10px;
+  padding: 11px 13px; border-radius: 12px;
+  background: color-mix(in srgb, var(--bk-accent) 8%, #fff);
+  border: 1px solid color-mix(in srgb, var(--bk-accent) 22%, transparent);
+  font-size: 13px; color: #0f766e; line-height: 1.4;
+}
+.bk-addr-momentum i { font-size: 16px; color: var(--bk-accent); flex: none; }
 .bk-addr-soon {
   display: flex; gap: 12px; align-items: flex-start; margin-top: 6px;
   padding: 14px; border-radius: 14px;
@@ -190,6 +198,19 @@
 .bk-photo-add:hover { border-color: var(--bk-accent); background: color-mix(in srgb, var(--bk-accent) 6%, #fff); }
 .bk-photo-add i { font-size: 20px; }
 .bk-photo-add span { font-size: 11px; font-weight: 600; }
+
+/* Photo-first (repair-type) services: a bigger, more inviting dropzone up top. */
+.bk-photos-lead { gap: 12px; margin-bottom: 4px; }
+.bk-photos-lead .bk-photo { width: 92px; height: 92px; }
+.bk-photo-add-lead {
+  width: 100%; min-height: 116px; flex-direction: row; gap: 10px;
+  border-width: 2px; border-radius: 16px; font-size: 15px;
+  background: color-mix(in srgb, var(--bk-accent) 5%, #fff);
+}
+.bk-photos-lead .bk-photo ~ .bk-photo-add-lead { width: 92px; min-height: 92px; height: 92px; flex-direction: column; }
+.bk-photo-add-lead i { font-size: 26px; }
+.bk-photo-add-lead span { font-size: 14px; }
+.bk-details-note { margin-top: 16px; }
 
 /* OTP */
 .bk-otp { display: flex; gap: 10px; justify-content: center; margin: 10px 0 4px; }

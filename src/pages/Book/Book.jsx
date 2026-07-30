@@ -45,6 +45,12 @@ const DETAIL_HINTS = {
   "fitness-coach": "weight loss, strength training, meal plan",
 };
 
+// Services where a photo of the problem/space helps a pro quote — these lead
+// the details step with the camera ("Show us the problem") and make text optional.
+const VISUAL_SERVICES = new Set([
+  "handyman", "painting", "cleaning", "car-detailing", "pet-care",
+]);
+
 const STEP_META = [
   { key: "service", label: "Service", icon: "bi-grid-3x3-gap-fill" },
   { key: "address", label: "Location", icon: "bi-geo-alt-fill" },
@@ -106,6 +112,7 @@ export default function Book() {
   const detailPlaceholder = svc && DETAIL_HINTS[svc.id]
     ? `e.g. ${DETAIL_HINTS[svc.id]}…`
     : "Describe the work you need done…";
+  const photoFirst = VISUAL_SERVICES.has(form.serviceId);
 
   const phoneOk = form.phone.replace(/\D/g, "").length >= 10;
   const otpOk = form.otp.join("").length === 6;
@@ -114,7 +121,11 @@ export default function Book() {
       case "service": return !!form.serviceId;
       case "address": return !!form.address && form.city.toLowerCase() === SUPPORTED_CITY;
       case "schedule": return !!form.date && !!form.timeSlot && !(form.timeSlot === "9 AM - 1 PM" && isMorningBlocked(form.date));
-      case "details": return form.details.trim().length > 2;
+      case "details":
+        // Photo-first services can continue on a photo alone; text is optional.
+        if (VISUAL_SERVICES.has(form.serviceId))
+          return form.photos.length > 0 || form.details.trim().length > 2;
+        return form.details.trim().length > 2;
       case "contact": return form.name.trim().length > 1 && phoneOk;
       case "verify": return otpSent && otpOk;
       default: return true;
@@ -128,6 +139,13 @@ export default function Book() {
   };
   const goBack = () => { setError(""); setStep((s) => Math.max(s - 1, 0)); };
   const jumpTo = (i) => { if (i < step) { setError(""); setStep(i); } };
+
+  // Picking a service auto-advances to the address step — one less tap up front.
+  const pickService = (id) => {
+    set({ serviceId: id });
+    setError("");
+    setTimeout(() => setStep((s) => (s === 0 ? 1 : s)), 220);
+  };
 
   const sendOtp = () => { setOtpSent(true); setResendIn(30); set({ otp: ["", "", "", "", "", ""] }); };
   const otpRefs = useRef([]);
@@ -201,7 +219,7 @@ export default function Book() {
                       <button key={s.id} type="button"
                         className={`bk-service-tile ${form.serviceId === s.id ? "is-sel" : ""}`}
                         style={{ "--tile": s.accent || "#14b8a6" }}
-                        onClick={() => set({ serviceId: s.id })}>
+                        onClick={() => pickService(s.id)}>
                         <span className="bk-service-ic"><i className={`bi ${s.icon || "bi-briefcase"}`} /></span>
                         <span className="bk-service-name">{s.title}</span>
                         {form.serviceId === s.id && <i className="bi bi-check-circle-fill bk-service-check" />}
@@ -263,26 +281,31 @@ export default function Book() {
               )}
 
               {stepKey === "details" && (
-                <StepShell icon="bi-card-text" title="Tell the pro about the job" sub="A short description helps them quote accurately.">
-                  <label className="bk-field">
-                    <span>Work details</span>
-                    <textarea rows={4} placeholder={detailPlaceholder} value={form.details} onChange={(e) => set({ details: e.target.value })} />
-                  </label>
-                  <span className="bk-field-label">Photos <em>(optional, up to 4)</em></span>
-                  <div className="bk-photos">
-                    {form.photos.map((p, i) => (
-                      <div className="bk-photo" key={i}>
-                        <img src={p.url} alt="" />
-                        <button type="button" onClick={() => removePhoto(i)}><i className="bi bi-x" /></button>
-                      </div>
-                    ))}
-                    {form.photos.length < 4 && (
-                      <label className="bk-photo-add">
-                        <i className="bi bi-camera" /><span>Add</span>
-                        <input type="file" accept="image/*" multiple hidden onChange={onPickPhotos} />
+                <StepShell
+                  icon={photoFirst ? "bi-camera-fill" : "bi-card-text"}
+                  title={photoFirst ? "Show us the problem" : "Tell the pro about the job"}
+                  sub={photoFirst
+                    ? "A quick photo helps pros understand the job and quote faster — a note is optional."
+                    : "A short description helps them quote accurately."}
+                >
+                  {photoFirst ? (
+                    <>
+                      <PhotoGrid photos={form.photos} onAdd={onPickPhotos} onRemove={removePhoto} lead />
+                      <label className="bk-field bk-details-note">
+                        <span>Add a note <em>(optional)</em></span>
+                        <textarea rows={3} placeholder={detailPlaceholder} value={form.details} onChange={(e) => set({ details: e.target.value })} />
                       </label>
-                    )}
-                  </div>
+                    </>
+                  ) : (
+                    <>
+                      <label className="bk-field">
+                        <span>Work details</span>
+                        <textarea rows={4} placeholder={detailPlaceholder} value={form.details} onChange={(e) => set({ details: e.target.value })} />
+                      </label>
+                      <span className="bk-field-label">Photos <em>(optional, up to 4)</em></span>
+                      <PhotoGrid photos={form.photos} onAdd={onPickPhotos} onRemove={removePhoto} />
+                    </>
+                  )}
                 </StepShell>
               )}
 
@@ -495,7 +518,13 @@ function AddressStep({ form, set }) {
         )}
 
         {confirmed && (
-          <div className="bk-addr-ok"><i className="bi bi-check-circle-fill" /> {form.address}</div>
+          <>
+            <div className="bk-addr-ok"><i className="bi bi-check-circle-fill" /> {form.address}</div>
+            <div className="bk-addr-momentum">
+              <i className="bi bi-people-fill" />
+              <span>You're in our service area — trusted local pros are ready to quote your job.</span>
+            </div>
+          </>
         )}
 
         {unsupported && (
@@ -512,6 +541,26 @@ function AddressStep({ form, set }) {
         {!manualMode && !confirmed && !unsupported && <small className="bk-hint">Pick a suggestion so we can match you with local pros.</small>}
       </div>
     </StepShell>
+  );
+}
+
+function PhotoGrid({ photos, onAdd, onRemove, lead }) {
+  return (
+    <div className={`bk-photos ${lead ? "bk-photos-lead" : ""}`}>
+      {photos.map((p, i) => (
+        <div className="bk-photo" key={i}>
+          <img src={p.url} alt="" />
+          <button type="button" onClick={() => onRemove(i)}><i className="bi bi-x" /></button>
+        </div>
+      ))}
+      {photos.length < 4 && (
+        <label className={`bk-photo-add ${lead ? "bk-photo-add-lead" : ""}`}>
+          <i className="bi bi-camera" />
+          <span>{lead ? (photos.length ? "Add another" : "Add a photo") : "Add"}</span>
+          <input type="file" accept="image/*" multiple hidden onChange={onAdd} />
+        </label>
+      )}
+    </div>
   );
 }
 
